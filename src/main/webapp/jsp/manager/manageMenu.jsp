@@ -1,5 +1,7 @@
 <%@ page import="app.redoge.restaurant.UserRole" %>
-<%@ page import="app.redoge.restaurant.DishesMenu" %><%--
+<%@ page import="app.redoge.restaurant.DishesMenu" %>
+<%@ page import="java.util.Map" %>
+<%@ page import="static app.redoge.restaurant.DAO.DishesDAO.getAllMenuMap" %><%--
   Created by IntelliJ IDEA.
   User: danyl
   Date: 2/16/2022
@@ -33,7 +35,9 @@
     }
 </style>
 
-
+<!--Add dish-->
+<h1>Add dish</h1>
+<%=request.getContextPath() + "/manager/manage/add-dishes"%>
 <form action="<%=request.getContextPath() + "/manager/manage/add-dishes"%>" method="post">
     <label for="name">Name of the dish:</label><br>
     <input type="text" id="name" name="name"><br><br>
@@ -50,7 +54,21 @@
     <br>
 
     <input type="submit"  value="Submit">
+</form>
 
+<!--Remove dish-->
+<h1>Remove dish</h1>
+<%=request.getContextPath() + "/manager/manage/rm-dishes"%>
+<form action="<%=request.getContextPath() + "/manager/manage/rm-dishes"%>" method="post">
+    <label for="AllMenu">Category:</label><br>
+    <input type = "text" list = "AllMenu" name="id">
+    <datalist id = "AllMenu">
+        <% Map<Integer, String> dishes = getAllMenuMap();
+            for(int id: getAllMenuMap().keySet()){ %>
+        <option value = "<%= id%>"><%=dishes.get(id)%></option><% } %>
+    </datalist>
+    <br>
+    <input type="submit"  value="Submit">
 </form>
 
 </body>

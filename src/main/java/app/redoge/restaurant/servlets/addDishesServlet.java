@@ -28,7 +28,7 @@ public class addDishesServlet extends HttpServlet {
         double price = 0;
         int category = 5;
         if(priceString == null || categoryString == null || name == null){
-            response.sendRedirect(request.getServletPath());
+            response.sendRedirect(request.getContextPath()+"/manager/manage-menu");
             isGood = false;
         }else{
             price = Double.parseDouble(priceString);
@@ -40,11 +40,11 @@ public class addDishesServlet extends HttpServlet {
         System.out.println(1);
         if(name.trim().length() < 3 || price < 1 || category < 1 || category > 5 ) {
             System.out.println(3);
-            response.sendRedirect(request.getContextPath() + "/login");
+            response.sendRedirect(request.getContextPath()+"/manager/manage-menu");
         }else if(isExistDishes(name)){
             System.out.println(4);
             //повідомити про наявність страви
-            response.sendRedirect(request.getContextPath() + "/login");
+            response.sendRedirect(request.getContextPath()+"/manager/manage-menu");
         }else{
             System.out.println(5);
             isGood =  setDishes(name, price, category);
@@ -56,7 +56,7 @@ public class addDishesServlet extends HttpServlet {
 //                response.sendRedirect(request.getContextPath() + "/login");
 //            }else{
                 //повідомити про проблему
-                response.sendRedirect(request.getContextPath() + "/login");
+            response.sendRedirect(request.getContextPath()+"/manager/manage-menu");
 //            }
         }
 

@@ -48,6 +48,15 @@
     </servlet-mapping>
 
     <servlet>
+        <servlet-name>RmDishes</servlet-name>
+        <servlet-class>app.redoge.restaurant.servlets.rmDishesServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>RmDishes</servlet-name>
+        <url-pattern>/manager/manage/rm-dishes</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
         <servlet-name>Manage</servlet-name>
         <jsp-file>/jsp/manager/manage.jsp</jsp-file>
     </servlet>
@@ -92,7 +101,14 @@
         <url-pattern>/user/new-order</url-pattern>
     </servlet-mapping>
 
-
+    <servlet>
+        <servlet-name>NewOrderServlet</servlet-name>
+        <servlet-class>app.redoge.restaurant.servlets.NewOrder</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>NewOrderServlet</servlet-name>
+        <url-pattern>/user/new-orderPost</url-pattern>
+    </servlet-mapping>
 
 
     <!--All manage-->
