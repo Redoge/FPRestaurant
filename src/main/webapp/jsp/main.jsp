@@ -10,13 +10,10 @@
 %>
 <a href="login">Login</a> <%} else{%>
 <a href="cabinet">Cabinet</a>   <%}%>
-
-
-
-
+<a href="<%=request.getContextPath()%>">Main</a>
+<a href="<%=request.getContextPath() + "/dishesMenu"%>">Menu</a>
 
 <br><br>
         <h1>RESTAURANT</h1>
-<a href="<%=request.getContextPath()%>">Main</a>
 </body>
 </html>

@@ -17,7 +17,7 @@
     else if ((role.equals(UserRole.User)) || (role.equals(UserRole.Manager))){response.sendRedirect(request.getContextPath());}
 %>
 <style>
-    input[type=text], input[type=password] {
+    input[type=text], input[type=password], input[type=email] {
         width: 100%;
         margin: 8px 0;
         padding: 12px 20px;
@@ -31,7 +31,7 @@
 
 <form action="<%=request.getContextPath() + "/registerPost" %>" method="post">
     <label for="email">E-mail:</label>
-    <input type="text" id="email" name="email"><br><br>
+    <input type="email" id="email" name="email"><br><br>
 
     <label for="username">Username:</label>
     <input type="text" id="username" name="username"><br><br>

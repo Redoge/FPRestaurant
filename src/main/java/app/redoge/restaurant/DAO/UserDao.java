@@ -113,7 +113,6 @@ public class UserDao {
     }
 
     public static boolean isEmailExists(String email) throws SQLException {
-        System.out.println(13);
         boolean  out = true;
         String tmp = null;
         ResultSet rs = null;
@@ -123,12 +122,10 @@ public class UserDao {
         while(rs.next()) {
             tmp = rs.getString("email");
         }
-        System.out.println(14);
         return !isNull(tmp);
     }
 
     public static boolean isUsernameExists(String username) throws SQLException {
-        System.out.println(11);
         boolean  out = true;
         String tmp = null;
         ResultSet rs = null;
@@ -138,13 +135,12 @@ public class UserDao {
         while(rs.next()) {
             tmp = rs.getString("username");
         }
-        System.out.println(12);
         return !isNull(tmp);
     }
 
 
-//    public static void main(String[] args) throws SQLException {
-//        System.out.println(isEmailExists("danylo.klas@gmail.com"));
-//        System.out.println(isUsernameExists("redoge"));
-//    }
+    public static void main(String[] args) throws SQLException {
+        System.out.println(isEmailExists("danylo.klas@gmail.com"));
+        System.out.println(isTruePassword("admin","mail.redoge@gmail.com" ));
+    }
 }
