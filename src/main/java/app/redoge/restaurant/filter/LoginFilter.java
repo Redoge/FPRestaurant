@@ -1,0 +1,73 @@
+package app.redoge.restaurant.filter;
+
+
+import app.redoge.restaurant.DAO.UserDao;
+import app.redoge.restaurant.User;
+import app.redoge.restaurant.UserRole;
+
+import javax.servlet.*;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import java.io.IOException;
+import java.sql.SQLException;
+import java.util.concurrent.atomic.AtomicReference;
+
+import static java.util.Objects.nonNull;
+
+public class LoginFilter implements Filter {
+    @Override
+    public void init(FilterConfig filterConfig) throws ServletException {
+
+    }
+
+    @Override
+    public void doFilter(ServletRequest servletRequest,
+                         ServletResponse servletResponse,
+                         FilterChain filterChain)
+            throws IOException, ServletException {
+
+        final HttpServletRequest req = (HttpServletRequest) servletRequest;
+        final HttpServletResponse resp = (HttpServletResponse) servletResponse;
+
+        final String email = servletRequest.getParameter("email");
+        final String password = servletRequest.getParameter("password");
+
+        final HttpSession session = req.getSession();
+//        System.out.println(password);
+//        System.out.println(email);
+        if(nonNull(session.getAttribute("email"))){
+
+            final UserRole role = (UserRole) session.getAttribute("role");
+
+            filterChain.doFilter(req,resp);
+        }else if(UserDao.isTruePassword(password, email)){
+            try {
+                User user = UserDao.getUser(email);
+                UserRole role = UserRole.getUserRole(user.getRole());
+                req.getSession().setAttribute("email", email);
+                req.getSession().setAttribute("role", role);
+
+                moveToMenu(req, resp, role);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }else{
+            moveToMenu(req, resp, UserRole.Unknown);
+        }
+
+    }
+
+    private void moveToMenu(HttpServletRequest req, HttpServletResponse resp, UserRole role) throws ServletException, IOException {
+        if (role.equals(UserRole.Manager) || role.equals(UserRole.User)){
+            resp.sendRedirect("./cabinet");
+        } else{
+            req.getRequestDispatcher("/login").forward(req, resp);
+        }
+    }
+
+    @Override
+    public void destroy() {
+
+    }
+}
