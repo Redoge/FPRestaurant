@@ -23,7 +23,8 @@ ${sessionScope.email}
 </br></br>
 ${sessionScope.role}
 <br><br>
-<a href="./logout">Logout</a>
+<a href="./logout">Logout</a><br><br>
+<a href="<%=request.getContextPath()+ "/logout"%>">Logout</a>
 
 
 </body>
