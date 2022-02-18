@@ -7,6 +7,7 @@ public class Order {
     int order_id = -1;
     String name = "";
     orderStatus status;
+    double price;
 
 
     public Order(int dishes_id, int count, int user_id) {
@@ -15,14 +16,20 @@ public class Order {
         this.user_id = user_id;
         this.status = orderStatus.NEW;
     }
+
+    public double getPrice() {
+        return price;
+    }
+
     public Order(int dishes_id, int count, int user_id,
-                 int order_id, String name, orderStatus status) {
+                 int order_id, String name, orderStatus status, double price) {
         this.dishes_id = dishes_id;
         this.count = count;
         this.user_id = user_id;
         this.status = status;
         this.name = name;
         this.order_id = order_id;
+        this.price = price;
     }
 
     public void setOrder_id (int order_id ) {

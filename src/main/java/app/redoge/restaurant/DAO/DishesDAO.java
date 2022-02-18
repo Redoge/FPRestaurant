@@ -99,6 +99,23 @@ public class DishesDAO {
        return out;
    }
 
+   public static double getPriceDishById(int id){
+       double out = 0;
+       ResultSet rs = null;
+       Connection connection = getConnection();
+       Statement statement = null;
+       try {
+           statement = connection.createStatement();
+           rs = statement.executeQuery("SELECT * FROM dishes WHERE `id` = "+id+";");
+           while(rs.next()) {
+               out = rs.getDouble("price");
+           }
+       } catch (SQLException e) {
+           e.printStackTrace();
+       }
+       return out;
+   }
+
     public static void main(String[] args) {
         System.out.println(getNameDishById(2));
     }

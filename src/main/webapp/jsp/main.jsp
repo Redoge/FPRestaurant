@@ -8,8 +8,8 @@
 <% UserRole role = (UserRole) request.getSession().getAttribute("role");
     if (role == null || role.equals(UserRole.Unknown)){
 %>
-<a href="login">Login</a> <%} else{%>
-<a href="cabinet">Cabinet</a>   <%}%>
+<a href="<%=request.getContextPath() + "/login"%>">Login</a> <%} else{%>
+<a href="<%=request.getContextPath() + "/cabinet"%>">Cabinet</a>   <%}%>
 <a href="<%=request.getContextPath()%>">Main</a>
 <a href="<%=request.getContextPath() + "/dishesMenu"%>">Menu</a>
 

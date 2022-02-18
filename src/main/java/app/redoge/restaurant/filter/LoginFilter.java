@@ -36,7 +36,7 @@ public class LoginFilter implements Filter {
         final HttpSession session = req.getSession();
 //        System.out.println(password);
 //        System.out.println(email);
-        if(nonNull(session.getAttribute("email"))){
+        if(nonNull(session.getAttribute("email")) || nonNull(session.getAttribute("user_id"))){
 
             final UserRole role = (UserRole) session.getAttribute("role");
 
@@ -47,6 +47,7 @@ public class LoginFilter implements Filter {
                 UserRole role = UserRole.getUserRole(user.getRole());
                 req.getSession().setAttribute("email", email);
                 req.getSession().setAttribute("role", role);
+                req.getSession().setAttribute("user_id", user.getId());
 
                 moveToMenu(req, resp, role);
             } catch (SQLException e) {
