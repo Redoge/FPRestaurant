@@ -82,6 +82,15 @@
         <servlet-name>Manage Menu</servlet-name>
         <url-pattern>/manager/manage-menu</url-pattern>
     </servlet-mapping>
+
+    <servlet>
+        <servlet-name>changeOrderStatus</servlet-name>
+        <servlet-class>app.redoge.restaurant.servlets.changeOrderStatus</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>changeOrderStatus</servlet-name>
+        <url-pattern>/manager/changeOrderStatus</url-pattern>
+    </servlet-mapping>
     <!--User manage-->
 
     <servlet>
@@ -115,7 +124,7 @@
 
     <servlet>
         <servlet-name>Restaurant</servlet-name>
-        <jsp-file>/jsp/main.jsp</jsp-file>
+        <jsp-file>/jsp/dishesMenu.jsp</jsp-file>
     </servlet>
     <servlet-mapping>
         <servlet-name>Restaurant</servlet-name>

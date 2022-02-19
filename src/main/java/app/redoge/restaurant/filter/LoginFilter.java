@@ -61,8 +61,13 @@ public class LoginFilter implements Filter {
 
     private void moveToMenu(HttpServletRequest req, HttpServletResponse resp, UserRole role) throws ServletException, IOException {
         if (role.equals(UserRole.Manager) || role.equals(UserRole.User)){
+            req.setAttribute("info", "");
+            req.setAttribute("info", "Login successful");
             resp.sendRedirect("./cabinet");
-        } else{
+        } else if (req.getParameter("email") == null && req.getParameter("password") == null){
+            req.getRequestDispatcher("/login").forward(req, resp);
+        }else{
+            req.setAttribute("info", "Invalid email or password");
             req.getRequestDispatcher("/login").forward(req, resp);
         }
     }

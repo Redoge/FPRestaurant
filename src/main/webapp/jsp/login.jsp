@@ -3,32 +3,39 @@
 <html>
 <head>
     <title>Login</title>
+    <style>
+        <%@include file='/css/css.css' %>
+        <%@include file='/css/bootstrap.css' %>
+    </style>s
 </head>
     <body>
     <% UserRole role = (UserRole) request.getSession().getAttribute("role");
     if(role == null){
     }
        else if ((role.equals(UserRole.User)) || (role.equals(UserRole.Manager))){response.sendRedirect(request.getContextPath());}
+        String info = (String) request.getAttribute("info");
+       if (info == null){info = "";}
+
     %>
-    <style>
-        input[type=text], input[type=password], input[type=email]{
-            width: 100%;
-            margin: 8px 0;
-            padding: 12px 20px;
-            display: inline-block;
-            border: 2px solid green;
-            box-sizing: border-box;
-        }
-    </style>
+    <h3><%=info%></h3>
+    <div >
     <form action="" method="post">
-        <label for="email">E-mail:</label>
-        <input type="email" id="email" name="email"><br><br>
+        <div class="form-floating mb-3">
+            <input class="form-control" type="email" id="email" name="email">
+            <label for="email">E-mail:</label>
+        </div>
         <label for="password">Password:</label>
         <input type="password" id="password" name="password"><br><br>
         <input type="submit" value="Submit">
     </form>
+    </div>
     <hr>
+
     <a href="<%=request.getContextPath() + "/register"%>">Register</a><br><br>
     <a href="<%=request.getContextPath()%>">Main</a>
-    </body>
+
+<%--        <script type="text/javascript">--%>
+<%--            <%@include file='/js/bootstrapjs.js' %>--%>
+<%--        </script>--%>
+   </body>
 </html>

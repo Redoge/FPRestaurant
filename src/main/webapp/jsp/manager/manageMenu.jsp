@@ -18,23 +18,14 @@
 
 
     <title>Manage menu</title>
+    <style>
+        <%@include file='/css/css.css' %>
+
+    </style>
 </head>
 <body>
 <h1>Manage menu</h1>
 <a href="<%=request.getContextPath()%>">Main</a>
-
-<style>
-    input[type=text], input[type=password],  input[type=number]{
-        align-content: center;
-        width: 50%;
-        margin: 8px 0;
-        padding: 12px 20px;
-        display: inline-block;
-        border: 2px solid green;
-        box-sizing: border-box;
-    }
-</style>
-
 <!--Add dish-->
 <h1>Add dish</h1>
 <%=request.getContextPath() + "/manager/manage/add-dishes"%>

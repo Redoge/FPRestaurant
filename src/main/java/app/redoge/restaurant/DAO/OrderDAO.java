@@ -107,6 +107,49 @@ public class OrderDAO {
           return orders;
     }
 
+    public static ArrayList<Order> getAllOrders(){
+        ArrayList<Order> orders = new ArrayList<>();
+        ResultSet rs = null;
+        Connection connection = getConnection();
+        Statement statement = null;
+        try {
+            statement = connection.createStatement();
+            rs = statement.executeQuery("SELECT * FROM `order`");
+            while(rs.next()) {
+                String name = rs.getString("dish");
+                int dishes_id = rs.getInt("dishes_id");
+                int count = rs.getInt("count");
+                int user_id = rs.getInt("user_id");
+                int order_id = rs.getInt("id");
+                double price = rs.getDouble("price");
+                Order.orderStatus status = Order.orderStatus.getStatus(rs.getString("status"));
+                orders.add(new Order(dishes_id, count, user_id,order_id, name, status, price));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return orders;
+    }
+
+    public static boolean changeOrderStatusById(int id,
+                                            Order.orderStatus newStatus){
+        boolean out = false;
+        Statement statement = null;
+        ResultSet rs = null;
+        Connection connection = getConnection();
+        String sql = "UPDATE `order` SET `status` ='" + newStatus + "' WHERE (`id` = '" + id + "');";
+        try {
+            statement = connection.createStatement();
+            statement.executeUpdate(sql);
+            out = true;
+        } catch (SQLException e) {
+            out = false;
+            e.printStackTrace();
+        }
+        return out;
+    }
+
+
     public static void main(String[] args) {
 
         List<Order> orders = getOrdersByUserId(2);

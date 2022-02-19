@@ -3,6 +3,9 @@
 <html>
 <head>
     <title>Cabinet</title>
+    <style>
+        <%@include file='/css/css.css' %>
+    </style>
 </head>
 <body>
 <% UserRole role = (UserRole) request.getSession().getAttribute("role");

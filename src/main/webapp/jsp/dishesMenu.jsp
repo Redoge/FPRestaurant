@@ -3,16 +3,44 @@
 <%@ page import="java.util.Map" %>
 <%@ page import="java.util.HashMap" %>
 <%@ page import="app.redoge.restaurant.DishesMenu" %>
+<%@ page import="app.redoge.restaurant.UserRole" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql"%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
     <title>Dishes Menu</title>
+    <style>
+        <%@include file='/css/css.css' %>
+        <%@include file='/css/bootstrap.css' %>
+    </style>
 </head>
 <body>
-<h1>Dishes menu</h1>
-<a href="<%=request.getContextPath()%>">Main</a>
+
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="<%=request.getContextPath()%>">Restaurant</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+<%--                <a class="nav-link " aria-current="page" href="<%=request.getContextPath()%>">Main</a>--%>
+                <a class="nav-link active" href="<%=request.getContextPath()+ "/dishesMenu" %>">Dishes menu</a>
+                <% UserRole role = (UserRole) request.getSession().getAttribute("role");
+                    if (role == null || role.equals(UserRole.Unknown)){
+                %>
+                <a class="nav-link" href="<%=request.getContextPath() + "/login"%>" >Login</a> <%} else{%>
+                <a class="nav-link" href="<%=request.getContextPath() + "/cabinet"%>">Cabinet</a>   <%}%>
+            </div>
+        </div>
+    </div>
+</nav>
+
+
+
+
 
 <%
     ResultSet resultset =null;
@@ -30,7 +58,8 @@
         e.printStackTrace();
     }
 %>
-<TABLE BORDER="1" width="90%" ALIGN="CENTER">
+
+<TABLE BORDER="1" width="90%" ALIGN="CENTER" class="table table-hover">
     <TR>
         <TH>Name</TH>
         <TH>Category</TH>

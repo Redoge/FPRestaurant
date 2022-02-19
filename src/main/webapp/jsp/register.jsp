@@ -9,6 +9,9 @@
 <html>
 <head>
     <title>Register</title>
+    <style>
+        <%@include file='/css/css.css' %>
+    </style>
 </head>
 <body>
 <% UserRole role = (UserRole) request.getSession().getAttribute("role");
@@ -16,18 +19,6 @@
     }
     else if ((role.equals(UserRole.User)) || (role.equals(UserRole.Manager))){response.sendRedirect(request.getContextPath());}
 %>
-<style>
-    input[type=text], input[type=password], input[type=email] {
-        width: 100%;
-        margin: 8px 0;
-        padding: 12px 20px;
-        display: inline-block;
-        border: 2px solid green;
-        box-sizing: border-box;
-    }
-</style>
-
-
 
 <form action="<%=request.getContextPath() + "/registerPost" %>" method="post">
     <label for="email">E-mail:</label>
