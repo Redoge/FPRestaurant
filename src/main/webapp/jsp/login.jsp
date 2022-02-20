@@ -37,8 +37,6 @@
 
     <div >
         <form action="" method="post">
-
-
         <div class="container">
         <div class="row">
             <div class="col">
@@ -56,16 +54,6 @@
     </div>
         </form>
     </div>
-    <hr>
 
-
-
-
-    <a href="<%=request.getContextPath() + "/register"%>">Register</a><br><br>
-    <a href="<%=request.getContextPath()%>">Main</a>
-
-<%--        <script type="text/javascript">--%>
-<%--            <%@include file='/js/bootstrapjs.js' %>--%>
-<%--        </script>--%>
    </body>
 </html>

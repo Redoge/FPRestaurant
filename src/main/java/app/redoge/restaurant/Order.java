@@ -29,7 +29,7 @@ public class Order {
         this.status = status;
         this.name = name;
         this.order_id = order_id;
-        this.price = price;
+        this.price = price*count;
     }
 
     public void setOrder_id (int order_id ) {

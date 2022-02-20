@@ -3,6 +3,7 @@
 <%@ page import="app.redoge.restaurant.UserRole" %>
 <%@ page import="static app.redoge.restaurant.DAO.DishesDAO.getDishIdBySorted" %>
 <%@ page import="app.redoge.restaurant.Dish" %>
+<%@ page import="static app.redoge.restaurant.DAO.DishesDAO.getAllMenuMap" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -16,6 +17,7 @@
     </script>
 </head>
 <body>
+
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
         <a class="navbar-brand" href="<%=request.getContextPath()%>">Restaurant</a>
@@ -51,7 +53,35 @@
         </select>
         <button class="btn btn-outline-secondary" id=""  onclick="groupDishByCategory();">Grupped</button>
     </div>
+    <%if (role != null && role.equals(UserRole.User)){%>
+
+    <div id="newOrderDiv" class="col-2 position-relative"  align="center">
+        <div>
+            <button class="btn spoiler-trigger btn-outline-secondary">New order:</button>
+<%--            <a class="spoiler-trigger"><span>New order:</span></a>--%>
+            <div class="spoiler-block">
+
+<%--            <h3>New order:</h3>--%>
+        <form action="<%=request.getContextPath() + "/user/new-orderPost"%>" method="post">
+            <label for="AllMenu">Dish:</label>
+            <select id = "AllMenu" class = "form-select" name="id">
+                <% Map<Integer, String> dishesMap = getAllMenuMap();
+                    for(int id: getAllMenuMap().keySet()){ %>
+                <option value = "<%= id%>"><%=dishesMap.get(id)%></option><% } %>
+            </select>
+            <div class="form-group">
+                <label for="count">Count:</label>
+                <input type="number" class="form-control" id="count" name="count">
+            </div>
+            <input type="submit"  class="btn btn-outline-secondary" value="Submit">
+        </form>
+    </div>
+        </div>
+    </div>
+    <%}%>
 </div>
+
+
 <div class="container">
     <div class="row">
         <TABLE cellspacing="0"   width="100%"  class="sort-table.js table js-sort-table" id="table_dish">
@@ -72,7 +102,7 @@
         </TABLE>
     </div>
 </div>
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script>
     function groupDishByCategory() {
         // Declare variables
@@ -95,6 +125,12 @@
             }
         }
     }
+    $(document).on('click','.spoiler-trigger',function(e){e.preventDefault();
+        $(this).toggleClass('active');
+        $(this).parent().find('.spoiler-block').first().slideToggle(300);
+    })
+
 </script>
+
 </body>
 </html>
