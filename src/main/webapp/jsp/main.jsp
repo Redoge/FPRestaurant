@@ -4,7 +4,6 @@
 <head>
     <title>Restaurant</title>
     <style>
-
         <%@include file='/css/css.css' %>
         <%@include file='/css/bootstrap.css' %>
     </style>
@@ -24,7 +23,8 @@
                 <% UserRole role = (UserRole) request.getSession().getAttribute("role");
                     if (role == null || role.equals(UserRole.Unknown)){
                 %>
-                <a class="nav-link" href="<%=request.getContextPath() + "/login"%>" >Login</a> <%} else{%>
+                <a class="nav-link" href="<%=request.getContextPath() + "/login"%>" >Login</a>
+                <a class="nav-link" href="<%=request.getContextPath() + "/register"%>">Register</a> <%} else{%>
                 <a class="nav-link" href="<%=request.getContextPath() + "/cabinet"%>">Cabinet</a>   <%}%>
             </div>
         </div>

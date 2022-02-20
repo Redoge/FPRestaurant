@@ -156,6 +156,7 @@
         <url-pattern>/registerPost</url-pattern>
     </servlet-mapping>
 
+
     <servlet>
         <servlet-name>Register</servlet-name>
         <jsp-file>/jsp/register.jsp</jsp-file>

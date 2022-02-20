@@ -1,10 +1,15 @@
 package app.redoge.restaurant.DAO;
 
+import app.redoge.restaurant.Dish;
+import app.redoge.restaurant.DishesMenu;
+
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.Locale;
 import java.util.Map;
 
 import static app.redoge.restaurant.DAO.UserDao.getConnection;
@@ -116,8 +121,70 @@ public class DishesDAO {
        return out;
    }
 
+//   public static Map<Integer, Map<String, Double>> getAllMenuMapWithPrice(String category){
+//       Map<String, Map<String, Double>> out = new HashMap<>();
+//       ResultSet rs = null;
+//       Connection connection = getConnection();
+//       Statement statement = null;
+//       try {
+//           statement = connection.createStatement();
+//           rs = statement.executeQuery("SELECT * FROM dishes ORDER BY " + category.toLowerCase(Locale.ROOT) + ";");
+////           System.out.println("SELECT * FROM dishes ORDER BY " + category.toLowerCase(Locale.ROOT) );
+//           while(rs.next()) {
+//               Map<String, Double> tmp =  new HashMap<>();
+//               tmp.put(DishesMenu.getDishesCategoryToString(rs.getInt("category_id")), rs.getDouble("price"));
+//               out.put(rs.getString("name"), tmp);
+//           }
+//       } catch (SQLException e) {
+//           e.printStackTrace();
+//       }
+//       return out;
+//   }
+
+   public static LinkedList<Integer> getDishIdBySortedListId(String category){
+       LinkedList<Integer> out = new LinkedList<>();
+       ResultSet rs = null;
+       Connection connection = getConnection();
+       Statement statement = null;
+       try {
+           statement = connection.createStatement();
+           rs = statement.executeQuery("SELECT * FROM dishes ORDER BY " + category.toLowerCase(Locale.ROOT) + ";");
+           System.out.println("SELECT * FROM dishes ORDER BY " + category.toLowerCase(Locale.ROOT) + ";" );
+           while(rs.next()) {
+               System.out.println(rs.getString("name"));
+               out.add(rs.getInt("id"));
+           }
+       } catch (SQLException e) {
+           e.printStackTrace();
+       }
+       return out;
+   }
+
+    public static Map<Integer, Dish> getDishIdBySorted(String category){
+        Map<Integer, Dish> out = new HashMap<>();
+        ResultSet rs = null;
+        Connection connection = getConnection();
+        Statement statement = null;
+        try {
+            statement = connection.createStatement();
+            rs = statement.executeQuery("SELECT * FROM dishes ORDER BY " + category.toLowerCase(Locale.ROOT) + ";");
+            System.out.println("SELECT * FROM dishes ORDER BY " + category.toLowerCase(Locale.ROOT) + ";" );
+            while(rs.next()) {
+                int id = rs.getInt("id");
+                String name = rs.getString("name");
+                int category_id = rs.getInt("category_id");
+                double price = rs.getDouble("price");
+                Dish tmp = new Dish(id, name, category_id, price);
+                out.put(id, tmp);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return out;
+    }
+
     public static void main(String[] args) {
-        System.out.println(getNameDishById(2));
+        System.out.println(getDishIdBySorted("category_id"));
     }
 
 }
