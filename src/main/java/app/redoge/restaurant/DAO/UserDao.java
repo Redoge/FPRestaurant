@@ -9,6 +9,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 import static java.util.Objects.isNull;
 
@@ -69,11 +70,28 @@ public class UserDao {
             user = new User(username, email, id, role);
 
         }
-
-
-
-
         return user;
+    }
+
+    public static ArrayList<User> getAllUser() throws SQLException {
+        ArrayList<User> userList = new ArrayList<>();
+        ResultSet rs = null;
+        connection = getConnection();
+        try {
+            Statement statement = connection.createStatement();
+            rs = statement.executeQuery("SELECT * FROM user");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        while(rs.next()) {
+            int id = rs.getInt("id");
+            int role = Integer.parseInt(rs.getString("role_id"));
+            String username = rs.getString("username");
+            String email = rs.getString("email");
+            userList.add(new User(username, email, id, role));
+
+        }
+        return userList;
     }
 
     public static boolean setUser(String username, String email, String password, int access){
@@ -138,9 +156,66 @@ public class UserDao {
         return !isNull(tmp);
     }
 
+    public static  User getUserByUserId(int id){
+        ResultSet rs = null;
+        connection = getConnection();
+        try {
+            Statement statement = connection.createStatement();
+            rs = statement.executeQuery("SELECT * FROM user  WHERE `id` = '"+id+"'");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        User user = null;
+        try {
+            while (rs.next()) {
+                String email = rs.getString("email");
+                int role = Integer.parseInt(rs.getString("role_id"));
+                String username = rs.getString("username");
+                user = new User(username, email, id, role);
+            }
+        }catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return user;
+    }
+
+    public static boolean changeRoleById(int id, UserRole role){
+        int role_id = role.getId();
+        if(role_id != 2 && role_id != 3 ){return false;}
+        boolean out = false;
+        Statement statement = null;
+        Connection connection = getConnection();
+        String sql = "UPDATE `restaurant`.`user` SET `role_id` = '" + role_id + "' WHERE (`id` = '" + id + "');";
+        try {
+            statement = connection.createStatement();
+            statement.executeUpdate(sql);
+            out = true;
+        } catch (SQLException e) {
+            out = false;
+            e.printStackTrace();
+        }
+        return out;
+    }
+
+    public static boolean changeRoleByUsername(String username, UserRole role){
+        int role_id = role.getId();
+        if(role_id != 2 && role_id != 3 ){return false;}
+        boolean out = false;
+        Statement statement = null;
+        Connection connection = getConnection();
+        String sql = "UPDATE `restaurant`.`user` SET `role_id` = '" + role_id + "' WHERE (`username` = '" + username + "');";
+        try {
+            statement = connection.createStatement();
+            statement.executeUpdate(sql);
+            out = true;
+        } catch (SQLException e) {
+            out = false;
+            e.printStackTrace();
+        }
+        return out;
+    }
 
     public static void main(String[] args) throws SQLException {
-        System.out.println(isEmailExists("danylo.klas@gmail.com"));
-        System.out.println(isTruePassword("admin","mail.redoge@gmail.com" ));
+        System.out.println(changeRoleByUsername("aefasadwty", UserRole.User));
     }
 }

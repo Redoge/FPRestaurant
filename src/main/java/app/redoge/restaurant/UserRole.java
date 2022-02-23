@@ -2,9 +2,13 @@ package app.redoge.restaurant;
 
 public enum UserRole {
     Admin(1), Manager(2), User(3), Unknown(4);
-    int id;
+    private int id;
     UserRole(int id) {
         this.id = id;
+    }
+
+    public int getId() {
+        return this.id;
     }
 
     public static UserRole getUserRole(int role){

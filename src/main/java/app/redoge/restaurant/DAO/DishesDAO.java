@@ -39,7 +39,8 @@ public class DishesDAO {
        boolean out = false;
        Statement statement = null;
        Connection connection = getConnection();
-       String sql = "DELETE FROM `restaurant`.`dishes` WHERE (`id` = '"+ id +"');";
+       System.out.println(id);
+       String sql = "DELETE FROM `dishes` WHERE (`id` = '"+ id +"');";
        try {
            statement = connection.createStatement();
            statement.executeUpdate(sql);

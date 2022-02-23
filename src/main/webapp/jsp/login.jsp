@@ -2,21 +2,24 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
+    <% UserRole role = (UserRole) request.getSession().getAttribute("role");
+        if(role == null){
+        }
+        else if ((role.equals(UserRole.User)) || (role.equals(UserRole.Manager))){response.sendRedirect(request.getContextPath());}
+        String info = (String) request.getAttribute("info");
+        if (info == null){info = "";}
+
+    %>
     <title>Login</title>
     <style>
         <%@include file='/css/css.css' %>
         <%@include file='/css/bootstrap.css' %>
     </style>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
 </head>
     <body>
-    <% UserRole role = (UserRole) request.getSession().getAttribute("role");
-    if(role == null){
-    }
-       else if ((role.equals(UserRole.User)) || (role.equals(UserRole.Manager))){response.sendRedirect(request.getContextPath());}
-        String info = (String) request.getAttribute("info");
-       if (info == null){info = "";}
-
-    %>
 
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid">
@@ -35,20 +38,28 @@
     </nav>
     <hr>
 
-    <div >
+    <div>
+
         <form action="" method="post">
+
         <div class="container">
-        <div class="row">
-            <div class="col">
-                <input  type="email" id="email" name="email">
+        <div class="row" >
+            <%if(info.length() != 0){%>
+            <div class="forAlert">
+                <div class="alert alert-secondary form-group"  role="alert">
+                    <%=info%>
+                </div></div><%}%>
+            <div class="form-group">
                 <label for="email">E-mail:</label>
+                <input  type="email" class="form-control" id="email" name="email" placeholder="Email">
             </div>
-            <div class="col">
+            <div class="form-group">
                 <label for="password">Password:</label>
-                <input type="password" id="password" name="password">
+                <input type="password" class="form-control" id="password" name="password"  placeholder="Login">
             </div>
-            <div class="col">
-                <input type="submit" value="Submit">
+            <div class="form-group" align="center">
+                <br>
+                <input  class="btn btn-outline-secondary" type="submit" value="Login">
             </div>
         </div>
     </div>
