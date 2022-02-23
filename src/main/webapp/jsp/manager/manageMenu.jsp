@@ -1,14 +1,13 @@
 <%@ page import="app.redoge.restaurant.UserRole" %>
 <%@ page import="app.redoge.restaurant.DishesMenu" %>
-<%@ page import="java.util.Map" %>
-<%@ page import="static app.redoge.restaurant.DAO.DishesDAO.getAllMenuMap" %><%--
-  Created by IntelliJ IDEA.
-  User: danyl
-  Date: 2/16/2022
-  Time: 10:50 PM
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page import="java.util.Map" %>
+<%@ page import="static app.redoge.restaurant.DAO.DishesDAO.getAllMenuMap" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@taglib uri="http://java.sun.com/jsp/jstl/fmt"  prefix="fmt" %>
+<%String language = (String) session.getAttribute("language");%>
+<fmt:setLocale value="<%=language%>"/>
+<fmt:setBundle basename="language"  var="rb"/>
 <html>
 <head>
     <% UserRole role = (UserRole) request.getSession().getAttribute("role");
@@ -42,16 +41,13 @@
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
                 <%if (role.equals(UserRole.Manager)) {%>
-                <a class="nav-link " href="<%=request.getContextPath() + "/manager/manage"%> ">Manage</a>
-                <a class="nav-link active" href="<%=request.getContextPath() + "/manager/manage-menu"%>">Manage menu</a>
-                <a class="nav-link" href="<%=request.getContextPath() + "/manager/manage-orders"%>">Manage orders</a>
-                <%} else if (role.equals(UserRole.User)) {%>
-                <a class="nav-link" href="<%=request.getContextPath() + "/user/orders"%>">My order</a>
-                <a class="nav-link" href="<%=request.getContextPath() + "/user/new-order"%>">New order</a>
-                <%}%>
-                <a class="nav-link " href="<%=request.getContextPath() + "/cabinet"%>">Cabinet</a>
-                <a class="nav-link" href="<%=request.getContextPath() + "/dishesMenu"%>">Dishes Menu</a>
-                <a class="nav-link" href="<%=request.getContextPath()+ "/logout"%>">Logout</a>
+                <a class="nav-link " href="<%=request.getContextPath() + "/manager/manage"%> "><fmt:message key="Manage" bundle="${rb}"/></a>
+                <a class="nav-link active" href="<%=request.getContextPath() + "/manager/manage-menu"%>"><fmt:message key="Manage_menu" bundle="${rb}"/></a>
+                <a class="nav-link" href="<%=request.getContextPath() + "/manager/manage-orders"%>"><fmt:message key="Manage_orders" bundle="${rb}"/></a>
+                <%} %>
+                <a class="nav-link " href="<%=request.getContextPath() + "/cabinet"%>"><fmt:message key="Cabinet" bundle="${rb}"/></a>
+                <a class="nav-link" href="<%=request.getContextPath() + "/dishesMenu"%>"><fmt:message key="Dishes_menu" bundle="${rb}"/></a>
+                <a class="nav-link" href="<%=request.getContextPath()+ "/logout"%>"><fmt:message key="Logout" bundle="${rb}"/></a>
             </div>
         </div>
     </div>
@@ -60,15 +56,15 @@
 
 <div class="container">
     <div class="row ">
-        <div align="center"><h1>Add dish</h1></div>
+        <div align="center"><h1><fmt:message key="Add_dish" bundle="${rb}"/></h1></div>
         <form action="<%=request.getContextPath() + "/manager/manage/add-dishes"%>" method="post">
-            <label for="name">Name of the dish:</label>
+            <label for="name"><fmt:message key="Name_of_the_dish" bundle="${rb}"/>:</label>
             <input type="text" id="name" name="name" class="form-control" placeholder="Name of the dish">
 
-            <label for="price">Price:</label>
+            <label for="price"><fmt:message key="Price" bundle="${rb}"/>:</label>
             <input type="number" id="price" name="price" class="form-control" placeholder="Price of the dish">
 
-            <label for="category">Name of dish:</label>
+            <label for="category"><fmt:message key="Category" bundle="${rb}"/></label>
             <%--    <input type = "text" list = "category" name="category">--%>
             <select id="category" name="category" class="form-select">
                 <% for (DishesMenu name : DishesMenu.values()) { %>
@@ -77,15 +73,15 @@
                 <% } %>
             </select>
 <br>
-            <div align="center"> <input type="submit" value="Add" class="btn btn-outline-secondary"></div>
+            <div align="center"> <input type="submit" value="<fmt:message key="Add" bundle="${rb}"/>" class="btn btn-outline-secondary"></div>
         </form>
     </div>
     <div class="row ">
         <hr>
         <!--Remove dish-->
-        <div align="center"><h1>Remove dish</h1></div>
+        <div align="center"><h1><fmt:message key="Remove_dish" bundle="${rb}"/></h1></div>
         <form action="<%=request.getContextPath() + "/manager/manage/rm-dishes"%>" method="post">
-            <label for="AllMenu">Category:</label>
+            <label for="AllMenu"><fmt:message key="Category" bundle="${rb}"/>:</label>
             <%--    <input type = "text" list = "AllMenu" name="id">--%>
             <select id="AllMenu" name="id" class="form-select">
                 <% Map<Integer, String> dishes = getAllMenuMap();
@@ -95,7 +91,7 @@
                 <% } %>
             </select>
 <br>
-            <div align="center"><input type="submit" value="Remove" class="btn btn-outline-secondary"></div>
+            <div align="center"><input type="submit" value="<fmt:message key="Remove" bundle="${rb}"/>" class="btn btn-outline-secondary"></div>
         </form>
     </div>
 </body>

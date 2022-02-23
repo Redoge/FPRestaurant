@@ -1,5 +1,14 @@
 <%@ page import="app.redoge.restaurant.UserRole" %>
+<%@ page import="java.util.Locale" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@taglib uri="http://java.sun.com/jsp/jstl/fmt"  prefix="fmt" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@taglib uri="http://java.sun.com/jsp/jstl/fmt"  prefix="fmt" %>
+<%String language = (String) session.getAttribute("language");%>
+<fmt:setLocale value="<%=language%>"/>
+<fmt:setBundle basename="language"  var="rb"/>
+
 <html>
 <head>
     <% UserRole role = (UserRole) request.getSession().getAttribute("role");
@@ -29,9 +38,9 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <div class="navbar-nav">
-                    <a class="nav-link " href="<%=request.getContextPath()+ "/dishesMenu" %>">Dishes menu</a>
-                    <a class="nav-link active" href="<%=request.getContextPath() + "/login"%>" >Login</a>
-                    <a class="nav-link" href="<%=request.getContextPath() + "/register"%>">Register</a>
+                    <a class="nav-link " href="<%=request.getContextPath()+ "/dishesMenu" %>"><fmt:message key="Dishes_menu" bundle="${rb}"/></a>
+                    <a class="nav-link active" href="<%=request.getContextPath() + "/login"%>" ><fmt:message key="Login" bundle="${rb}"/></a>
+                    <a class="nav-link" href="<%=request.getContextPath() + "/register"%>"><fmt:message key="Register" bundle="${rb}"/></a>
                 </div>
             </div>
         </div>
@@ -54,12 +63,12 @@
                 <input  type="email" class="form-control" id="email" name="email" placeholder="Email">
             </div>
             <div class="form-group">
-                <label for="password">Password:</label>
-                <input type="password" class="form-control" id="password" name="password"  placeholder="Login">
+                <label for="password"><fmt:message key="Password" bundle="${rb}"/>:</label>
+                <input type="password" class="form-control" id="password" name="password"  placeholder="Password">
             </div>
             <div class="form-group" align="center">
                 <br>
-                <input  class="btn btn-outline-secondary" type="submit" value="Login">
+                <input  class="btn btn-outline-secondary" type="submit" value="<fmt:message key="Login" bundle="${rb}"/>">
             </div>
         </div>
     </div>

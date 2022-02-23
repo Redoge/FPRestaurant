@@ -3,6 +3,12 @@
 <%@ page import="static app.redoge.restaurant.DAO.OrderDAO.getOrdersByUserId" %>
 <%@ page import="java.util.List" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@taglib uri="http://java.sun.com/jsp/jstl/fmt"  prefix="fmt" %>
+<%String language = (String) session.getAttribute("language");%>
+<fmt:setLocale value="<%=language%>"/>
+<fmt:setBundle basename="language"  var="rb"/>
+
 <html>
 <head>
     <title>Order</title>
@@ -35,26 +41,26 @@
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
                 <%if (role.equals(UserRole.User)) {%>
-                <a class="nav-link active" href="<%=request.getContextPath() + "/user/orders"%>">My order</a>
-                <a class="nav-link " href="<%=request.getContextPath() + "/user/new-order"%>">New order</a>
+                <a class="nav-link active" href="<%=request.getContextPath() + "/user/orders"%>"><fmt:message key="My_orders" bundle="${rb}"/></a>
+                <a class="nav-link " href="<%=request.getContextPath() + "/user/new-order"%>"><fmt:message key="New_order" bundle="${rb}"/></a>
                 <%}%>
-                <a class="nav-link active" href="<%=request.getContextPath() + "/cabinet"%>">Cabinet</a>
-                <a class="nav-link" href="<%=request.getContextPath() + "/dishesMenu"%>">Dishes Menu</a>
-                <a class="nav-link" href="<%=request.getContextPath()+ "/logout"%>">Logout</a>
+                <a class="nav-link active" href="<%=request.getContextPath() + "/cabinet"%>"><fmt:message key="Cabinet" bundle="${rb}"/></a>
+                <a class="nav-link" href="<%=request.getContextPath() + "/dishesMenu"%>"><fmt:message key="Dishes_menu" bundle="${rb}"/></a>
+                <a class="nav-link" href="<%=request.getContextPath()+ "/logout"%>"><fmt:message key="Logout" bundle="${rb}"/></a>
             </div>
         </div>
     </div>
 </nav>
-<div align="center"><h1>My orders</h1></div>
+<div align="center"><h1><fmt:message key="My_orders" bundle="${rb}"/></h1></div>
 <div class="container">
     <div class="row">
         <TABLE BORDER="1" width="90%" ALIGN="CENTER" class="table">
             <TR>
-                <TH>Name of dish</TH>
-                <TH>Count</TH>
-                <TH>Price (UAH)</TH>
-                <th>Status</th>
-                <th>Order id</th>
+                <TH><fmt:message key="Name_of_the_dish" bundle="${rb}"/></TH>
+                <TH><fmt:message key="Count" bundle="${rb}"/></TH>
+                <TH><fmt:message key="Price" bundle="${rb}"/> (UAH)</TH>
+                <th><fmt:message key="Status" bundle="${rb}"/></th>
+                <th><fmt:message key="Order_id" bundle="${rb}"/></th>
 
             </TR>
             <% for (Order order : orders) { %>

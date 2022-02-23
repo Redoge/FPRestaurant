@@ -5,6 +5,12 @@
 <%@ page import="app.redoge.restaurant.Dish" %>
 <%@ page import="static app.redoge.restaurant.DAO.DishesDAO.getAllMenuMap" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@taglib uri="http://java.sun.com/jsp/jstl/fmt"  prefix="fmt" %>
+<%String language = (String) session.getAttribute("language");%>
+<fmt:setLocale value="<%=language%>"/>
+<fmt:setBundle basename="language"  var="rb"/>
+
 <html>
 <head>
     <title>Dishes Menu</title>
@@ -29,13 +35,13 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
-                <a class="nav-link active" href="<%=request.getContextPath()+ "/dishesMenu" %>">Dishes menu</a>
+                <a class="nav-link active" href="<%=request.getContextPath()+ "/dishesMenu" %>"><fmt:message key="Dishes_menu" bundle="${rb}"/></a>
                 <% UserRole role = (UserRole) request.getSession().getAttribute("role");
                     if (role == null || role.equals(UserRole.Unknown)){
                 %>
-                <a class="nav-link" href="<%=request.getContextPath() + "/login"%>" >Login</a>
-                <a class="nav-link" href="<%=request.getContextPath() + "/register"%>">Register</a> <%} else{%>
-                <a class="nav-link" href="<%=request.getContextPath() + "/cabinet"%>">Cabinet</a>   <%}%>
+                <a class="nav-link" href="<%=request.getContextPath() + "/login"%>" ><fmt:message key="Login" bundle="${rb}"/></a>
+                <a class="nav-link" href="<%=request.getContextPath() + "/register"%>"><fmt:message key="Register" bundle="${rb}"/></a> <%} else{%>
+                <a class="nav-link" href="<%=request.getContextPath() + "/cabinet"%>"><fmt:message key="Cabinet" bundle="${rb}"/></a>   <%}%>
             </div>
         </div>
     </div>
@@ -47,36 +53,36 @@
 <hr>
 <div class="row">
     <div class="col-2 position-relative start-50" align="center">
-        <label for="input_group" >Group by:</label>
+        <label for="input_group" ><fmt:message key="Group_by" bundle="${rb}"/>:</label>
         <select class="form-select" aria-label="Default select example" id="input_group" >
             <option value = "">All</option>
             <% DishesMenu[] dishesMenuArr = DishesMenu.values(); for(DishesMenu dm: dishesMenuArr){ if(dm.equals(DishesMenu.Unknown)){continue;}%>
                <option value = "<%=dm%>"><%=dm%></option>
             <%}%>
         </select>
-        <button class="btn btn-outline-secondary" id=""  onclick="groupDishByCategory();">Grupped</button>
+        <button class="btn btn-outline-secondary" id=""  onclick="groupDishByCategory();"><fmt:message key="Grupped" bundle="${rb}"/></button>
     </div>
     <%if (role != null && role.equals(UserRole.User)){%>
 
     <div id="newOrderDiv" class="col-2 position-relative"  align="center">
         <div>
-            <button class="btn spoiler-trigger btn-outline-secondary">New order:</button>
+            <button class="btn spoiler-trigger btn-outline-secondary"><fmt:message key="New_order" bundle="${rb}"/>:</button>
 <%--            <a class="spoiler-trigger"><span>New order:</span></a>--%>
             <div class="spoiler-block">
 
 <%--            <h3>New order:</h3>--%>
         <form action="<%=request.getContextPath() + "/user/new-orderPost"%>" method="post">
-            <label for="AllMenu">Dish:</label>
+            <label for="AllMenu"><fmt:message key="Name_of_the_dish" bundle="${rb}"/>:</label>
             <select id = "AllMenu" class = "form-select" name="id">
                 <% Map<Integer, String> dishesMap = getAllMenuMap();
                     for(int id: getAllMenuMap().keySet()){ %>
                 <option value = "<%= id%>"><%=dishesMap.get(id)%></option><% } %>
             </select>
             <div class="form-group">
-                <label for="count">Count:</label>
+                <label for="count"><fmt:message key="Count" bundle="${rb}"/>:</label>
                 <input type="number" class="form-control" id="count" name="count">
             </div>
-            <input type="submit"  class="btn btn-outline-secondary" value="Submit">
+            <input type="submit"  class="btn btn-outline-secondary" value="<fmt:message key="Order" bundle="${rb}"/>">
         </form>
     </div>
         </div>
@@ -90,9 +96,9 @@
         <TABLE cellspacing="0"   width="100%"  class="sort-table.js table js-sort-table" id="table_dish">
             <thead>
                 <TR>
-                    <TH>Name</TH>
-                    <TH>Category</TH>
-                    <TH class="js-sort-number">Price (UAH)</TH>
+                    <TH><fmt:message key="Name" bundle="${rb}"/></TH>
+                    <TH><fmt:message key="Category" bundle="${rb}"/></TH>
+                    <TH class="js-sort-number"><fmt:message key="Price" bundle="${rb}"/> (UAH)</TH>
                 </TR>
             </thead>
             <% for(int id: dishes.keySet()){ %>

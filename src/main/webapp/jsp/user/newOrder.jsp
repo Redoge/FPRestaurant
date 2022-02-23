@@ -2,6 +2,12 @@
 <%@ page import="java.util.Map" %>
 <%@ page import="static app.redoge.restaurant.DAO.DishesDAO.getAllMenuMap" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@taglib uri="http://java.sun.com/jsp/jstl/fmt"  prefix="fmt" %>
+<%String language = (String) session.getAttribute("language");%>
+<fmt:setLocale value="<%=language%>"/>
+<fmt:setBundle basename="language"  var="rb"/>
+
 <html>
 <head>
     <% UserRole role = (UserRole) request.getSession().getAttribute("role");
@@ -33,22 +39,22 @@
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
                 <%if (role.equals(UserRole.User)) {%>
-                <a class="nav-link" href="<%=request.getContextPath() + "/user/orders"%>">My order</a>
-                <a class="nav-link active" href="<%=request.getContextPath() + "/user/new-order"%>">New order</a>
+                <a class="nav-link" href="<%=request.getContextPath() + "/user/orders"%>"><fmt:message key="My_orders" bundle="${rb}"/></a>
+                <a class="nav-link active" href="<%=request.getContextPath() + "/user/new-order"%>"><fmt:message key="New_order" bundle="${rb}"/></a>
                 <%}%>
-                <a class="nav-link active" href="<%=request.getContextPath() + "/cabinet"%>">Cabinet</a>
-                <a class="nav-link" href="<%=request.getContextPath() + "/dishesMenu"%>">Dishes Menu</a>
-                <a class="nav-link" href="<%=request.getContextPath()+ "/logout"%>">Logout</a>
+                <a class="nav-link " href="<%=request.getContextPath() + "/cabinet"%>"><fmt:message key="Cabinet" bundle="${rb}"/></a>
+                <a class="nav-link" href="<%=request.getContextPath() + "/dishesMenu"%>"><fmt:message key="Dishes_menu" bundle="${rb}"/></a>
+                <a class="nav-link" href="<%=request.getContextPath()+ "/logout"%>"><fmt:message key="Logout" bundle="${rb}"/></a>
             </div>
         </div>
     </div>
 </nav>
-<div align="center"><h1>Make order</h1></div>
+<div align="center"><h1><fmt:message key="New_order" bundle="${rb}"/></h1></div>
 
 <div class="container">
     <div class="row">
         <form action="<%=request.getContextPath() + "/user/new-orderPost"%>" method="post">
-            <label for="AllMenu">Category:</label><br>
+            <label for="AllMenu"><fmt:message key="Name_of_the_dish" bundle="${rb}"/>:</label><br>
             <%--    <input type = "text" list = "AllMenu" >--%>
             <select id="AllMenu" name="id" class="form-select">
                 <% Map<Integer, String> dishes = getAllMenuMap();
@@ -58,9 +64,9 @@
                 <% } %>
             </select>
 
-            <label for="count">Price:</label>
+            <label for="count"><fmt:message key="Price" bundle="${rb}"/>:</label>
             <input type="number" id="count" name="count" class="form-control"><br>
-            <div align="center"><input type="submit" value="Submit" class="btn btn-outline-secondary"></div>
+            <div align="center"><input type="submit" value="<fmt:message key="New_order" bundle="${rb}"/>" class="btn btn-outline-secondary"></div>
         </form>
     </div>
 </div>

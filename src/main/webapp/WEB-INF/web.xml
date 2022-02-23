@@ -129,6 +129,8 @@
     </servlet-mapping>
 
 
+
+
     <!--All manage-->
 
     <servlet>
@@ -165,6 +167,14 @@
         <url-pattern>/registerPost</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>changeLanguage</servlet-name>
+        <servlet-class>app.redoge.restaurant.servlets.changeLanguage</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>changeLanguage</servlet-name>
+        <url-pattern>/changeLanguage</url-pattern>
+    </servlet-mapping>
 
     <servlet>
         <servlet-name>Register</servlet-name>

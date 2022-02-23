@@ -1,11 +1,11 @@
-<%@ page import="app.redoge.restaurant.UserRole" %><%--
-  Created by IntelliJ IDEA.
-  User: danyl
-  Date: 2/16/2022
-  Time: 11:15 PM
-  To change this template use File | Settings | File Templates.
---%>
+<%@ page import="app.redoge.restaurant.UserRole" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@taglib uri="http://java.sun.com/jsp/jstl/fmt"  prefix="fmt" %>
+<%String language = (String) session.getAttribute("language");%>
+<fmt:setLocale value="<%=language%>"/>
+<fmt:setBundle basename="language"  var="rb"/>
+
 <html>
 <head>
     <title>Register</title>
@@ -34,9 +34,9 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
-                <a class="nav-link " href="<%=request.getContextPath()+ "/dishesMenu" %>">Dishes menu</a>
-                <a class="nav-link " href="<%=request.getContextPath() + "/login"%>" >Login</a>
-                <a class="nav-link active" href="<%=request.getContextPath() + "/register"%>">Register</a>
+                <a class="nav-link " href="<%=request.getContextPath()+ "/dishesMenu" %>"><fmt:message key="Dishes_menu" bundle="${rb}"/></a>
+                <a class="nav-link " href="<%=request.getContextPath() + "/login"%>" ><fmt:message key="Login" bundle="${rb}"/></a>
+                <a class="nav-link active" href="<%=request.getContextPath() + "/register"%>"><fmt:message key="Register" bundle="${rb}"/></a>
             </div>
         </div>
     </div>
@@ -71,16 +71,16 @@
                     <input class="form-control" type="email" id="email" name="email">
                 </div>
                 <div class="form-group">
-                    <label for="username">Username:</label>
+                    <label for="username"><fmt:message key="Username" bundle="${rb}"/>:</label>
                     <input class="form-control" type="text" id="username" name="username">
                 </div>
                 <div class="form-group">
-                    <label for="password">Password:</label>
+                    <label for="password"><fmt:message key="Password" bundle="${rb}"/>:</label>
                     <input class="form-control" type="password" id="password" name="password">
                 </div>
                 <div class="form-group" align="center">
                     <br>
-                    <input  class="btn btn-outline-secondary" type="submit" value="Register">
+                    <input  class="btn btn-outline-secondary" type="submit" value="<fmt:message key="Register" bundle="${rb}"/>">
                 </div>
             </div>
         </div>

@@ -4,6 +4,11 @@
 <%@ page import="static app.redoge.restaurant.DAO.UserDao.getAllUser" %>
 <%--<%@ page import="app.redoge.restaurant.Order" %>--%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@taglib uri="http://java.sun.com/jsp/jstl/fmt"  prefix="fmt" %>
+<%String language = (String) session.getAttribute("language");%>
+<fmt:setLocale value="<%=language%>"/>
+<fmt:setBundle basename="language"  var="rb"/>
 <html>
 <head>
     <title>Manage</title>
@@ -35,28 +40,23 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
         <a class="navbar-brand" href="<%=request.getContextPath()%>">Restaurant</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
-                aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
-                <%if (role.equals(UserRole.Manager)) {%>
-                <a class="nav-link active" href="<%=request.getContextPath() + "/manager/manage"%> ">Manage</a>
-                <a class="nav-link" href="<%=request.getContextPath() + "/manager/manage-menu"%>">Manage menu</a>
-                <a class="nav-link" href="<%=request.getContextPath() + "/manager/manage-orders"%>">Manage orders</a>
-                <%} else if (role.equals(UserRole.User)) {%>
-                <a class="nav-link" href="<%=request.getContextPath() + "/user/orders"%>">My order</a>
-                <a class="nav-link" href="<%=request.getContextPath() + "/user/new-order"%>">New order</a>
+                <%if(role.equals(UserRole.Manager)){%>
+                <a class="nav-link active"  href="<%=request.getContextPath() + "/manager/manage"%> "><fmt:message key="Manage" bundle="${rb}"/></a>
+                <a class="nav-link" href="<%=request.getContextPath() + "/manager/manage-menu"%>"><fmt:message key="Manage_menu" bundle="${rb}"/></a>
+                <a class="nav-link" href="<%=request.getContextPath() + "/manager/manage-orders"%>"><fmt:message key="Manage_orders" bundle="${rb}"/></a>
                 <%}%>
-                <a class="nav-link " href="<%=request.getContextPath() + "/cabinet"%>">Cabinet</a>
-                <a class="nav-link" href="<%=request.getContextPath() + "/dishesMenu"%>">Dishes Menu</a>
-                <a class="nav-link" href="<%=request.getContextPath()+ "/logout"%>">Logout</a>
+                <a class="nav-link " href="<%=request.getContextPath() + "/cabinet"%>"><fmt:message key="Cabinet" bundle="${rb}"/></a>
+                <a class="nav-link" href="<%=request.getContextPath() + "/dishesMenu"%>"><fmt:message key="Dishes_menu" bundle="${rb}"/></a>
+                <a class="nav-link" href="<%=request.getContextPath()+ "/logout"%>"><fmt:message key="Logout" bundle="${rb}"/></a>
             </div>
         </div>
     </div>
 </nav>
-
 
 <div class="container">
     <div class="row ">
@@ -68,7 +68,7 @@
         </div>
         <%}%>
         <form action="<%=request.getContextPath() + "/manager/manage/changeRole"%>" method="post">
-            <label for="AllMenu">New role:</label><br>
+            <label for="AllMenu"><fmt:message key="New_role" bundle="${rb}"/></label><br>
             <%--    <input type = "text" list = "AllMenu" name="changed_id">--%>
             <select id="AllMenu" name="newRole" class="form-select">
                 <%
@@ -80,7 +80,7 @@
                 <option value="<%=userRoleForm.getId()%>"><%=userRoleForm%>
                         <% } %>
             </select>
-            <label for="userId">User id:</label>
+            <label for="userId"><fmt:message key="User_id" bundle="${rb}"/>:</label>
             <input id="userId" type="number" list="userIdList" name="userId" class="form-select" list="userIdList">
             <datalist id="userIdList" >
                 <%for (User userForm : userList) {%>
@@ -88,7 +88,7 @@
                         <% } %>
             </datalist>
             <br>
-            <div align="center"><input type="submit" value="Change order status" class="btn btn-outline-secondary">
+            <div align="center"><input type="submit" value="<fmt:message key="Change_order_status" bundle="${rb}"/>" class="btn btn-outline-secondary">
             </div>
 
         </form>
@@ -97,9 +97,9 @@
         <TABLE BORDER="1" width="90%" ALIGN="CENTER" class="table">
             <TR>
                 <TH>Id</TH>
-                <TH>Username</TH>
+                <TH><fmt:message key="Username" bundle="${rb}"/></TH>
                 <TH>Email</TH>
-                <th>Role</th>
+                <th><fmt:message key="Role" bundle="${rb}"/></th>
             </TR>
                 <% for(User user: userList){%>
             <TR>
