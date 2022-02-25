@@ -11,7 +11,7 @@ public enum DishesMenu{
         if (role == 1) return Salad;
         if (role == 2) return MainDishes;
         if (role == 3) return Desserts;
-        else if(role == 4) return Drinks;
+        if(role == 4) return Drinks;
         else return Unknown;
     }
 
@@ -19,7 +19,7 @@ public enum DishesMenu{
        return getDishesCategory(role).toString();
     }
 
-    public int getId() {
+    public  int getId() {
         return id;
     }
 }

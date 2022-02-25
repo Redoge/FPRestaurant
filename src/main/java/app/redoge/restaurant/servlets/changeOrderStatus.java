@@ -20,6 +20,9 @@ public class changeOrderStatus extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         boolean isGood = true;
         final UserRole role = (UserRole) request.getSession().getAttribute("role");
+        if (role == null || role.equals(UserRole.Unknown) || role.equals(UserRole.User)) {
+            response.sendRedirect(request.getContextPath());
+        }
         final String orderIdString = request.getParameter("changed_id");
         int orderId = -1;
         if (orderIdString == null || orderIdString.length() == 0) {isGood = false;}

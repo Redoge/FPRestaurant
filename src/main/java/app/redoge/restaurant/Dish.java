@@ -1,11 +1,11 @@
 package app.redoge.restaurant;
 
 public class Dish {
-        int id;
-        String name;
-        int category_id;
-        DishesMenu category;
-        double price;
+        private int id;
+        private String name;
+        private int category_id;
+        private DishesMenu category;
+        private double price;
 
     public Dish(int id, String name, int category_id, DishesMenu category, double price) {
         this.id = id;
@@ -26,6 +26,7 @@ public class Dish {
         this.name = name;
         this.category_id = category_id;
         this.price = price;
+        this.category = DishesMenu.getDishesCategory(category_id);
     }
 
 

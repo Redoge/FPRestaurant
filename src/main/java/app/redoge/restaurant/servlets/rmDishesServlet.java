@@ -1,5 +1,7 @@
 package app.redoge.restaurant.servlets;
 
+import app.redoge.restaurant.UserRole;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -12,6 +14,11 @@ public class rmDishesServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        UserRole role = (UserRole) request.getSession().getAttribute("role");
+        if (role == null || role.equals(UserRole.Unknown) || role.equals(UserRole.User)) {
+            response.sendRedirect(request.getContextPath());
+        }
+
         final String id = request.getParameter("id");
         if(id == null) {
             response.sendRedirect(request.getContextPath()+"/manager/manage-menu");

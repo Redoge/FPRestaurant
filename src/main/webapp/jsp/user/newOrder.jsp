@@ -7,14 +7,14 @@
 <%String language = (String) session.getAttribute("language");%>
 <fmt:setLocale value="<%=language%>"/>
 <fmt:setBundle basename="language"  var="rb"/>
-
+<% UserRole role = (UserRole) request.getSession().getAttribute("role");
+    if (role == null || role.equals(UserRole.Unknown) || role.equals(UserRole.Manager)) {
+        response.sendRedirect(request.getContextPath());
+    }
+%>
 <html>
 <head>
-    <% UserRole role = (UserRole) request.getSession().getAttribute("role");
-        if (role == null || role.equals(UserRole.Unknown) || role.equals(UserRole.Manager)) {
-            response.sendRedirect(request.getContextPath());
-        }
-    %>
+
     <title>New order</title>
     <style>
         <%@include file='/css/css.css' %>
@@ -38,7 +38,7 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
-                <%if (role.equals(UserRole.User)) {%>
+                <%if (role != null && role.equals(UserRole.User)) {%>
                 <a class="nav-link" href="<%=request.getContextPath() + "/user/orders"%>"><fmt:message key="My_orders" bundle="${rb}"/></a>
                 <a class="nav-link active" href="<%=request.getContextPath() + "/user/new-order"%>"><fmt:message key="New_order" bundle="${rb}"/></a>
                 <%}%>
@@ -64,7 +64,7 @@
                 <% } %>
             </select>
 
-            <label for="count"><fmt:message key="Price" bundle="${rb}"/>:</label>
+            <label for="count"><fmt:message key="Count" bundle="${rb}"/>:</label>
             <input type="number" id="count" name="count" class="form-control"><br>
             <div align="center"><input type="submit" value="<fmt:message key="New_order" bundle="${rb}"/>" class="btn btn-outline-secondary"></div>
         </form>

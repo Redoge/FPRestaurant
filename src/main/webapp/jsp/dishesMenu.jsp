@@ -75,8 +75,8 @@
             <label for="AllMenu"><fmt:message key="Name_of_the_dish" bundle="${rb}"/>:</label>
             <select id = "AllMenu" class = "form-select" name="id">
                 <% Map<Integer, String> dishesMap = getAllMenuMap();
-                    for(int id: getAllMenuMap().keySet()){ %>
-                <option value = "<%= id%>"><%=dishesMap.get(id)%></option><% } %>
+                    for(int id: dishes.keySet()){ %>
+                <option value = "<%= id%>"><%=dishes.get(id).getName()%></option><% } %>
             </select>
             <div class="form-group">
                 <label for="count"><fmt:message key="Count" bundle="${rb}"/>:</label>

@@ -18,6 +18,10 @@ public class NewOrder extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        final UserRole role = (UserRole) req.getSession().getAttribute("role");
+        if (role == null || role.equals(UserRole.Unknown) || role.equals(UserRole.Manager)) {
+            resp.sendRedirect(req.getContextPath());
+        }
         boolean isGood = false;
 
         String dishIdString = req.getParameter("id");

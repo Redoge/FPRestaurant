@@ -2,13 +2,23 @@
 <%@ page import="app.redoge.restaurant.Order" %>
 <%@ page import="static app.redoge.restaurant.DAO.OrderDAO.getOrdersByUserId" %>
 <%@ page import="java.util.List" %>
+<%@ page import="java.util.ArrayList" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@taglib uri="http://java.sun.com/jsp/jstl/fmt"  prefix="fmt" %>
+<%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%String language = (String) session.getAttribute("language");%>
 <fmt:setLocale value="<%=language%>"/>
-<fmt:setBundle basename="language"  var="rb"/>
+<fmt:setBundle basename="language" var="rb"/>
+<% UserRole role = (UserRole) request.getSession().getAttribute("role");
+    List<Order> orders = new ArrayList<>();
+    if (role == null || role.equals(UserRole.Unknown) || role.equals(UserRole.Manager)) {
+        response.sendRedirect(request.getContextPath());
 
+    }
+    if(request.getSession().getAttribute("user_id") != null) {
+        orders = getOrdersByUserId((int)request.getSession().getAttribute("user_id"));
+    }
+%>
 <html>
 <head>
     <title>Order</title>
@@ -25,12 +35,7 @@
 
 </head>
 <body>
-<% UserRole role = (UserRole) request.getSession().getAttribute("role");
-    if (role == null || role.equals(UserRole.Unknown) || role.equals(UserRole.Manager)) {
-        response.sendRedirect(request.getContextPath());
-    }
-    List<Order> orders = getOrdersByUserId((int) request.getSession().getAttribute("user_id"));
-%>
+
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
         <a class="navbar-brand" href="<%=request.getContextPath()%>">Restaurant</a>
@@ -40,13 +45,18 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
-                <%if (role.equals(UserRole.User)) {%>
-                <a class="nav-link active" href="<%=request.getContextPath() + "/user/orders"%>"><fmt:message key="My_orders" bundle="${rb}"/></a>
-                <a class="nav-link " href="<%=request.getContextPath() + "/user/new-order"%>"><fmt:message key="New_order" bundle="${rb}"/></a>
+                <%if (role != null && role.equals(UserRole.User)) {%>
+                <a class="nav-link active" href="<%=request.getContextPath() + "/user/orders"%>"><fmt:message
+                        key="My_orders" bundle="${rb}"/></a>
+                <a class="nav-link " href="<%=request.getContextPath() + "/user/new-order"%>"><fmt:message
+                        key="New_order" bundle="${rb}"/></a>
                 <%}%>
-                <a class="nav-link active" href="<%=request.getContextPath() + "/cabinet"%>"><fmt:message key="Cabinet" bundle="${rb}"/></a>
-                <a class="nav-link" href="<%=request.getContextPath() + "/dishesMenu"%>"><fmt:message key="Dishes_menu" bundle="${rb}"/></a>
-                <a class="nav-link" href="<%=request.getContextPath()+ "/logout"%>"><fmt:message key="Logout" bundle="${rb}"/></a>
+                <a class="nav-link" href="<%=request.getContextPath() + "/cabinet"%>"><fmt:message key="Cabinet"
+                                                                                                          bundle="${rb}"/></a>
+                <a class="nav-link" href="<%=request.getContextPath() + "/dishesMenu"%>"><fmt:message key="Dishes_menu"
+                                                                                                      bundle="${rb}"/></a>
+                <a class="nav-link" href="<%=request.getContextPath()+ "/logout"%>"><fmt:message key="Logout"
+                                                                                                 bundle="${rb}"/></a>
             </div>
         </div>
     </div>

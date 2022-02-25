@@ -8,7 +8,11 @@
 <%String language = (String) session.getAttribute("language");%>
 <fmt:setLocale value="<%=language%>"/>
 <fmt:setBundle basename="language" var="rb"/>
-
+<% UserRole role = (UserRole) request.getSession().getAttribute("role");
+    if (role == null || role.equals(UserRole.Unknown)) {
+        response.sendRedirect(request.getContextPath());
+    }
+%>
 <html>
 <head>
     <title>Cabinet</title>
@@ -27,11 +31,6 @@
 
 </head>
 <body>
-<% UserRole role = (UserRole) request.getSession().getAttribute("role");
-    if (role == null || role.equals(UserRole.Unknown)) {
-        response.sendRedirect(request.getContextPath());
-    }
-%>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
         <a class="navbar-brand" href="<%=request.getContextPath()%>">Restaurant</a>
@@ -41,14 +40,14 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
-                <%if (role.equals(UserRole.Manager)) {%>
+                <%if (role != null && role.equals(UserRole.Manager)) {%>
                 <a class="nav-link" href="<%=request.getContextPath() + "/manager/manage"%> "><fmt:message key="Manage"
                                                                                                            bundle="${rb}"/></a>
                 <a class="nav-link" href="<%=request.getContextPath() + "/manager/manage-menu"%>"><fmt:message
                         key="Manage_menu" bundle="${rb}"/></a>
                 <a class="nav-link" href="<%=request.getContextPath() + "/manager/manage-orders"%>"><fmt:message
                         key="Manage_orders" bundle="${rb}"/></a>
-                <%} else if (role.equals(UserRole.User)) {%>
+                <%} else if (role != null && role.equals(UserRole.User)) {%>
                 <a class="nav-link" href="<%=request.getContextPath() + "/user/orders"%>"><fmt:message key="My_orders"
                                                                                                        bundle="${rb}"/></a>
                 <a class="nav-link" href="<%=request.getContextPath() + "/user/new-order"%>"><fmt:message
@@ -75,7 +74,8 @@
                     <option value="uk_UA">Ukraine</option>
                 </select>
                 <br>
-                <div align="center"><input type="submit" value="<fmt:message key="Change_language" bundle="${rb}"/>" class="btn btn-outline-secondary"></div>
+                <div align="center"><input type="submit" value="<fmt:message key="Change_language" bundle="${rb}"/>"
+                                           class="btn btn-outline-secondary"></div>
             </form>
         </div>
     </div>

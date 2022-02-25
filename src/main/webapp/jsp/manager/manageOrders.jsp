@@ -11,19 +11,19 @@
 <%String language = (String) session.getAttribute("language");%>
 <fmt:setLocale value="<%=language%>"/>
 <fmt:setBundle basename="language"  var="rb"/>
-
+<% UserRole role = (UserRole) request.getSession().getAttribute("role");
+    if (role == null || role.equals(UserRole.Unknown) || role.equals(UserRole.User)) {
+        response.sendRedirect(request.getContextPath());
+    }
+    ArrayList<Order> orders = getAllOrders();
+    String info = (String) request.getAttribute("info");
+    if (info == null) {
+        info = "";
+    }
+%>
 <html>
 <head>
-    <% UserRole role = (UserRole) request.getSession().getAttribute("role");
-        if (role == null || role.equals(UserRole.Unknown) || role.equals(UserRole.User)) {
-            response.sendRedirect(request.getContextPath());
-        }
-        ArrayList<Order> orders = getAllOrders();
-        String info = (String) request.getAttribute("info");
-        if (info == null) {
-            info = "";
-        }
-    %>
+
     <style>
         <%@include file='/css/css.css' %>
         <%@include file='/css/bootstrap.css' %>
@@ -48,7 +48,7 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
-                <%if (role.equals(UserRole.Manager)) {%>
+                <%if (role != null && role.equals(UserRole.Manager)) {%>
                 <a class="nav-link " href="<%=request.getContextPath() + "/manager/manage"%> "><fmt:message key="Manage" bundle="${rb}"/></a>
                 <a class="nav-link " href="<%=request.getContextPath() + "/manager/manage-menu"%>"><fmt:message key="Manage_menu" bundle="${rb}"/></a>
                 <a class="nav-link active" href="<%=request.getContextPath() + "/manager/manage-orders"%>"><fmt:message key="Manage_orders" bundle="${rb}"/></a>

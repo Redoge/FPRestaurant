@@ -17,6 +17,9 @@ public class changeUserRole extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         boolean isGood = true;
         final UserRole role = (UserRole) request.getSession().getAttribute("role");
+        if (role == null || role.equals(UserRole.Unknown) || role.equals(UserRole.User)) {
+            response.sendRedirect(request.getContextPath());
+        }
         final String newRoleStringId = request.getParameter("newRole");
         final String userStringId = request.getParameter("userId");
         int newRoleId = -1;

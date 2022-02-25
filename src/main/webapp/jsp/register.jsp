@@ -5,7 +5,14 @@
 <%String language = (String) session.getAttribute("language");%>
 <fmt:setLocale value="<%=language%>"/>
 <fmt:setBundle basename="language"  var="rb"/>
+<% UserRole role = (UserRole) request.getSession().getAttribute("role");
+    if(role == null){
+    }
+    else if ((role.equals(UserRole.User)) || (role.equals(UserRole.Manager))){response.sendRedirect(request.getContextPath());}
+    String info = (String) request.getAttribute("info");
+    if (info == null){info = "";}
 
+%>
 <html>
 <head>
     <title>Register</title>
@@ -18,14 +25,7 @@
 
 </head>
 <body>
-<% UserRole role = (UserRole) request.getSession().getAttribute("role");
-    if(role == null){
-    }
-    else if ((role.equals(UserRole.User)) || (role.equals(UserRole.Manager))){response.sendRedirect(request.getContextPath());}
-    String info = (String) request.getAttribute("info");
-    if (info == null){info = "";}
 
-%>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
         <a class="navbar-brand" href="<%=request.getContextPath()%>">Restaurant</a>
@@ -42,19 +42,6 @@
     </div>
 </nav>
 <hr>
-<%--<form action="<%=request.getContextPath() + "/registerPost" %>" method="post">--%>
-<%--    <label for="email">E-mail:</label>--%>
-<%--    <input class="form-control" type="email" id="email" name="email"><br><br>--%>
-
-<%--    <label for="username">Username:</label>--%>
-<%--    <input class="form-control" type="text" id="username" name="username"><br><br>--%>
-
-<%--    <label for="password">Password:</label>--%>
-<%--    <input class="form-control" type="password" id="password" name="password"><br><br>--%>
-
-<%--    <input class="btn btn-outline-secondary" type="submit" value="Register">--%>
-<%--</form>--%>
-
 <div>
 
     <form action="<%=request.getContextPath() + "/registerPost" %>" method="post">

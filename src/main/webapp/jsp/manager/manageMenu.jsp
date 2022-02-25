@@ -2,7 +2,8 @@
 <%@ page import="app.redoge.restaurant.DishesMenu" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="java.util.Map" %>
-<%@ page import="static app.redoge.restaurant.DAO.DishesDAO.getAllMenuMap" %>
+<%@ page import="static app.redoge.restaurant.DAO.DishesDAO.getDishIdBySorted" %>
+<%@ page import="app.redoge.restaurant.Dish" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt"  prefix="fmt" %>
 <%String language = (String) session.getAttribute("language");%>
@@ -40,7 +41,7 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
-                <%if (role.equals(UserRole.Manager)) {%>
+                <%if (role != null && role.equals(UserRole.Manager)) {%>
                 <a class="nav-link " href="<%=request.getContextPath() + "/manager/manage"%> "><fmt:message key="Manage" bundle="${rb}"/></a>
                 <a class="nav-link active" href="<%=request.getContextPath() + "/manager/manage-menu"%>"><fmt:message key="Manage_menu" bundle="${rb}"/></a>
                 <a class="nav-link" href="<%=request.getContextPath() + "/manager/manage-orders"%>"><fmt:message key="Manage_orders" bundle="${rb}"/></a>
@@ -79,14 +80,17 @@
     <div class="row ">
         <hr>
         <!--Remove dish-->
+        <%
+            String category = "category_id";
+            Map<Integer, Dish> dishes = getDishIdBySorted(category);
+        %>
         <div align="center"><h1><fmt:message key="Remove_dish" bundle="${rb}"/></h1></div>
         <form action="<%=request.getContextPath() + "/manager/manage/rm-dishes"%>" method="post">
             <label for="AllMenu"><fmt:message key="Category" bundle="${rb}"/>:</label>
             <%--    <input type = "text" list = "AllMenu" name="id">--%>
             <select id="AllMenu" name="id" class="form-select">
-                <% Map<Integer, String> dishes = getAllMenuMap();
-                    for (int id : getAllMenuMap().keySet()) { %>
-                <option value="<%= id%>"><%=dishes.get(id)%>
+                <%for(int id: dishes.keySet()) { %>
+                <option value="<%= id%>"><%=dishes.get(id).getName()%>
                 </option>
                 <% } %>
             </select>

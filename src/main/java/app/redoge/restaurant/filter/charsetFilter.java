@@ -14,23 +14,16 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 public class charsetFilter implements Filter {
-    // кодировка
-    private String encoding;
 
     public void init(FilterConfig config) throws ServletException {
-        // читаем из конфигурации
-        encoding = config.getInitParameter("requestEncoding");
 
-        // если не установлена — устанавливаем UTF-8
-        if (encoding == null) encoding = "UTF-8";
     }
 
     public void doFilter(ServletRequest request,
                          ServletResponse response, FilterChain next)
             throws IOException, ServletException {
 
-        request.setCharacterEncoding(encoding);
-
+        request.setCharacterEncoding("UTF-8");
 
         HttpServletRequest req = (HttpServletRequest) request;
         HttpSession session = req.getSession();

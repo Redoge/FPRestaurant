@@ -21,7 +21,10 @@ public class addDishesServlet extends HttpServlet {
 
         boolean isGood = false;
 
-
+        final UserRole role = (UserRole) request.getSession().getAttribute("role");
+        if (role == null || role.equals(UserRole.Unknown) || role.equals(UserRole.User)) {
+            response.sendRedirect(request.getContextPath());
+        }
         final String name = request.getParameter("name");
         String priceString = request.getParameter("price");
         String categoryString = request.getParameter("category");

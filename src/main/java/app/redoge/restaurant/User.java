@@ -1,6 +1,7 @@
 package app.redoge.restaurant;
 
 public class User {
+
     String username;
     String email;
     int id;
