@@ -2,7 +2,7 @@ package app.redoge.restaurant;
 
 import org.junit.jupiter.api.Test;
 
-import static app.redoge.restaurant.DishesMenu.getDishesCategory;
+import static app.redoge.restaurant.Category.getDishesCategory;
 import static org.junit.jupiter.api.Assertions.*;
 
 class UserRoleTest {

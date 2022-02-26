@@ -1,5 +1,5 @@
 <%@ page import="app.redoge.restaurant.UserRole" %>
-<%@ page import="app.redoge.restaurant.DishesMenu" %>
+<%@ page import="app.redoge.restaurant.Category" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="java.util.Map" %>
 <%@ page import="static app.redoge.restaurant.DAO.DishesDAO.getDishIdBySorted" %>
@@ -68,7 +68,7 @@
             <label for="category"><fmt:message key="Category" bundle="${rb}"/></label>
             <%--    <input type = "text" list = "category" name="category">--%>
             <select id="category" name="category" class="form-select">
-                <% for (DishesMenu name : DishesMenu.values()) { %>
+                <% for (Category name : Category.values()) { %>
                 <option value="<%= name.getId()%>"><%=name%>
                 </option>
                 <% } %>

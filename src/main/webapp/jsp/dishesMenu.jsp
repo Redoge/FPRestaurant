@@ -1,9 +1,10 @@
 <%@ page import="java.util.Map" %>
-<%@ page import="app.redoge.restaurant.DishesMenu" %>
+<%@ page import="app.redoge.restaurant.Category" %>
 <%@ page import="app.redoge.restaurant.UserRole" %>
 <%@ page import="static app.redoge.restaurant.DAO.DishesDAO.getDishIdBySorted" %>
 <%@ page import="app.redoge.restaurant.Dish" %>
 <%@ page import="static app.redoge.restaurant.DAO.DishesDAO.getAllMenuMap" %>
+<%@ page import="app.redoge.restaurant.Category" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt"  prefix="fmt" %>
@@ -56,7 +57,7 @@
         <label for="input_group" ><fmt:message key="Group_by" bundle="${rb}"/>:</label>
         <select class="form-select" aria-label="Default select example" id="input_group" >
             <option value = "">All</option>
-            <% DishesMenu[] dishesMenuArr = DishesMenu.values(); for(DishesMenu dm: dishesMenuArr){ if(dm.equals(DishesMenu.Unknown)){continue;}%>
+            <% Category[] dishesMenuArr = Category.values(); for(Category dm: dishesMenuArr){ if(dm.equals(Category.Unknown)){continue;}%>
                <option value = "<%=dm%>"><%=dm%></option>
             <%}%>
         </select>

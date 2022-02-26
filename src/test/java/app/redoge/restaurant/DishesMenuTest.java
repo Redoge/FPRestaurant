@@ -9,19 +9,19 @@ class DishesMenuTest {
 
     @Test
     void getDishesCategory() {
-        assertEquals(DishesMenu.Drinks,
-                DishesMenu.getDishesCategory(category_id));
-        assertEquals(DishesMenu.Unknown, DishesMenu.getDishesCategory(category_id+5));
+        assertEquals(Category.Drinks,
+                Category.getDishesCategory(category_id));
+        assertEquals(Category.Unknown, Category.getDishesCategory(category_id+5));
     }
 
     @Test
     void getDishesCategoryToString() {
         assertEquals("Drinks",
-                DishesMenu.getDishesCategoryToString(category_id));
+                Category.getDishesCategoryToString(category_id));
     }
 
     @Test
     void getId() {
-        assertEquals(4, DishesMenu.Drinks.getId());
+        assertEquals(4, Category.Drinks.getId());
     }
 }

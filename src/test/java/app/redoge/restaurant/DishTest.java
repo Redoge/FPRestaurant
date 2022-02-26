@@ -10,7 +10,7 @@ class DishTest {
     int category_id = 4;
     double price = 20;
     String name = "Coffe";
-    DishesMenu category = DishesMenu.Drinks;
+    Category category = Category.Drinks;
 
     Dish dishFull = new Dish(id, name, category_id, category, price);
     Dish dishNotCategory = new Dish(id, name, category_id,  price);
@@ -40,9 +40,9 @@ class DishTest {
 
     @Test
     void getCategory() {
-        assertEquals(DishesMenu.Drinks, dishFull.getCategory());
-        assertEquals(DishesMenu.Drinks, dishNotCategory.getCategory());
-        assertEquals(DishesMenu.Drinks, dishNotCategoryNotId.getCategory());
+        assertEquals(Category.Drinks, dishFull.getCategory());
+        assertEquals(Category.Drinks, dishNotCategory.getCategory());
+        assertEquals(Category.Drinks, dishNotCategoryNotId.getCategory());
     }
 
     @Test
