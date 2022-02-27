@@ -18,6 +18,8 @@
     if(request.getSession().getAttribute("user_id") != null) {
         orders = getOrdersByUserId((int)request.getSession().getAttribute("user_id"));
     }
+    String info = (String) request.getAttribute("info");
+    if (info == null){info = "";}
 %>
 <html>
 <head>
@@ -64,6 +66,11 @@
 <div align="center"><h1><fmt:message key="My_orders" bundle="${rb}"/></h1></div>
 <div class="container">
     <div class="row">
+        <%if(info.length() != 0){%>
+        <div class="forAlert">
+            <div class="alert alert-secondary form-group"  role="alert">
+                <%=info%>
+            </div></div><%}%>
         <TABLE BORDER="1" width="90%" ALIGN="CENTER" class="table">
             <TR>
                 <TH><fmt:message key="Name_of_the_dish" bundle="${rb}"/></TH>

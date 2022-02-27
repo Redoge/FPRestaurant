@@ -11,6 +11,10 @@
     if (role == null || role.equals(UserRole.Unknown) || role.equals(UserRole.Manager)) {
         response.sendRedirect(request.getContextPath());
     }
+    String info = (String) request.getAttribute("info");
+    if (info == null){info = "";}
+
+
 %>
 <html>
 <head>
@@ -53,6 +57,11 @@
 
 <div class="container">
     <div class="row">
+        <%if(info.length() != 0){%>
+        <div class="forAlert">
+            <div class="alert alert-secondary form-group"  role="alert">
+                <%=info%>
+            </div></div><%}%>
         <form action="<%=request.getContextPath() + "/user/new-orderPost"%>" method="post">
             <label for="AllMenu"><fmt:message key="Name_of_the_dish" bundle="${rb}"/>:</label><br>
             <%--    <input type = "text" list = "AllMenu" >--%>

@@ -22,43 +22,56 @@ public class NewOrder extends HttpServlet {
         if (role == null || role.equals(UserRole.Unknown) || role.equals(UserRole.Manager)) {
             resp.sendRedirect(req.getContextPath());
         }
-        boolean isGood = false;
+
+        boolean isGood = true;
+        String err = "";
+        Order order = null;
 
         String dishIdString = req.getParameter("id");
         String countString = req.getParameter("count");
         int dishId = 0;
         int count = 0;
-        if(dishIdString == null || countString == null) {
-            //ERROR
-            resp.sendRedirect(req.getContextPath()+"/user/new-order");
+        if (dishIdString == null || countString == null || countString.length() < 1 || dishIdString.length() < 1) {
+            err = "Error";
             isGood = false;
-        }else{
-            dishId = Integer.parseInt(dishIdString);
-            count = Integer.parseInt(countString);
+        } else {
+            try {
+                dishId = Integer.parseInt(dishIdString);
+                count = Integer.parseInt(countString);
+            } catch (NumberFormatException e) {
+                isGood = false;
+                err = "Error. Please enter the number!";
+            }
         }
-        String  email = (String) req.getSession().getAttribute("email");
+        String email = (String) req.getSession().getAttribute("email");
         User user = null;
         try {
             user = getUser(email);
         } catch (SQLException e) {
+            isGood = false;
             e.printStackTrace();
         }
-        if(user == null){
-            //ERROR
-            resp.sendRedirect(req.getContextPath()+"/user/new-order");
+        if (user == null) {
+            err = "Error";
             isGood = false;
         }
-        Order order = new Order(dishId, count, user.getId());
-        System.out.println(23);
-        isGood = newOrder(order);
 
-        if (isGood == false){
-            System.out.println(24);
-            resp.sendRedirect(req.getContextPath()+"/user/new-order");
-            isGood = false;
-        }else{
-            System.out.println(25);
-            resp.sendRedirect(req.getContextPath()+"/user/new-order");
+        if (isGood) {
+            order = new Order(dishId, count, user.getId());
+        }
+        System.out.println(order);
+        if (isGood) {
+            isGood = newOrder(order);
+        }
+        if (!isGood) {
+            if (err.length() == 0) {
+                err = "Error";
+            }
+            req.setAttribute("info", err);
+            req.getRequestDispatcher("/user/new-order").forward(req, resp);
+        } else {
+            req.setAttribute("info", "Order accepted");
+            req.getRequestDispatcher("/user/orders").forward(req, resp);
         }
 
 

@@ -11,7 +11,11 @@
 <%String language = (String) session.getAttribute("language");%>
 <fmt:setLocale value="<%=language%>"/>
 <fmt:setBundle basename="language"  var="rb"/>
+<%
+    String info = (String) request.getAttribute("info");
+    if (info == null){info = "";}
 
+%>
 <html>
 <head>
     <title>Dishes Menu</title>
@@ -66,6 +70,11 @@
     <%if (role != null && role.equals(UserRole.User)){%>
 
     <div id="newOrderDiv" class="col-2 position-relative"  align="center">
+        <%if(info.length() != 0){%>
+        <div class="forAlert">
+            <div class="alert alert-secondary form-group"  role="alert">
+                <%=info%>
+            </div></div><%}%>
         <div>
             <button class="btn spoiler-trigger btn-outline-secondary"><fmt:message key="New_order" bundle="${rb}"/>:</button>
 <%--            <a class="spoiler-trigger"><span>New order:</span></a>--%>
@@ -83,7 +92,7 @@
                 <label for="count"><fmt:message key="Count" bundle="${rb}"/>:</label>
                 <input type="number" class="form-control" id="count" name="count">
             </div>
-            <input type="submit"  class="btn btn-outline-secondary" value="<fmt:message key="Order" bundle="${rb}"/>">
+            <input type="submit"  class="btn btn-outline-secondary" value="<fmt:message key="New_order" bundle="${rb}"/>">
         </form>
     </div>
         </div>
