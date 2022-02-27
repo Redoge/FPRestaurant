@@ -5,16 +5,21 @@
 <%@ page import="static app.redoge.restaurant.DAO.DishesDAO.getDishIdBySorted" %>
 <%@ page import="app.redoge.restaurant.Dish" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@taglib uri="http://java.sun.com/jsp/jstl/fmt"  prefix="fmt" %>
+<%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%String language = (String) session.getAttribute("language");%>
 <fmt:setLocale value="<%=language%>"/>
-<fmt:setBundle basename="language"  var="rb"/>
+<fmt:setBundle basename="language" var="rb"/>
 <html>
 <head>
     <% UserRole role = (UserRole) request.getSession().getAttribute("role");
         if (role == null || role.equals(UserRole.Unknown) || role.equals(UserRole.User)) {
             response.sendRedirect(request.getContextPath());
         }
+        String info = (String) request.getAttribute("info");
+        if (info == null) {
+            info = "";
+        }
+
     %>
 
 
@@ -42,13 +47,19 @@
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
                 <%if (role != null && role.equals(UserRole.Manager)) {%>
-                <a class="nav-link " href="<%=request.getContextPath() + "/manager/manage"%> "><fmt:message key="Manage" bundle="${rb}"/></a>
-                <a class="nav-link active" href="<%=request.getContextPath() + "/manager/manage-menu"%>"><fmt:message key="Manage_menu" bundle="${rb}"/></a>
-                <a class="nav-link" href="<%=request.getContextPath() + "/manager/manage-orders"%>"><fmt:message key="Manage_orders" bundle="${rb}"/></a>
+                <a class="nav-link " href="<%=request.getContextPath() + "/manager/manage"%> "><fmt:message key="Manage"
+                                                                                                            bundle="${rb}"/></a>
+                <a class="nav-link active" href="<%=request.getContextPath() + "/manager/manage-menu"%>"><fmt:message
+                        key="Manage_menu" bundle="${rb}"/></a>
+                <a class="nav-link" href="<%=request.getContextPath() + "/manager/manage-orders"%>"><fmt:message
+                        key="Manage_orders" bundle="${rb}"/></a>
                 <%} %>
-                <a class="nav-link " href="<%=request.getContextPath() + "/cabinet"%>"><fmt:message key="Cabinet" bundle="${rb}"/></a>
-                <a class="nav-link" href="<%=request.getContextPath() + "/dishesMenu"%>"><fmt:message key="Dishes_menu" bundle="${rb}"/></a>
-                <a class="nav-link" href="<%=request.getContextPath()+ "/logout"%>"><fmt:message key="Logout" bundle="${rb}"/></a>
+                <a class="nav-link " href="<%=request.getContextPath() + "/cabinet"%>"><fmt:message key="Cabinet"
+                                                                                                    bundle="${rb}"/></a>
+                <a class="nav-link" href="<%=request.getContextPath() + "/dishesMenu"%>"><fmt:message key="Dishes_menu"
+                                                                                                      bundle="${rb}"/></a>
+                <a class="nav-link" href="<%=request.getContextPath()+ "/logout"%>"><fmt:message key="Logout"
+                                                                                                 bundle="${rb}"/></a>
             </div>
         </div>
     </div>
@@ -57,6 +68,13 @@
 
 <div class="container">
     <div class="row ">
+        <%if (info.length() != 0) {%>
+        <div class="forAlert">
+            <div class="alert alert-secondary form-group" role="alert">
+                <%=info%>
+            </div>
+        </div>
+        <%}%>
         <div align="center"><h1><fmt:message key="Add_dish" bundle="${rb}"/></h1></div>
         <form action="<%=request.getContextPath() + "/manager/manage/add-dishes"%>" method="post">
             <label for="name"><fmt:message key="Name_of_the_dish" bundle="${rb}"/>:</label>
@@ -68,13 +86,14 @@
             <label for="category"><fmt:message key="Category" bundle="${rb}"/></label>
             <%--    <input type = "text" list = "category" name="category">--%>
             <select id="category" name="category" class="form-select">
-                <% for (Category name : Category.values()) { %>
+                <% for (Category name : Category.values()) { if(name.equals(Category.Unknown)){continue;}%>
                 <option value="<%= name.getId()%>"><%=name%>
                 </option>
                 <% } %>
             </select>
-<br>
-            <div align="center"> <input type="submit" value="<fmt:message key="Add" bundle="${rb}"/>" class="btn btn-outline-secondary"></div>
+            <br>
+            <div align="center"><input type="submit" value="<fmt:message key="Add" bundle="${rb}"/>"
+                                       class="btn btn-outline-secondary"></div>
         </form>
     </div>
     <div class="row ">
@@ -89,14 +108,16 @@
             <label for="AllMenu"><fmt:message key="Category" bundle="${rb}"/>:</label>
             <%--    <input type = "text" list = "AllMenu" name="id">--%>
             <select id="AllMenu" name="id" class="form-select">
-                <%for(int id: dishes.keySet()) { %>
+                <%for (int id : dishes.keySet()) { %>
                 <option value="<%= id%>"><%=dishes.get(id).getName()%>
                 </option>
                 <% } %>
             </select>
-<br>
-            <div align="center"><input type="submit" value="<fmt:message key="Remove" bundle="${rb}"/>" class="btn btn-outline-secondary"></div>
+            <br>
+            <div align="center"><input type="submit" value="<fmt:message key="Remove" bundle="${rb}"/>"
+                                       class="btn btn-outline-secondary"></div>
         </form>
     </div>
+</div>
 </body>
 </html>

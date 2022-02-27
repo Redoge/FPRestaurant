@@ -21,11 +21,17 @@ public class rmDishesServlet extends HttpServlet {
 
         final String id = request.getParameter("id");
         if(id == null) {
-            response.sendRedirect(request.getContextPath()+"/manager/manage-menu");
+            request.setAttribute("info", "Error");
+            request.getRequestDispatcher("/manager/manage-menu").forward(request, response);
         }
         boolean isGood = rmDish(Integer.parseInt(id));
 
-        response.sendRedirect(request.getContextPath()+"/manager/manage-menu");
-
+        if (isGood) {
+            request.setAttribute("info", "Dishes remove");
+            request.getRequestDispatcher("/manager/manage-menu").forward(request, response);
+        }else{
+            request.setAttribute("info", "Error");
+            request.getRequestDispatcher("/manager/manage-menu").forward(request, response);
+        }
     }
 }

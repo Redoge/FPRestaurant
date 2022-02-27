@@ -55,7 +55,7 @@ public class DishesDAO {
        Statement statement = null;
        try {
            statement = connection.createStatement();
-           rs = statement.executeQuery("SELECT * FROM dishes  WHERE `name` = '"+name+"'");
+           rs = statement.executeQuery("SELECT * FROM dishes  WHERE `name` = '"+name+"' and `deleted` is null");
            while(rs.next()) {
                tmp = rs.getString("name");
            }
