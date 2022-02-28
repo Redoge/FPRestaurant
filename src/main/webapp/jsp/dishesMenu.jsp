@@ -1,10 +1,10 @@
 <%@ page import="java.util.Map" %>
-<%@ page import="app.redoge.restaurant.Category" %>
-<%@ page import="app.redoge.restaurant.UserRole" %>
+<%@ page import="app.redoge.restaurant.enums.Category" %>
+<%@ page import="app.redoge.restaurant.enums.UserRole" %>
 <%@ page import="static app.redoge.restaurant.DAO.DishesDAO.getDishIdBySorted" %>
 <%@ page import="app.redoge.restaurant.Dish" %>
 <%@ page import="static app.redoge.restaurant.DAO.DishesDAO.getAllMenuMap" %>
-<%@ page import="app.redoge.restaurant.Category" %>
+<%@ page import="app.redoge.restaurant.enums.Category" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt"  prefix="fmt" %>

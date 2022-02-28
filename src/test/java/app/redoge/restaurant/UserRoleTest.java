@@ -1,8 +1,8 @@
 package app.redoge.restaurant;
 
+import app.redoge.restaurant.enums.UserRole;
 import org.junit.jupiter.api.Test;
 
-import static app.redoge.restaurant.Category.getDishesCategory;
 import static org.junit.jupiter.api.Assertions.*;
 
 class UserRoleTest {

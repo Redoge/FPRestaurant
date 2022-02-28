@@ -1,5 +1,6 @@
 package app.redoge.restaurant;
 
+import app.redoge.restaurant.enums.Category;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;

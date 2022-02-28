@@ -1,17 +1,15 @@
 package app.redoge.restaurant.servlets;
 
-import app.redoge.restaurant.UserRole;
+import app.redoge.restaurant.enums.UserRole;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.sql.SQLException;
 
 import static app.redoge.restaurant.DAO.DishesDAO.isExistDishes;
 import static app.redoge.restaurant.DAO.DishesDAO.setDishes;
-import static app.redoge.restaurant.DAO.UserDao.*;
 
 
 public class addDishesServlet extends HttpServlet {

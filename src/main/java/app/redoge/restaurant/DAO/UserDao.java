@@ -1,7 +1,7 @@
 package app.redoge.restaurant.DAO;
 
 import app.redoge.restaurant.User;
-import app.redoge.restaurant.UserRole;
+import app.redoge.restaurant.enums.UserRole;
 import com.mysql.cj.jdbc.Driver;
 
 import java.sql.Connection;
@@ -215,7 +215,4 @@ public class UserDao {
         return out;
     }
 
-    public static void main(String[] args) throws SQLException {
-        System.out.println(changeRoleByUsername("aefasadwty", UserRole.User));
-    }
 }

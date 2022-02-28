@@ -1,4 +1,4 @@
-<%@ page import="app.redoge.restaurant.UserRole" %>
+<%@ page import="app.redoge.restaurant.enums.UserRole" %>
 <%@ page import="app.redoge.restaurant.Order" %>
 <%@ page import="static app.redoge.restaurant.DAO.OrderDAO.getOrdersByUserId" %>
 <%@ page import="java.util.List" %>

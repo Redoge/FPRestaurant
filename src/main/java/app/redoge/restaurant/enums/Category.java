@@ -1,4 +1,4 @@
-package app.redoge.restaurant;
+package app.redoge.restaurant.enums;
 
 public enum Category {
     Salad(1), MainDishes(2), Desserts(3), Drinks(4), Unknown(5);

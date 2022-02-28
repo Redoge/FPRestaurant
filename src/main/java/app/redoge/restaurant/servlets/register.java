@@ -1,6 +1,6 @@
 package app.redoge.restaurant.servlets;
 
-import app.redoge.restaurant.UserRole;
+import app.redoge.restaurant.enums.UserRole;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;

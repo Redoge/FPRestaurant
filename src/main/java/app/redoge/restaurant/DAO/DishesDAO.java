@@ -12,7 +12,7 @@ import java.util.Map;
 import static app.redoge.restaurant.DAO.UserDao.getConnection;
 import static java.util.Objects.isNull;
 
-public class DishesDAO {
+public class DishesDAO{
 
    public static boolean setDishes(String name, double price, int category){
        if(name == null || price == 0|| category < 1 || category > 5  || name.length() < 3) return false;

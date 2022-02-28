@@ -1,4 +1,4 @@
-<%@ page import="app.redoge.restaurant.UserRole" %>
+<%@ page import="app.redoge.restaurant.enums.UserRole" %>
 <%@ page import="java.util.Map" %>
 <%@ page import="static app.redoge.restaurant.DAO.DishesDAO.getAllMenuMap" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>

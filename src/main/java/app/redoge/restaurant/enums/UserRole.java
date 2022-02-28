@@ -1,4 +1,4 @@
-package app.redoge.restaurant;
+package app.redoge.restaurant.enums;
 
 public enum UserRole {
     Admin(1), Manager(2), User(3), Unknown(4);

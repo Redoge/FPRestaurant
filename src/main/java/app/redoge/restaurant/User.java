@@ -1,6 +1,8 @@
 package app.redoge.restaurant;
 
-public class User {
+import app.redoge.restaurant.interfaces.UserInterface;
+
+public class User implements UserInterface {
 
     String username;
     String email;

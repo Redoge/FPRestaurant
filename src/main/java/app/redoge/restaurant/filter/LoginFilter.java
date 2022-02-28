@@ -3,7 +3,7 @@ package app.redoge.restaurant.filter;
 
 import app.redoge.restaurant.DAO.UserDao;
 import app.redoge.restaurant.User;
-import app.redoge.restaurant.UserRole;
+import app.redoge.restaurant.enums.UserRole;
 
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;

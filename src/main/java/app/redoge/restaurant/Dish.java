@@ -1,12 +1,15 @@
 package app.redoge.restaurant;
 
+import app.redoge.restaurant.enums.Category;
+import app.redoge.restaurant.interfaces.DishInterface;
+
 /**
  * Клас для створення об'єкта 'Dish' - страва, що включає в себе : /int id/, /String name/, /int category_id/, /DishesMenu category/, /double price/.
  * @author Redoge
  * @version 1.0 10/02/20
  */
 
-public class Dish {
+public class Dish implements DishInterface {
         private int id;
         private String name;
         private int category_id;

@@ -149,13 +149,4 @@ public class OrderDAO {
         return out;
     }
 
-
-    public static void main(String[] args) {
-
-        List<Order> orders = getOrdersByUserId(2);
-        for(Order order: orders){
-            System.out.println(order.getName());
-        }
-    }
-
 }

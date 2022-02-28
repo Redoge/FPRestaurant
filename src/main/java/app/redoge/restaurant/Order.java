@@ -1,6 +1,8 @@
 package app.redoge.restaurant;
 
-public class Order {
+import app.redoge.restaurant.interfaces.OrderInterface;
+
+public class Order implements OrderInterface {
     int dishes_id;
     int count;
     int user_id;
