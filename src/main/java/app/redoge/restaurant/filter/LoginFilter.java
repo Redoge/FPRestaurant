@@ -11,11 +11,13 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.concurrent.atomic.AtomicReference;
+import org.apache.log4j.Logger;
+
 
 import static java.util.Objects.nonNull;
 
 public class LoginFilter implements Filter {
+    private static final Logger log = Logger.getLogger(String.valueOf(LoginFilter.class));
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
 
@@ -26,7 +28,6 @@ public class LoginFilter implements Filter {
                          ServletResponse servletResponse,
                          FilterChain filterChain)
             throws IOException, ServletException {
-
         final HttpServletRequest req = (HttpServletRequest) servletRequest;
         final HttpServletResponse resp = (HttpServletResponse) servletResponse;
 
@@ -61,11 +62,14 @@ public class LoginFilter implements Filter {
 
     private void moveToMenu(HttpServletRequest req, HttpServletResponse resp, UserRole role) throws ServletException, IOException {
         if (role.equals(UserRole.Manager) || role.equals(UserRole.User)){
+            log.info("User loggined " + req.getParameter("email"));
             req.setAttribute("info", "Login successful");
             resp.sendRedirect("./cabinet");
         } else if (req.getParameter("email") == null && req.getParameter("password") == null){
+            log.info("User not loggined, email or passw is null");
             req.getRequestDispatcher("/login").forward(req, resp);
         }else{
+            log.info("User not loggined. Invalid email or password");
             req.setAttribute("info", "Invalid email or password");
             req.getRequestDispatcher("/login").forward(req, resp);
         }
