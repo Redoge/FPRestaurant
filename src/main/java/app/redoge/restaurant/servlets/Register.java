@@ -1,5 +1,7 @@
 package app.redoge.restaurant.servlets;
 
+import app.redoge.restaurant.DAO.UserDao;
+import app.redoge.restaurant.User;
 import app.redoge.restaurant.enums.UserRole;
 import org.apache.log4j.Logger;
 
@@ -12,8 +14,8 @@ import java.sql.SQLException;
 
 import static app.redoge.restaurant.DAO.UserDao.*;
 
-public class register extends HttpServlet {
-    private static final Logger log = Logger.getLogger(register.class);
+public class Register extends HttpServlet {
+    private static final Logger log = Logger.getLogger(Register.class);
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
@@ -40,10 +42,19 @@ public class register extends HttpServlet {
         }else{
             validSetUser = setUser(username, email, password, 3);
             if(validSetUser){
-                log.info("Register is done" + email);
+                log.info("Register is done " + email);
                 request.getSession().setAttribute("email", email);
                 request.getSession().setAttribute("role", UserRole.User);
-                response.sendRedirect(request.getContextPath() + "/login");
+                User user = null;
+                try {
+                    user = UserDao.getUser(email);
+                    request.getSession().setAttribute("user_id", user.getId());
+                    response.sendRedirect(request.getContextPath() + "/login");
+                } catch (SQLException e) {
+                    log.error(e);
+                    request.setAttribute("info", "Unknown Error");
+                    request.getRequestDispatcher("/register").forward(request, response);
+                }
             }else{
                 log.info("Register error");
                 request.setAttribute("info", "Unknown Error");

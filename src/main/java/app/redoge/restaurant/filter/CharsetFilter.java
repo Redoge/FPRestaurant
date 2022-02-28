@@ -1,8 +1,5 @@
 package app.redoge.restaurant.filter;
 
-import app.redoge.restaurant.servlets.rmDishesServlet;
-import org.apache.log4j.Logger;
-
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
@@ -13,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
-public class charsetFilter implements Filter {
+public class CharsetFilter implements Filter {
 
     public void init(FilterConfig config) throws ServletException {
 

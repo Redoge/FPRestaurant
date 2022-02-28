@@ -1,4 +1,4 @@
-package app.redoge.restaurant.filter;
+package app.redoge.restaurant.servlets;
 
 
 import app.redoge.restaurant.DAO.UserDao;
@@ -16,8 +16,8 @@ import org.apache.log4j.Logger;
 
 import static java.util.Objects.nonNull;
 
-public class LoginFilter implements Filter {
-    private static final Logger log = Logger.getLogger(String.valueOf(LoginFilter.class));
+public class Login implements Filter {
+    private static final Logger log = Logger.getLogger(String.valueOf(Login.class));
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
 

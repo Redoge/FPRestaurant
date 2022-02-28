@@ -11,8 +11,8 @@ import java.io.IOException;
 
 import static app.redoge.restaurant.DAO.DishesDAO.rmDish;
 
-public class rmDishesServlet extends HttpServlet {
-    private static final Logger log = Logger.getLogger(rmDishesServlet.class);
+public class RemoveDishes extends HttpServlet {
+    private static final Logger log = Logger.getLogger(RemoveDishes.class);
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         UserRole role = (UserRole) request.getSession().getAttribute("role");

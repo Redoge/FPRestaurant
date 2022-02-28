@@ -12,8 +12,8 @@ import java.io.IOException;
 import static app.redoge.restaurant.DAO.UserDao.changeRoleById;
 import static app.redoge.restaurant.DAO.UserDao.getUserByUserId;
 
-public class changeUserRole extends HttpServlet {
-    private static final Logger log = Logger.getLogger(changeUserRole.class);
+public class ChangeUserRole extends HttpServlet {
+    private static final Logger log = Logger.getLogger(ChangeUserRole.class);
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         boolean isGood = true;

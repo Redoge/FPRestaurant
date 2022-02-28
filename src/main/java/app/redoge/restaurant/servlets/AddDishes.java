@@ -1,7 +1,6 @@
 package app.redoge.restaurant.servlets;
 
 import app.redoge.restaurant.enums.UserRole;
-import app.redoge.restaurant.filter.LoginFilter;
 import org.apache.log4j.Logger;
 
 import javax.servlet.ServletException;
@@ -14,8 +13,8 @@ import static app.redoge.restaurant.DAO.DishesDAO.isExistDishes;
 import static app.redoge.restaurant.DAO.DishesDAO.setDishes;
 
 
-public class addDishesServlet extends HttpServlet {
-    private static final Logger log = Logger.getLogger(addDishesServlet.class);
+public class AddDishes extends HttpServlet {
+    private static final Logger log = Logger.getLogger(AddDishes.class);
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 

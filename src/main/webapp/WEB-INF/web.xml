@@ -26,7 +26,7 @@
         <url-pattern>/logout</url-pattern>
     </servlet-mapping>
 
-    **************************************
+
     <!--Manage mapping-->
 
     <servlet>
@@ -40,7 +40,7 @@
 
     <servlet>
         <servlet-name>AddDishes</servlet-name>
-        <servlet-class>app.redoge.restaurant.servlets.addDishesServlet</servlet-class>
+        <servlet-class>app.redoge.restaurant.servlets.AddDishes</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>AddDishes</servlet-name>
@@ -49,7 +49,7 @@
 
     <servlet>
         <servlet-name>RmDishes</servlet-name>
-        <servlet-class>app.redoge.restaurant.servlets.rmDishesServlet</servlet-class>
+        <servlet-class>app.redoge.restaurant.servlets.RemoveDishes</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>RmDishes</servlet-name>
@@ -58,7 +58,7 @@
 
     <servlet>
         <servlet-name>changeUserRole</servlet-name>
-        <servlet-class>app.redoge.restaurant.servlets.changeUserRole</servlet-class>
+        <servlet-class>app.redoge.restaurant.servlets.ChangeUserRole</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>changeUserRole</servlet-name>
@@ -94,7 +94,7 @@
 
     <servlet>
         <servlet-name>changeOrderStatus</servlet-name>
-        <servlet-class>app.redoge.restaurant.servlets.changeOrderStatus</servlet-class>
+        <servlet-class>app.redoge.restaurant.servlets.ChangeOrderStatus</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>changeOrderStatus</servlet-name>
@@ -110,6 +110,7 @@
         <servlet-name>User</servlet-name>
         <url-pattern>/user/orders</url-pattern>
     </servlet-mapping>
+
     <servlet>
         <servlet-name>New Order</servlet-name>
         <jsp-file>/jsp/user/newOrder.jsp</jsp-file>
@@ -141,6 +142,7 @@
         <servlet-name>Restaurant</servlet-name>
         <url-pattern>/</url-pattern>
     </servlet-mapping>
+
     <servlet>
         <servlet-name>Cabinet</servlet-name>
         <jsp-file>/jsp/cabinet.jsp</jsp-file>
@@ -149,6 +151,7 @@
         <servlet-name>Cabinet</servlet-name>
         <url-pattern>/cabinet</url-pattern>
     </servlet-mapping>
+
     <servlet>
         <servlet-name>Dishes Menu</servlet-name>
         <jsp-file>/jsp/dishesMenu.jsp</jsp-file>
@@ -160,7 +163,7 @@
 
     <servlet>
         <servlet-name>RegisterPost</servlet-name>
-        <servlet-class>app.redoge.restaurant.servlets.register</servlet-class>
+        <servlet-class>app.redoge.restaurant.servlets.Register</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>RegisterPost</servlet-name>
@@ -169,7 +172,7 @@
 
     <servlet>
         <servlet-name>changeLanguage</servlet-name>
-        <servlet-class>app.redoge.restaurant.servlets.changeLanguage</servlet-class>
+        <servlet-class>app.redoge.restaurant.servlets.ChangeLanguage</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>changeLanguage</servlet-name>
@@ -192,7 +195,7 @@
     <!--    FILTER MAPPING    -->
     <filter>
         <filter-name>CharsetFilter</filter-name>
-        <filter-class>app.redoge.restaurant.filter.charsetFilter</filter-class>
+        <filter-class>app.redoge.restaurant.filter.CharsetFilter</filter-class>
     </filter>
     <filter-mapping>
         <filter-name>CharsetFilter</filter-name>
@@ -201,7 +204,7 @@
 
     <filter>
         <filter-name>FilterLogin</filter-name>
-        <filter-class>app.redoge.restaurant.filter.LoginFilter</filter-class>
+        <filter-class>app.redoge.restaurant.servlets.Login</filter-class>
     </filter>
     <filter-mapping>
         <filter-name>FilterLogin</filter-name>

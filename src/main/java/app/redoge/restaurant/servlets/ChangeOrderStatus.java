@@ -10,8 +10,8 @@ import java.io.IOException;
 
 import static app.redoge.restaurant.DAO.OrderDAO.changeOrderStatusById;
 
-public class changeOrderStatus extends HttpServlet {
-    private static final Logger log = Logger.getLogger(changeOrderStatus.class);
+public class ChangeOrderStatus extends HttpServlet {
+    private static final Logger log = Logger.getLogger(ChangeOrderStatus.class);
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         boolean isGood = true;

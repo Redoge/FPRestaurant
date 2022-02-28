@@ -2,10 +2,8 @@ package app.redoge.restaurant.DAO;
 
 import app.redoge.restaurant.User;
 import app.redoge.restaurant.enums.UserRole;
-import app.redoge.restaurant.servlets.rmDishesServlet;
 import com.mysql.cj.jdbc.Driver;
 import org.apache.log4j.Logger;
-
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;

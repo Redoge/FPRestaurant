@@ -9,8 +9,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
-public class changeLanguage extends HttpServlet {
-    private static final Logger log = Logger.getLogger(changeLanguage.class);
+public class ChangeLanguage extends HttpServlet {
+    private static final Logger log = Logger.getLogger(ChangeLanguage.class);
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         final HttpSession session = req.getSession();

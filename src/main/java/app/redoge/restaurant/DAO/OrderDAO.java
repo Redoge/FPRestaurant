@@ -1,17 +1,13 @@
 package app.redoge.restaurant.DAO;
 
 import app.redoge.restaurant.Order;
-import app.redoge.restaurant.servlets.rmDishesServlet;
 import org.apache.log4j.Logger;
-
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import static app.redoge.restaurant.DAO.DishesDAO.getNameDishById;
 import static app.redoge.restaurant.DAO.DishesDAO.getPriceDishById;
@@ -27,11 +23,9 @@ public class OrderDAO {
         Connection connection = getConnection();
         String dish = getNameDishById(order.getDishes_id());
         double price = getPriceDishById(order.getDishes_id());
-        System.out.println(order);
         String sql = "INSERT `order`(`count`, `user_id`, `dishes_id`, `status`, `dish`, `price`) VALUE"+
                 "("+order.getCount()+","+order.getUser_id()+", "+
                 order.getDishes_id()+", '"+ order.getStatus()+"','"+dish+"',"+price+")";
-        System.out.println(sql);
         try {
             statement = connection.createStatement();
             statement.executeUpdate(sql);
@@ -44,7 +38,6 @@ public class OrderDAO {
                 int id = 0;
                 statement = connection.createStatement();
                 rs = statement.executeQuery("SELECT * FROM `order`");
-                System.out.println(rs);
                 while (rs.next()) {
                     id = rs.getInt("id");
                 }

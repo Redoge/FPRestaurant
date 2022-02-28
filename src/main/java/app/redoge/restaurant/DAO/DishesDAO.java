@@ -1,9 +1,7 @@
 package app.redoge.restaurant.DAO;
 
 import app.redoge.restaurant.Dish;
-import app.redoge.restaurant.servlets.rmDishesServlet;
 import org.apache.log4j.Logger;
-
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
