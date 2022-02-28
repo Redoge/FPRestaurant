@@ -2,7 +2,9 @@ package app.redoge.restaurant.DAO;
 
 import app.redoge.restaurant.User;
 import app.redoge.restaurant.enums.UserRole;
+import app.redoge.restaurant.servlets.rmDishesServlet;
 import com.mysql.cj.jdbc.Driver;
+import org.apache.log4j.Logger;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -14,6 +16,8 @@ import java.util.ArrayList;
 import static java.util.Objects.isNull;
 
 public class UserDao {
+    private static final Logger log = Logger.getLogger(UserDao.class);
+
     private static Connection connection = null;
 
     public static Connection getConnection() {
@@ -34,7 +38,7 @@ public class UserDao {
                 connection = DriverManager.getConnection(url + dbName, userName, password);
             }
             catch (SQLException e) {
-                e.printStackTrace();
+                log.error(e);
             }
             return connection;
         }
@@ -48,7 +52,6 @@ public class UserDao {
         rs = statement.executeQuery("SELECT * FROM user  WHERE `email` = '"+email+"'");
         while(rs.next()) {
             out = (rs.getString("password"));
-
         }
         return out;
     }
@@ -60,7 +63,7 @@ public class UserDao {
             Statement statement = connection.createStatement();
             rs = statement.executeQuery("SELECT * FROM user  WHERE `email` = '"+email+"'");
         } catch (SQLException e) {
-            e.printStackTrace();
+            log.error(e);
         }
         User user = null;
         while(rs.next()) {
@@ -81,7 +84,7 @@ public class UserDao {
             Statement statement = connection.createStatement();
             rs = statement.executeQuery("SELECT * FROM user");
         } catch (SQLException e) {
-            e.printStackTrace();
+            log.error(e);
         }
         while(rs.next()) {
             int id = rs.getInt("id");
@@ -106,9 +109,9 @@ public class UserDao {
              statement.executeUpdate(sql);
              rs = true;
         } catch (SQLException e) {
-            e.printStackTrace();
+            log.error(e);
         }
-        System.out.println(10);
+        log.info("Added new user " + email);
         return rs;
     }
 
@@ -125,7 +128,7 @@ public class UserDao {
         try {
             passwordTrue = getPassword(email);
         } catch (SQLException e) {
-            e.printStackTrace();
+            log.error(e);
         }
         return password.equals(passwordTrue);
     }
@@ -163,7 +166,7 @@ public class UserDao {
             Statement statement = connection.createStatement();
             rs = statement.executeQuery("SELECT * FROM user  WHERE `id` = '"+id+"'");
         } catch (SQLException e) {
-            e.printStackTrace();
+            log.error(e);
         }
         User user = null;
         try {
@@ -174,7 +177,7 @@ public class UserDao {
                 user = new User(username, email, id, role);
             }
         }catch (SQLException e) {
-            e.printStackTrace();
+            log.error(e);
         }
         return user;
     }
@@ -191,8 +194,7 @@ public class UserDao {
             statement.executeUpdate(sql);
             out = true;
         } catch (SQLException e) {
-            out = false;
-            e.printStackTrace();
+            log.error(e);
         }
         return out;
     }
@@ -209,8 +211,7 @@ public class UserDao {
             statement.executeUpdate(sql);
             out = true;
         } catch (SQLException e) {
-            out = false;
-            e.printStackTrace();
+            log.error(e);
         }
         return out;
     }

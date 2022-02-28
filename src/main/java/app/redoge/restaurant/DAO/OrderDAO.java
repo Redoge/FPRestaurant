@@ -1,6 +1,8 @@
 package app.redoge.restaurant.DAO;
 
 import app.redoge.restaurant.Order;
+import app.redoge.restaurant.servlets.rmDishesServlet;
+import org.apache.log4j.Logger;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -16,7 +18,7 @@ import static app.redoge.restaurant.DAO.DishesDAO.getPriceDishById;
 import static app.redoge.restaurant.DAO.UserDao.getConnection;
 
 public class OrderDAO {
-
+    private static final Logger log = Logger.getLogger(OrderDAO.class);
 
     public static boolean newOrder(Order order){
         boolean out = false;
@@ -35,12 +37,9 @@ public class OrderDAO {
             statement.executeUpdate(sql);
             out = true;
         } catch (SQLException e) {
-            out = false;
-            e.printStackTrace();
+            log.error(e);
         }
         if (out) {
-
-
             try {
                 int id = 0;
                 statement = connection.createStatement();
@@ -51,15 +50,15 @@ public class OrderDAO {
                 }
                 order.setOrder_id(id);
             } catch (SQLException e) {
-                e.printStackTrace();
+                log.error(e);
             }
 
         }
-
+        log.info("Make new order");
         return out;
     }
 
-    public static Order getOrder(int id){
+    public static Order getOrderById(int id){
         Order order = null;
         ResultSet rs = null;
         Connection connection = getConnection();
@@ -78,7 +77,7 @@ public class OrderDAO {
                 order = new Order(dishes_id, count, user_id,order_id, name, status, price);
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            log.error(e);
         }
         return order;
     }
@@ -102,7 +101,7 @@ public class OrderDAO {
                 orders.add(new Order(dishes_id, count, user_id,order_id, name, status, price));
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            log.error(e);
         }
           return orders;
     }
@@ -126,7 +125,7 @@ public class OrderDAO {
                 orders.add(new Order(dishes_id, count, user_id,order_id, name, status, price));
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            log.error(e);
         }
         return orders;
     }
@@ -143,9 +142,9 @@ public class OrderDAO {
             statement.executeUpdate(sql);
             out = true;
         } catch (SQLException e) {
-            out = false;
-            e.printStackTrace();
+            log.error(e);
         }
+        log.info("Changed order status");
         return out;
     }
 

@@ -35,12 +35,9 @@ public class LoginFilter implements Filter {
         final String password = servletRequest.getParameter("password");
 
         final HttpSession session = req.getSession();
-//        System.out.println(password);
-//        System.out.println(email);
+
         if(nonNull(session.getAttribute("email")) || nonNull(session.getAttribute("user_id"))){
-
             final UserRole role = (UserRole) session.getAttribute("role");
-
             filterChain.doFilter(req,resp);
         }else if(UserDao.isTruePassword(password, email)){
             try {

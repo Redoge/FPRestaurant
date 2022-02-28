@@ -1,5 +1,8 @@
 package app.redoge.restaurant.filter;
 
+import app.redoge.restaurant.servlets.rmDishesServlet;
+import org.apache.log4j.Logger;
+
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;

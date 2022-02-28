@@ -1,6 +1,9 @@
 package app.redoge.restaurant.DAO;
 
 import app.redoge.restaurant.Dish;
+import app.redoge.restaurant.servlets.rmDishesServlet;
+import org.apache.log4j.Logger;
+
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -13,10 +16,10 @@ import static app.redoge.restaurant.DAO.UserDao.getConnection;
 import static java.util.Objects.isNull;
 
 public class DishesDAO{
+    private static final Logger log = Logger.getLogger(DishesDAO.class);
 
    public static boolean setDishes(String name, double price, int category){
        if(name == null || price == 0|| category < 1 || category > 5  || name.length() < 3) return false;
-
        boolean out = false;
        Statement statement = null;
        Connection connection = getConnection();
@@ -27,8 +30,9 @@ public class DishesDAO{
            statement.executeUpdate(sql);
            out = true;
        } catch (SQLException e) {
-           e.printStackTrace();
+           log.error(e);
        }
+       log.info("Added dishes done");
        return out;
     }
 
@@ -42,9 +46,9 @@ public class DishesDAO{
            statement.executeUpdate(sql);
            out = true;
        } catch (SQLException e) {
-           e.printStackTrace();
-           return out;
+           log.error(e);
        }
+       log.info("Removing dish done");
        return out;
    }
 
@@ -60,7 +64,7 @@ public class DishesDAO{
                tmp = rs.getString("name");
            }
        } catch (SQLException e) {
-           e.printStackTrace();
+           log.error(e);
            return true;
        }
 
@@ -79,7 +83,7 @@ public class DishesDAO{
                out.put(rs.getInt("id"), rs.getString("name"));
            }
        } catch (SQLException e) {
-           e.printStackTrace();
+           log.error(e);
        }
        return out;
    }
@@ -96,7 +100,7 @@ public class DishesDAO{
                out = rs.getString("name");
            }
        } catch (SQLException e) {
-           e.printStackTrace();
+           log.error(e);
        }
        return out;
    }
@@ -113,7 +117,7 @@ public class DishesDAO{
                out = rs.getDouble("price");
            }
        } catch (SQLException e) {
-           e.printStackTrace();
+           log.error(e);
        }
        return out;
    }
@@ -135,7 +139,7 @@ public class DishesDAO{
                 out.put(id, tmp);
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            log.error(e);
         }
         return out;
     }

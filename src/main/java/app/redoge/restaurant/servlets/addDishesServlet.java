@@ -1,6 +1,8 @@
 package app.redoge.restaurant.servlets;
 
 import app.redoge.restaurant.enums.UserRole;
+import app.redoge.restaurant.filter.LoginFilter;
+import org.apache.log4j.Logger;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -13,7 +15,7 @@ import static app.redoge.restaurant.DAO.DishesDAO.setDishes;
 
 
 public class addDishesServlet extends HttpServlet {
-
+    private static final Logger log = Logger.getLogger(addDishesServlet.class);
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
@@ -23,6 +25,7 @@ public class addDishesServlet extends HttpServlet {
 
         final UserRole role = (UserRole) request.getSession().getAttribute("role");
         if (role == null || role.equals(UserRole.Unknown) || role.equals(UserRole.User)) {
+            log.info("Access denied or role is null");
             response.sendRedirect(request.getContextPath());
         }
 
@@ -34,6 +37,7 @@ public class addDishesServlet extends HttpServlet {
         int category = 5;
 
         if (priceString == null || categoryString == null || name == null || name.length() == 0 || priceString.length() == 0) {
+            log.info("Parameter is null or empty");
             isGood = false;
             err = "Error";
         } else {
@@ -41,6 +45,7 @@ public class addDishesServlet extends HttpServlet {
                 price = Double.parseDouble(priceString);
                 category = Integer.parseInt(categoryString);
             } catch (NumberFormatException e) {
+                log.error(e);
                 err = "Error";
                 isGood = false;
             }
@@ -51,14 +56,13 @@ public class addDishesServlet extends HttpServlet {
             if (name.trim().length() < 3 || price < 1 || category < 1 || category >= 5) {
                 isGood = false;
                 err = "The name of the dish must be longer than 3 characters and price must be > 1";
-//                request.getRequestDispatcher("/manager/manage-menu").forward(request, response);
             } else if (isExistDishes(name)) {
                 isGood = false;
                 err = "The dish exists";
-//                request.getRequestDispatcher("/manager/manage-menu").forward(request, response);
             } else if (isGood) {
                 isGood = setDishes(name, price, category);
                 if (isGood) {
+                    log.info("Dish added: " + name);
                     request.setAttribute("info", "The dish added");
                     request.getRequestDispatcher("/manager/manage-menu").forward(request, response);
                 }
@@ -66,6 +70,7 @@ public class addDishesServlet extends HttpServlet {
 
         }
         if (!isGood) {
+            log.info("Dish not added: " + name);
             request.setAttribute("info", err);
             request.getRequestDispatcher("/manager/manage-menu").forward(request, response);
         }
