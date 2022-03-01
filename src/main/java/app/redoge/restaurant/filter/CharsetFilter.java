@@ -27,7 +27,7 @@ public class CharsetFilter implements Filter {
 
         String language = (String) session.getAttribute("language");
         if(language == null || language.length() == 0){
-            session.setAttribute("language", "en");
+            session.setAttribute("language", "en_US");
         }
 
         next.doFilter(request, response);

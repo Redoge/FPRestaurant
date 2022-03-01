@@ -7,6 +7,8 @@ import org.apache.log4j.Logger;
 import javax.servlet.*;
 import javax.servlet.http.*;
 import java.io.IOException;
+import java.util.Locale;
+import java.util.ResourceBundle;
 
 import static app.redoge.restaurant.DAO.OrderDAO.changeOrderStatusById;
 
@@ -14,6 +16,11 @@ public class ChangeOrderStatus extends HttpServlet {
     private static final Logger log = Logger.getLogger(ChangeOrderStatus.class);
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        HttpSession session = request.getSession();
+        String[] lang_param =  ((String) session.getAttribute("language")).split("_");
+        Locale locale = new Locale(lang_param[0], lang_param[1]);
+        ResourceBundle rb = ResourceBundle.getBundle("language", locale);
+
         boolean isGood = true;
         final UserRole role = (UserRole) request.getSession().getAttribute("role");
         if (role == null || role.equals(UserRole.Unknown) || role.equals(UserRole.User)) {
@@ -33,7 +40,7 @@ public class ChangeOrderStatus extends HttpServlet {
         if(orderId == -1 || newStatus == null || newStatus.length() == 0){
             log.info("OrderId invalid or newStatus is null or empty");
             isGood = false;
-            request.setAttribute("info", "Error.");
+            request.setAttribute("info",  rb.getString("Error"));
             request.getRequestDispatcher("/manager/manage-orders").forward(request, response);
         }
 
@@ -44,11 +51,11 @@ public class ChangeOrderStatus extends HttpServlet {
 
         if(isGood){
             log.info("Added status in db");
-            request.setAttribute("info", "Status changed");
+            request.setAttribute("info", rb.getString("StatusChanged"));
             request.getRequestDispatcher("/manager/manage-orders").forward(request, response);
         }else{
             log.info("Error added status in db");
-            request.setAttribute("info", "Error. Try again.");
+            request.setAttribute("info", rb.getString("Error"));
             request.getRequestDispatcher("/manager/manage-orders").forward(request, response);
         }
 

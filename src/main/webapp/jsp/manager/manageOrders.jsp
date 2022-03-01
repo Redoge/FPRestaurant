@@ -63,6 +63,11 @@
 
 <div class="container">
     <div class="row ">
+        <%if(info.length() != 0){%>
+        <div class="forAlert">
+            <div class="alert alert-secondary form-group"  role="alert">
+                <%=info%>
+            </div></div><%}%>
         <form action="<%=request.getContextPath() + "/manager/changeOrderStatus"%>" method="post">
             <label for="AllMenu"><fmt:message key="Order_id" bundle="${rb}"/>:</label><br>
             <%--    <input type = "text" list = "AllMenu" name="changed_id">--%>

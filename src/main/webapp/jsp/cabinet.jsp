@@ -70,7 +70,7 @@
             <div align="center"><h3><fmt:message key="Change_language" bundle="${rb}"/></h3></div>
             <form action="<%=request.getContextPath() + "/changeLanguage"%>" method="post">
                 <select name="language" class="form-select">
-                    <option value="en">English</option>
+                    <option value="en_US">English</option>
                     <option value="uk_UA">Ukraine</option>
                 </select>
                 <br>

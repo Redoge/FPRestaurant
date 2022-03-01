@@ -7,7 +7,10 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.Locale;
+import java.util.ResourceBundle;
 
 import static app.redoge.restaurant.DAO.UserDao.changeRoleById;
 import static app.redoge.restaurant.DAO.UserDao.getUserByUserId;
@@ -16,6 +19,12 @@ public class ChangeUserRole extends HttpServlet {
     private static final Logger log = Logger.getLogger(ChangeUserRole.class);
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        HttpSession session = request.getSession();
+        String[] lang_param =  ((String) session.getAttribute("language")).split("_");
+        Locale locale = new Locale(lang_param[0], lang_param[1]);
+        ResourceBundle rb = ResourceBundle.getBundle("language", locale);
+
+
         boolean isGood = true;
         final UserRole role = (UserRole) request.getSession().getAttribute("role");
         if (role == null || role.equals(UserRole.Unknown) || role.equals(UserRole.User)) {
@@ -53,11 +62,11 @@ public class ChangeUserRole extends HttpServlet {
         }
         if (isGood) {
             log.info("Role changed: userId - " + userStringId + " newRoleId - "+ newRoleStringId);
-            request.setAttribute("info", "Changed");
+            request.setAttribute("info", rb.getString("Changed"));
             request.getRequestDispatcher("/manager/manage").forward(request, response);
         } else {
             log.info("Error role changed: userId - " + userStringId + " newRoleId - "+ newRoleStringId);
-            request.setAttribute("info", "Error");
+            request.setAttribute("info", rb.getString("Error"));
             request.getRequestDispatcher("/manager/manage").forward(request, response);
         }
 

@@ -7,7 +7,10 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.Locale;
+import java.util.ResourceBundle;
 
 import static app.redoge.restaurant.DAO.DishesDAO.rmDish;
 
@@ -15,6 +18,12 @@ public class RemoveDishes extends HttpServlet {
     private static final Logger log = Logger.getLogger(RemoveDishes.class);
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        HttpSession session = request.getSession();
+        String[] lang_param =  ((String) session.getAttribute("language")).split("_");
+        Locale locale = new Locale(lang_param[0], lang_param[1]);
+        ResourceBundle rb = ResourceBundle.getBundle("language", locale);
+
         UserRole role = (UserRole) request.getSession().getAttribute("role");
         boolean isGood = true;
         if (role == null || role.equals(UserRole.Unknown) || role.equals(UserRole.User)) {
@@ -26,7 +35,7 @@ public class RemoveDishes extends HttpServlet {
         if(id == null) {
             log.info("Paramater is null or empty");
             isGood = false;
-            request.setAttribute("info", "Error");
+            request.setAttribute("info", rb.getString("Error"));
             request.getRequestDispatcher("/manager/manage-menu").forward(request, response);
         }
         if(isGood) {
@@ -35,11 +44,11 @@ public class RemoveDishes extends HttpServlet {
         }
         if (isGood) {
             log.info("Dishes removed: " + id );
-            request.setAttribute("info", "Dishes remove");
+            request.setAttribute("info", rb.getString("DishesRemove"));
             request.getRequestDispatcher("/manager/manage-menu").forward(request, response);
         }else{
             log.info("Error removing");
-            request.setAttribute("info", "Error");
+            request.setAttribute("info", rb.getString("Error"));
             request.getRequestDispatcher("/manager/manage-menu").forward(request, response);
         }
     }

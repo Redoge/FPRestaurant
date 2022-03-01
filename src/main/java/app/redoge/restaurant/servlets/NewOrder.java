@@ -9,8 +9,11 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.Locale;
+import java.util.ResourceBundle;
 
 import static app.redoge.restaurant.DAO.OrderDAO.newOrder;
 import static app.redoge.restaurant.DAO.UserDao.getUser;
@@ -19,6 +22,12 @@ public class NewOrder extends HttpServlet {
     private static final Logger log = Logger.getLogger(NewOrder.class);
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        HttpSession session = req.getSession();
+        String[] lang_param =  ((String) session.getAttribute("language")).split("_");
+        Locale locale = new Locale(lang_param[0], lang_param[1]);
+        ResourceBundle rb = ResourceBundle.getBundle("language", locale);
+
+
         final UserRole role = (UserRole) req.getSession().getAttribute("role");
         if (role == null || role.equals(UserRole.Unknown) || role.equals(UserRole.Manager)) {
             log.info("Access denied or role is null");
@@ -35,7 +44,7 @@ public class NewOrder extends HttpServlet {
         int count = 0;
         if (dishIdString == null || countString == null || countString.length() < 1 || dishIdString.length() < 1) {
             log.info("Parameter is null or empty");
-            err = "Error";
+            err = rb.getString("Error");
             isGood = false;
         } else {
             try {
@@ -44,7 +53,7 @@ public class NewOrder extends HttpServlet {
             } catch (NumberFormatException e) {
                 log.error(e);
                 isGood = false;
-                err = "Error. Please enter the number!";
+                err = rb.getString("PleaseEnterTheNumber");
             }
         }
         String email = (String) req.getSession().getAttribute("email");
@@ -58,7 +67,7 @@ public class NewOrder extends HttpServlet {
         }
         if (user == null) {
             log.info("User not found");
-            err = "Error";
+            err = rb.getString("Error");
             isGood = false;
         }
 
@@ -71,14 +80,14 @@ public class NewOrder extends HttpServlet {
         }
         if (!isGood) {
             if (err.length() == 0) {
-                err = "Error";
+                err = rb.getString("Error");
             }
             log.info("Error added new order");
             req.setAttribute("info", err);
             req.getRequestDispatcher("/user/new-order").forward(req, resp);
         } else {
             log.info("Added new order");
-            req.setAttribute("info", "Order accepted");
+            req.setAttribute("info", rb.getString("OrderAccepted"));
             req.getRequestDispatcher("/user/orders").forward(req, resp);
         }
 

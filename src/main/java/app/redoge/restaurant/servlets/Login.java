@@ -11,6 +11,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.Locale;
+import java.util.ResourceBundle;
+
 import org.apache.log4j.Logger;
 
 
@@ -28,6 +31,8 @@ public class Login implements Filter {
                          ServletResponse servletResponse,
                          FilterChain filterChain)
             throws IOException, ServletException {
+
+
         final HttpServletRequest req = (HttpServletRequest) servletRequest;
         final HttpServletResponse resp = (HttpServletResponse) servletResponse;
 
@@ -58,16 +63,23 @@ public class Login implements Filter {
     }
 
     private void moveToMenu(HttpServletRequest req, HttpServletResponse resp, UserRole role) throws ServletException, IOException {
+        HttpSession session = req.getSession();
+        String[] lang_param =  ((String) session.getAttribute("language")).split("_");
+        Locale locale = new Locale(lang_param[0], lang_param[1]);
+        ResourceBundle rb = ResourceBundle.getBundle("language", locale);
+
+
+
         if (role.equals(UserRole.Manager) || role.equals(UserRole.User)){
             log.info("User loggined " + req.getParameter("email"));
-            req.setAttribute("info", "Login successful");
+            req.setAttribute("info", rb.getString("LoginSuccessful"));
             resp.sendRedirect("./cabinet");
         } else if (req.getParameter("email") == null && req.getParameter("password") == null){
             log.info("User not loggined, email or passw is null");
             req.getRequestDispatcher("/login").forward(req, resp);
         }else{
             log.info("User not loggined. Invalid email or password");
-            req.setAttribute("info", "Invalid email or password");
+            req.setAttribute("info", rb.getString("InvalidEmailOrPassword"));
             req.getRequestDispatcher("/login").forward(req, resp);
         }
     }

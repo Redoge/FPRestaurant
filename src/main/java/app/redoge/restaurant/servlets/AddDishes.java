@@ -7,7 +7,10 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.Locale;
+import java.util.ResourceBundle;
 
 import static app.redoge.restaurant.DAO.DishesDAO.isExistDishes;
 import static app.redoge.restaurant.DAO.DishesDAO.setDishes;
@@ -18,8 +21,13 @@ public class AddDishes extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+        HttpSession session = request.getSession();
+        String[] lang_param =  ((String) session.getAttribute("language")).split("_");
+        Locale locale = new Locale(lang_param[0], lang_param[1]);
+        ResourceBundle rb = ResourceBundle.getBundle("language", locale);
+
         boolean isGood = true;
-        String err = "Error";
+        String err = rb.getString("Error");
 
 
         final UserRole role = (UserRole) request.getSession().getAttribute("role");
@@ -38,14 +46,14 @@ public class AddDishes extends HttpServlet {
         if (priceString == null || categoryString == null || name == null || name.length() == 0 || priceString.length() == 0) {
             log.info("Parameter is null or empty");
             isGood = false;
-            err = "Error";
+            err = rb.getString("Error");
         } else {
             try {
                 price = Double.parseDouble(priceString);
                 category = Integer.parseInt(categoryString);
             } catch (NumberFormatException e) {
                 log.error(e);
-                err = "Error";
+                err = rb.getString("Error");
                 isGood = false;
             }
         }
@@ -54,15 +62,15 @@ public class AddDishes extends HttpServlet {
         if (isGood) {
             if (name.trim().length() < 3 || price < 1 || category < 1 || category >= 5) {
                 isGood = false;
-                err = "The name of the dish must be longer than 3 characters and price must be > 1";
+                err = rb.getString("ErrMustBeLonger3");
             } else if (isExistDishes(name)) {
                 isGood = false;
-                err = "The dish exists";
+                err = rb.getString("TheDishExists");
             } else if (isGood) {
                 isGood = setDishes(name, price, category);
                 if (isGood) {
                     log.info("Dish added: " + name);
-                    request.setAttribute("info", "The dish added");
+                    request.setAttribute("info", rb.getString("TheDishAdded"));
                     request.getRequestDispatcher("/manager/manage-menu").forward(request, response);
                 }
             }

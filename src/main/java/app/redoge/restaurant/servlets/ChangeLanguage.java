@@ -18,8 +18,8 @@ public class ChangeLanguage extends HttpServlet {
 
         final String language = req.getParameter("language");
 
-        if(language.equalsIgnoreCase("en")){
-            session.setAttribute("language", "en");
+        if(language.equalsIgnoreCase("en_US")){
+            session.setAttribute("language", "en_US");
         }else if(language.equalsIgnoreCase("uk_UA")){
             session.setAttribute("language", "uk_UA");
         }
