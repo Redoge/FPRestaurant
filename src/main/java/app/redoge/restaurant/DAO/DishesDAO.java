@@ -2,6 +2,7 @@ package app.redoge.restaurant.DAO;
 
 import app.redoge.restaurant.Dish;
 import org.apache.log4j.Logger;
+
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -10,7 +11,7 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
-import static app.redoge.restaurant.DAO.UserDao.getConnection;
+import static app.redoge.restaurant.DAO.ConnectDB.getConnection;
 import static java.util.Objects.isNull;
 
 public class DishesDAO{

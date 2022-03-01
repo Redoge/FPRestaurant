@@ -9,9 +9,10 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import static app.redoge.restaurant.DAO.ConnectDB.getConnection;
 import static app.redoge.restaurant.DAO.DishesDAO.getNameDishById;
 import static app.redoge.restaurant.DAO.DishesDAO.getPriceDishById;
-import static app.redoge.restaurant.DAO.UserDao.getConnection;
+
 
 public class OrderDAO {
     private static final Logger log = Logger.getLogger(OrderDAO.class);

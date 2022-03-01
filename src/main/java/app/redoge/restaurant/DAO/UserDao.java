@@ -11,36 +11,13 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+import static app.redoge.restaurant.DAO.ConnectDB.getConnection;
 import static java.util.Objects.isNull;
 
 public class UserDao {
     private static final Logger log = Logger.getLogger(UserDao.class);
 
     private static Connection connection = null;
-
-    public static Connection getConnection() {
-
-        if (connection != null)
-            return connection;
-        else {
-            try {
-                Driver driver;
-                Connection con;
-                driver = new com.mysql.cj.jdbc.Driver();
-                DriverManager.registerDriver(driver);
-                String url = "jdbc:mysql://localhost:3306/";
-                String dbName = "restaurant";
-                String driverr = "com.mysql.cj.jdbc.Driver";
-                String userName = "root";
-                String password = "danylo2003";
-                connection = DriverManager.getConnection(url + dbName, userName, password);
-            }
-            catch (SQLException e) {
-                log.error(e);
-            }
-            return connection;
-        }
-    }
 
     private static String getPassword(String email) throws SQLException {
         String  out = "";
