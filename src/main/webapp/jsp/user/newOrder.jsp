@@ -11,10 +11,6 @@
     if (role == null || role.equals(UserRole.Unknown) || role.equals(UserRole.Manager)) {
         response.sendRedirect(request.getContextPath());
     }
-    String info = (String) request.getAttribute("info");
-    if (info == null){info = "";}
-
-
 %>
 <html>
 <head>
@@ -57,11 +53,12 @@
 
 <div class="container">
     <div class="row">
-        <%if(info.length() != 0){%>
+        <%if(request.getParameter("info") != null){%>
         <div class="forAlert">
-            <div class="alert alert-secondary form-group"  role="alert">
-                <%=info%>
-            </div></div><%}%>
+            <div class="alert alert-secondary form-group" role="alert">
+                <%=request.getParameter("info")%>
+            </div>
+        </div><%}%>
         <form action="<%=request.getContextPath() + "/user/new-orderPost"%>" method="post">
             <label for="AllMenu"><fmt:message key="Name_of_the_dish" bundle="${rb}"/>:</label><br>
             <%--    <input type = "text" list = "AllMenu" >--%>
@@ -74,7 +71,7 @@
             </select>
 
             <label for="count"><fmt:message key="Count" bundle="${rb}"/>:</label>
-            <input type="number" id="count" name="count" class="form-control"><br>
+            <input type="number" id="count" name="count" class="form-control" placeholder="<fmt:message key="Count" bundle="${rb}"/>"><br>
             <div align="center"><input type="submit" value="<fmt:message key="New_order" bundle="${rb}"/>" class="btn btn-outline-secondary"></div>
         </form>
     </div>

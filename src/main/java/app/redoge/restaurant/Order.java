@@ -69,7 +69,10 @@ public class Order implements OrderInterface {
     }
 
     public enum orderStatus{
-        NEW, COOK, DELIVERY, DONE;
+        NEW,
+        COOK,
+        DELIVERY,
+        DONE;
 
         public static orderStatus getStatus(String str){
             if(str.equalsIgnoreCase("NEW")) return NEW;

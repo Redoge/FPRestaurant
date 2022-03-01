@@ -11,11 +11,7 @@
 <%String language = (String) session.getAttribute("language");%>
 <fmt:setLocale value="<%=language%>"/>
 <fmt:setBundle basename="language"  var="rb"/>
-<%
-    String info = (String) request.getAttribute("info");
-    if (info == null){info = "";}
 
-%>
 <html>
 <head>
     <title>Dishes Menu</title>
@@ -70,11 +66,12 @@
     <%if (role != null && role.equals(UserRole.User)){%>
 
     <div id="newOrderDiv" class="col-2 position-relative"  align="center">
-        <%if(info.length() != 0){%>
+        <%if(request.getParameter("info") != null){%>
         <div class="forAlert">
-            <div class="alert alert-secondary form-group"  role="alert">
-                <%=info%>
-            </div></div><%}%>
+            <div class="alert alert-secondary form-group" role="alert">
+                <%=request.getParameter("info")%>
+            </div>
+        </div><%}%>
         <div>
             <button class="btn spoiler-trigger btn-outline-secondary"><fmt:message key="New_order" bundle="${rb}"/>:</button>
 <%--            <a class="spoiler-trigger"><span>New order:</span></a>--%>
@@ -90,7 +87,7 @@
             </select>
             <div class="form-group">
                 <label for="count"><fmt:message key="Count" bundle="${rb}"/>:</label>
-                <input type="number" class="form-control" id="count" name="count">
+                <input type="number" class="form-control" id="count" name="count" placeholder="<fmt:message key="Count" bundle="${rb}"/>">
             </div>
             <input type="submit"  class="btn btn-outline-secondary" value="<fmt:message key="New_order" bundle="${rb}"/>">
         </form>

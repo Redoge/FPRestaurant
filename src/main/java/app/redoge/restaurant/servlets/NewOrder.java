@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.sql.SQLException;
 import java.util.Locale;
 import java.util.ResourceBundle;
@@ -83,12 +84,12 @@ public class NewOrder extends HttpServlet {
                 err = rb.getString("Error");
             }
             log.info("Error added new order");
-            req.setAttribute("info", err);
-            req.getRequestDispatcher("/user/new-order").forward(req, resp);
+            resp.sendRedirect(req.getContextPath() +"/user/new-order?info=" +
+                    new String(err.getBytes(StandardCharsets.UTF_8), "ISO-8859-1"));
         } else {
             log.info("Added new order");
-            req.setAttribute("info", rb.getString("OrderAccepted"));
-            req.getRequestDispatcher("/user/orders").forward(req, resp);
+            resp.sendRedirect(req.getContextPath() +"/user/new-order?info=" +
+                    new String(rb.getString("OrderAccepted").getBytes(StandardCharsets.UTF_8), "ISO-8859-1"));
         }
 
 

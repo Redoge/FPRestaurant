@@ -16,10 +16,6 @@
         response.sendRedirect(request.getContextPath());
     }
     ArrayList<Order> orders = getAllOrders();
-    String info = (String) request.getAttribute("info");
-    if (info == null) {
-        info = "";
-    }
 %>
 <html>
 <head>
@@ -63,11 +59,12 @@
 
 <div class="container">
     <div class="row ">
-        <%if(info.length() != 0){%>
+        <%if(request.getParameter("info") != null){%>
         <div class="forAlert">
-            <div class="alert alert-secondary form-group"  role="alert">
-                <%=info%>
-            </div></div><%}%>
+            <div class="alert alert-secondary form-group" role="alert">
+                <%=request.getParameter("info")%>
+            </div>
+        </div><%}%>
         <form action="<%=request.getContextPath() + "/manager/changeOrderStatus"%>" method="post">
             <label for="AllMenu"><fmt:message key="Order_id" bundle="${rb}"/>:</label><br>
             <%--    <input type = "text" list = "AllMenu" name="changed_id">--%>

@@ -7,6 +7,7 @@ import org.apache.log4j.Logger;
 import javax.servlet.*;
 import javax.servlet.http.*;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
@@ -40,8 +41,8 @@ public class ChangeOrderStatus extends HttpServlet {
         if(orderId == -1 || newStatus == null || newStatus.length() == 0){
             log.info("OrderId invalid or newStatus is null or empty");
             isGood = false;
-            request.setAttribute("info",  rb.getString("Error"));
-            request.getRequestDispatcher("/manager/manage-orders").forward(request, response);
+            response.sendRedirect(request.getContextPath() +"/manager/manage-orders?info=" +
+                    new String(rb.getString("Error").getBytes(StandardCharsets.UTF_8), "ISO-8859-1"));
         }
 
         if(isGood){
@@ -51,12 +52,12 @@ public class ChangeOrderStatus extends HttpServlet {
 
         if(isGood){
             log.info("Added status in db");
-            request.setAttribute("info", rb.getString("StatusChanged"));
-            request.getRequestDispatcher("/manager/manage-orders").forward(request, response);
+            response.sendRedirect(request.getContextPath() +"/manager/manage-orders?info=" +
+                    new String(rb.getString("StatusChanged").getBytes(StandardCharsets.UTF_8), "ISO-8859-1"));
         }else{
             log.info("Error added status in db");
-            request.setAttribute("info", rb.getString("Error"));
-            request.getRequestDispatcher("/manager/manage-orders").forward(request, response);
+            response.sendRedirect(request.getContextPath() +"/manager/manage-orders?info=" +
+                    new String(rb.getString("Error").getBytes(StandardCharsets.UTF_8), "ISO-8859-1"));
         }
 
 

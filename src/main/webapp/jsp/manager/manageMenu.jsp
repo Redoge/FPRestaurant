@@ -15,12 +15,7 @@
         if (role == null || role.equals(UserRole.Unknown) || role.equals(UserRole.User)) {
             response.sendRedirect(request.getContextPath());
         }
-        String info = (String) request.getAttribute("info");
-        if (info == null) {
-            info = "";
-        }
-
-    %>
+         %>
 
 
     <title>Manage menu</title>
@@ -68,20 +63,19 @@
 
 <div class="container">
     <div class="row ">
-        <%if (info.length() != 0) {%>
+        <%if(request.getParameter("info") != null){%>
         <div class="forAlert">
             <div class="alert alert-secondary form-group" role="alert">
-                <%=info%>
+                <%=request.getParameter("info")%>
             </div>
-        </div>
-        <%}%>
+        </div><%}%>
         <div align="center"><h1><fmt:message key="Add_dish" bundle="${rb}"/></h1></div>
         <form action="<%=request.getContextPath() + "/manager/manage/add-dishes"%>" method="post">
             <label for="name"><fmt:message key="Name_of_the_dish" bundle="${rb}"/>:</label>
-            <input type="text" id="name" name="name" class="form-control" placeholder="Name of the dish">
+            <input type="text" id="name" name="name" class="form-control" placeholder="<fmt:message key="Name_of_the_dish" bundle="${rb}"/>">
 
             <label for="price"><fmt:message key="Price" bundle="${rb}"/>:</label>
-            <input type="number" id="price" name="price" class="form-control" placeholder="Price of the dish">
+            <input type="number" id="price" name="price" class="form-control" placeholder="<fmt:message key="Price" bundle="${rb}"/>">
 
             <label for="category"><fmt:message key="Category" bundle="${rb}"/></label>
             <%--    <input type = "text" list = "category" name="category">--%>

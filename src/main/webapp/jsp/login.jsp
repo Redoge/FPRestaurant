@@ -15,9 +15,6 @@
         if(role == null){
         }
         else if ((role.equals(UserRole.User)) || (role.equals(UserRole.Manager))){response.sendRedirect(request.getContextPath());}
-        String info = (String) request.getAttribute("info");
-        if (info == null){info = "";}
-
     %>
     <title>Login</title>
     <style>
@@ -53,11 +50,12 @@
 
         <div class="container">
         <div class="row" >
-            <%if(info.length() != 0){%>
+            <%if(request.getParameter("info") != null){%>
             <div class="forAlert">
-                <div class="alert alert-secondary form-group"  role="alert">
-                    <%=info%>
-                </div></div><%}%>
+                <div class="alert alert-secondary form-group" role="alert">
+                    <%=request.getParameter("info")%>
+                </div>
+            </div><%}%>
             <div class="form-group">
                 <label for="email">E-mail:</label>
                 <input  type="email" class="form-control" id="email" name="email" placeholder="Email">

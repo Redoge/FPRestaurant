@@ -2,7 +2,6 @@
 <%@ page import="app.redoge.restaurant.User" %>
 <%@ page import="java.util.List" %>
 <%@ page import="static app.redoge.restaurant.DAO.UserDao.getAllUser" %>
-<%--<%@ page import="app.redoge.restaurant.Order" %>--%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt"  prefix="fmt" %>
@@ -14,11 +13,6 @@
         response.sendRedirect(request.getContextPath());
     }
     List<User> userList = getAllUser();
-    String info = (String) request.getAttribute("info");
-    if (info == null) {
-        info = "";
-    }
-
 %>
 <html>
 <head>
@@ -27,6 +21,7 @@
         <%@include file='/css/css.css' %>
         <%@include file='/css/bootstrap.css' %>
     </style>
+    <meta charset="utf-8">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
             crossorigin="anonymous"></script>
@@ -61,13 +56,13 @@
 
 <div class="container">
     <div class="row ">
-        <%if (info.length() != 0) {%>
+        <%if(request.getParameter("info") != null){%>
         <div class="forAlert">
             <div class="alert alert-secondary form-group" role="alert">
-                <%=info%>
+                <%=request.getParameter("info")%>
             </div>
-        </div>
-        <%}%>
+        </div><%}%>
+
         <form action="<%=request.getContextPath() + "/manager/manage/changeRole"%>" method="post">
             <label for="AllMenu"><fmt:message key="New_role" bundle="${rb}"/></label><br>
             <%--    <input type = "text" list = "AllMenu" name="changed_id">--%>
@@ -82,7 +77,7 @@
                         <% } %>
             </select>
             <label for="userId"><fmt:message key="User_id" bundle="${rb}"/>:</label>
-            <input id="userId" type="number" list="userIdList" name="userId" class="form-select" list="userIdList">
+            <input id="userId" type="number" list="userIdList" name="userId" class="form-select" list="userIdList" placeholder="ID">
             <datalist id="userIdList" >
                 <%for (User userForm : userList) {%>
                 <option value="<%=userForm.getId()%>"><%=userForm.getUsername()%>

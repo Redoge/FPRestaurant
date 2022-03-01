@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.sql.SQLException;
 import java.util.Locale;
 import java.util.ResourceBundle;
@@ -72,15 +73,15 @@ public class Login implements Filter {
 
         if (role.equals(UserRole.Manager) || role.equals(UserRole.User)){
             log.info("User loggined " + req.getParameter("email"));
-            req.setAttribute("info", rb.getString("LoginSuccessful"));
-            resp.sendRedirect("./cabinet");
+            resp.sendRedirect(req.getContextPath() + "/cabinet");
         } else if (req.getParameter("email") == null && req.getParameter("password") == null){
             log.info("User not loggined, email or passw is null");
-            req.getRequestDispatcher("/login").forward(req, resp);
+            req.getRequestDispatcher("/login").forward(req,resp);
+//            resp.sendRedirect(req.getContextPath() +"/login");
         }else{
             log.info("User not loggined. Invalid email or password");
-            req.setAttribute("info", rb.getString("InvalidEmailOrPassword"));
-            req.getRequestDispatcher("/login").forward(req, resp);
+            resp.sendRedirect(req.getContextPath() +"/login?info=" +
+                    new String(rb.getString("InvalidEmailOrPassword").getBytes(StandardCharsets.UTF_8), "ISO-8859-1"));
         }
     }
 

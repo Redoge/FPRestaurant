@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
@@ -70,16 +71,16 @@ public class AddDishes extends HttpServlet {
                 isGood = setDishes(name, price, category);
                 if (isGood) {
                     log.info("Dish added: " + name);
-                    request.setAttribute("info", rb.getString("TheDishAdded"));
-                    request.getRequestDispatcher("/manager/manage-menu").forward(request, response);
+                    response.sendRedirect(request.getContextPath() +"/manager/manage-menu?info=" +
+                            new String(rb.getString("TheDishAdded").getBytes(StandardCharsets.UTF_8), "ISO-8859-1"));
                 }
             }
 
         }
         if (!isGood) {
             log.info("Dish not added: " + name);
-            request.setAttribute("info", err);
-            request.getRequestDispatcher("/manager/manage-menu").forward(request, response);
+            response.sendRedirect(request.getContextPath() +"/manager/manage-menu?info=" +
+                    new String(err.getBytes(StandardCharsets.UTF_8), "ISO-8859-1"));
         }
     }
 }

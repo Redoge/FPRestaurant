@@ -29,14 +29,6 @@
 
     <!--Manage mapping-->
 
-    <servlet>
-        <servlet-name>Manager</servlet-name>
-        <jsp-file>/jsp/manager/index.jsp</jsp-file>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>Manager</servlet-name>
-        <url-pattern>/manager</url-pattern>
-    </servlet-mapping>
 
     <servlet>
         <servlet-name>AddDishes</servlet-name>

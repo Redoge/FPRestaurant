@@ -1,5 +1,8 @@
 package app.redoge.restaurant.filter;
 
+import app.redoge.restaurant.servlets.ChangeUserRole;
+import org.apache.log4j.Logger;
+
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
@@ -21,7 +24,7 @@ public class CharsetFilter implements Filter {
             throws IOException, ServletException {
 
         request.setCharacterEncoding("UTF-8");
-
+        response.setCharacterEncoding("UTF-8");
         HttpServletRequest req = (HttpServletRequest) request;
         HttpSession session = req.getSession();
 

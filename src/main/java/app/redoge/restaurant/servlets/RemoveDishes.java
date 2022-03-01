@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
@@ -35,8 +36,8 @@ public class RemoveDishes extends HttpServlet {
         if(id == null) {
             log.info("Paramater is null or empty");
             isGood = false;
-            request.setAttribute("info", rb.getString("Error"));
-            request.getRequestDispatcher("/manager/manage-menu").forward(request, response);
+            response.sendRedirect(request.getContextPath() +"/manager/manage-menu?info=" +
+                    new String(rb.getString("Error").getBytes(StandardCharsets.UTF_8), "ISO-8859-1"));
         }
         if(isGood) {
             log.info("Try remove dishes: " + id);
@@ -44,12 +45,12 @@ public class RemoveDishes extends HttpServlet {
         }
         if (isGood) {
             log.info("Dishes removed: " + id );
-            request.setAttribute("info", rb.getString("DishesRemove"));
-            request.getRequestDispatcher("/manager/manage-menu").forward(request, response);
+            response.sendRedirect(request.getContextPath() +"/manager/manage-menu?info=" +
+                    new String(rb.getString("DishesRemove").getBytes(StandardCharsets.UTF_8), "ISO-8859-1"));
         }else{
             log.info("Error removing");
-            request.setAttribute("info", rb.getString("Error"));
-            request.getRequestDispatcher("/manager/manage-menu").forward(request, response);
+            response.sendRedirect(request.getContextPath() +"/manager/manage-menu?info=" +
+                    new String(rb.getString("Error").getBytes(StandardCharsets.UTF_8), "ISO-8859-1"));
         }
     }
 }
