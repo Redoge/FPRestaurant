@@ -14,9 +14,20 @@ import static app.redoge.restaurant.DAO.DishesDAO.getNameDishById;
 import static app.redoge.restaurant.DAO.DishesDAO.getPriceDishById;
 
 
+/**
+ * The type Order dao.
+ */
 public class OrderDAO {
     private static final Logger log = Logger.getLogger(OrderDAO.class);
 
+    /**
+     * New order boolean.
+     * If the addition is successful, the return is true.
+     * If the addition is not successful, it is not true to return
+     *
+     * @param order the order
+     * @return the boolean
+     */
     public static boolean newOrder(Order order){
         boolean out = false;
         Statement statement = null;
@@ -52,6 +63,12 @@ public class OrderDAO {
         return out;
     }
 
+    /**
+     * Get order by id: Return Order.
+     *
+     * @param id the id
+     * @return the order
+     */
     public static Order getOrderById(int id){
         Order order = null;
         ResultSet rs = null;
@@ -76,6 +93,12 @@ public class OrderDAO {
         return order;
     }
 
+    /**
+     * Get orders by user id: Return List<Order>.
+     *
+     * @param id the id
+     * @return the list
+     */
     public static List<Order> getOrdersByUserId(int id){
         ArrayList<Order> orders = new ArrayList<>();
         ResultSet rs = null;
@@ -100,6 +123,11 @@ public class OrderDAO {
           return orders;
     }
 
+    /**
+     * Get all orders array: Return List<Order>.
+     *
+     * @return the array list
+     */
     public static ArrayList<Order> getAllOrders(){
         ArrayList<Order> orders = new ArrayList<>();
         ResultSet rs = null;
@@ -124,6 +152,14 @@ public class OrderDAO {
         return orders;
     }
 
+    /**
+     * Change order status by id boolean.
+     * If the change is successful successfully return the true.
+     * Otherwise False
+     * @param id        the id
+     * @param newStatus the new status
+     * @return the boolean
+     */
     public static boolean changeOrderStatusById(int id,
                                             Order.orderStatus newStatus){
         boolean out = false;

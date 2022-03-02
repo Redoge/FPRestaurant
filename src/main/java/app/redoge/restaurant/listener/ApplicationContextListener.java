@@ -9,6 +9,9 @@ import java.sql.Connection;
 import static app.redoge.restaurant.DAO.ConnectDB.getConnection;
 
 
+/**
+ * The type Application context listener.
+ */
 @WebListener
 public class ApplicationContextListener implements ServletContextListener {
     private static final Logger log = Logger.getLogger(ApplicationContextListener.class);

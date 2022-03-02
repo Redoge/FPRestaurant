@@ -13,6 +13,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
+/**
+ * The type Charset filter.
+ */
 public class CharsetFilter implements Filter {
 
     public void init(FilterConfig config) throws ServletException {

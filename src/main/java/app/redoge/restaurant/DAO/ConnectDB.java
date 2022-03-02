@@ -7,10 +7,18 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+/**
+ * The class for Connect to db.
+ */
 public class ConnectDB {
     private static final Logger log = Logger.getLogger(ConnectDB.class);
     private static Connection connection = null;
 
+    /**
+     * Gets connection.
+     *
+     * @return the connection
+     */
     public static Connection getConnection() {
 
         if (connection != null)

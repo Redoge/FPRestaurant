@@ -2,13 +2,24 @@ package app.redoge.restaurant;
 
 import app.redoge.restaurant.interfaces.UserInterface;
 
+/**
+ * The type User.
+ */
 public class User implements UserInterface {
 
-    String username;
-    String email;
-    int id;
-    int role;
+    private String username;
+    private String email;
+    private int id;
+    private int role;
 
+    /**
+     * Instantiates a new User.
+     *
+     * @param username the username: String
+     * @param email    the email: String
+     * @param id       the id: int
+     * @param role     the role: int
+     */
     public User(String username, String email, int id, int role) {
         this.username = username;
         this.email = email;

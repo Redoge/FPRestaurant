@@ -1,12 +1,43 @@
 package app.redoge.restaurant.enums;
 
+/**
+ * The enum Category.
+ */
 public enum Category {
-    Salad(1), MainDishes(2), Desserts(3), Drinks(4), Unknown(5);
+    /**
+     * Salad category.
+     */
+    Salad(1),
+    /**
+     * Main dishes category.
+     */
+    MainDishes(2),
+    /**
+     * Desserts category.
+     */
+    Desserts(3),
+    /**
+     * Drinks category.
+     */
+    Drinks(4),
+    /**
+     * Unknown category.
+     */
+    Unknown(5);
+    /**
+     * The Id.
+     */
     int id;
     Category(int id) {
         this.id = id;
     }
 
+    /**
+     * Get dishes Category.
+     *
+     * @param role the role
+     * @return the category
+     */
     public static Category getDishesCategory(int role){
         if (role == 1) return Salad;
         if (role == 2) return MainDishes;
@@ -15,10 +46,21 @@ public enum Category {
         else return Unknown;
     }
 
+    /**
+     * Get dishes category to String.
+     *
+     * @param role the role
+     * @return the string
+     */
     public static String getDishesCategoryToString(int role){
        return getDishesCategory(role).toString();
     }
 
+    /**
+     * Gets id.
+     *
+     * @return the id
+     */
     public  int getId() {
         return id;
     }

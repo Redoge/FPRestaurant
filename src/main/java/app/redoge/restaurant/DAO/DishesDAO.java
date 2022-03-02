@@ -14,10 +14,23 @@ import java.util.Map;
 import static app.redoge.restaurant.DAO.ConnectDB.getConnection;
 import static java.util.Objects.isNull;
 
+/**
+ * The type Dishes dao.
+ */
 public class DishesDAO{
     private static final Logger log = Logger.getLogger(DishesDAO.class);
 
-   public static boolean setDishes(String name, double price, int category){
+    /**
+     * Set dishes boolean.
+     * If the addition is successful, the return is true.
+     * If the addition is not successful, it is not true to return
+     *
+     * @param name     the name
+     * @param price    the price
+     * @param category the category
+     * @return the boolean
+     */
+    public static boolean setDishes(String name, double price, int category){
        if(name == null || price == 0|| category < 1 || category > 5  || name.length() < 3) return false;
        boolean out = false;
        Statement statement = null;
@@ -35,7 +48,14 @@ public class DishesDAO{
        return out;
     }
 
-   public static boolean rmDish(Integer id){
+    /**
+     * Rm dish boolean.
+     * If the removing is successful, the return is true.
+     * If the removing is not successful, it is not true to return
+     * @param id the id
+     * @return the boolean
+     */
+    public static boolean rmDish(Integer id){
        boolean out = false;
        Statement statement = null;
        Connection connection = getConnection();
@@ -51,7 +71,14 @@ public class DishesDAO{
        return out;
    }
 
-   public static boolean isExistDishes(String name){
+    /**
+     * Is exist dishes boolean.
+     * If the dish is available in the database then return true.
+     * Otherwise - not true.
+     * @param name the name
+     * @return the boolean
+     */
+    public static boolean isExistDishes(String name){
        String tmp = null;
        ResultSet rs = null;
        Connection connection = getConnection();
@@ -70,7 +97,12 @@ public class DishesDAO{
        return !isNull(tmp);
    }
 
-   public static Map<Integer, String> getAllMenuMap(){
+    /**
+     * Get all menu map. Return map.
+     *
+     * @return the map
+     */
+    public static Map<Integer, String> getAllMenuMap(){
        Map<Integer, String> out = new HashMap<>();
        ResultSet rs = null;
        Connection connection = getConnection();
@@ -87,7 +119,13 @@ public class DishesDAO{
        return out;
    }
 
-   public static String getNameDishById(int id){
+    /**
+     * Get name dish by id. Return String
+     *
+     * @param id the id
+     * @return the string
+     */
+    public static String getNameDishById(int id){
        String out = "";
        ResultSet rs = null;
        Connection connection = getConnection();
@@ -104,7 +142,13 @@ public class DishesDAO{
        return out;
    }
 
-   public static double getPriceDishById(int id){
+    /**
+     * Get price dish by id. Return double.
+     *
+     * @param id the id
+     * @return the double
+     */
+    public static double getPriceDishById(int id){
        double out = 0;
        ResultSet rs = null;
        Connection connection = getConnection();
@@ -121,7 +165,13 @@ public class DishesDAO{
        return out;
    }
 
-   public static Map<Integer, Dish> getDishIdBySorted(String category){
+    /**
+     * Get dish id by sorted. Return map.
+     *
+     * @param category the category
+     * @return the map
+     */
+    public static Map<Integer, Dish> getDishIdBySorted(String category){
         Map<Integer, Dish> out = new HashMap<>();
         ResultSet rs = null;
         Connection connection = getConnection();

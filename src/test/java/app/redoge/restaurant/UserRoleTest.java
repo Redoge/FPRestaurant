@@ -5,8 +5,14 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * The type User role test.
+ */
 class UserRoleTest {
 
+    /**
+     * Gets id TEST.
+     */
     @Test
     void getId() {
         assertEquals(1, UserRole.Admin.getId());
@@ -15,6 +21,9 @@ class UserRoleTest {
         assertEquals(4, UserRole.Unknown.getId());
     }
 
+    /**
+     * Gets user role TEST.
+     */
     @Test
     void getUserRole() {
         assertEquals(UserRole.Admin, UserRole.getUserRole(1));
