@@ -10,9 +10,10 @@
     }
     else if ((role.equals(UserRole.User)) || (role.equals(UserRole.Manager))){response.sendRedirect(request.getContextPath());}
 %>
-<html>
+<html translate="no">
 <head>
     <title>Register</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <style>
         <%@include file='/css/css.css' %>
         <%@include file='/css/bootstrap.css' %>

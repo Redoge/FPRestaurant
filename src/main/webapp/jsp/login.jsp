@@ -9,7 +9,7 @@
 <fmt:setLocale value="<%=language%>"/>
 <fmt:setBundle basename="language"  var="rb"/>
 
-<html>
+<html translate="no">
 <head>
     <% UserRole role = (UserRole) request.getSession().getAttribute("role");
         if(role == null){
@@ -17,6 +17,7 @@
         else if ((role.equals(UserRole.User)) || (role.equals(UserRole.Manager))){response.sendRedirect(request.getContextPath());}
     %>
     <title>Login</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <style>
         <%@include file='/css/css.css' %>
         <%@include file='/css/bootstrap.css' %>

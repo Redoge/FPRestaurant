@@ -9,7 +9,7 @@
 <%String language = (String) session.getAttribute("language");%>
 <fmt:setLocale value="<%=language%>"/>
 <fmt:setBundle basename="language" var="rb"/>
-<html>
+<html translate="no">
 <head>
     <% UserRole role = (UserRole) request.getSession().getAttribute("role");
         if (role == null || role.equals(UserRole.Unknown) || role.equals(UserRole.User)) {
@@ -19,6 +19,7 @@
 
 
     <title>Manage menu</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <style>
         <%@include file='/css/css.css' %>
         <%@include file='/css/bootstrap.css' %>

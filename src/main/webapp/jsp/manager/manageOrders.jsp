@@ -17,9 +17,9 @@
     }
     ArrayList<Order> orders = getAllOrders();
 %>
-<html>
+<html translate="no">
 <head>
-
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <style>
         <%@include file='/css/css.css' %>
         <%@include file='/css/bootstrap.css' %>

@@ -14,9 +14,10 @@
     }
     List<User> userList = getAllUser();
 %>
-<html>
+<html translate="no">
 <head>
     <title>Manage</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <style>
         <%@include file='/css/css.css' %>
         <%@include file='/css/bootstrap.css' %>
@@ -84,7 +85,7 @@
                         <% } %>
             </datalist>
             <br>
-            <div align="center"><input type="submit" value="<fmt:message key="Change_order_status" bundle="${rb}"/>" class="btn btn-outline-secondary">
+            <div align="center"><input type="submit" value="<fmt:message key="Change_user_role" bundle="${rb}"/>" class="btn btn-outline-secondary">
             </div>
 
         </form>

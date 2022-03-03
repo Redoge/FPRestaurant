@@ -12,9 +12,10 @@
 <fmt:setLocale value="<%=language%>"/>
 <fmt:setBundle basename="language"  var="rb"/>
 
-<html>
+<html translate="no">
 <head>
     <title>Dishes Menu</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <style>
         <%@include file='/css/css.css' %>
         <%@include file='/css/bootstrap.css' %>
