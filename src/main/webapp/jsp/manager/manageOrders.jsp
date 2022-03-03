@@ -20,6 +20,9 @@
 <html translate="no">
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script type="text/javascript">
+        <%@include file='/js/sort-table.js'%>
+    </script>
     <style>
         <%@include file='/css/css.css' %>
         <%@include file='/css/bootstrap.css' %>
@@ -86,12 +89,12 @@
         </form>
     </div>
     <div class="row">
-        <TABLE BORDER="1" width="90%" ALIGN="CENTER" class="table">
+        <TABLE cellspacing="0" width="100%" class="sort-table.js table js-sort-table" id="table_dish">
             <TR>
                 <TH><fmt:message key="Name_of_the_dish" bundle="${rb}"/></TH>
-                <TH><fmt:message key="Count" bundle="${rb}"/></TH>
-                <TH><fmt:message key="Price" bundle="${rb}"/> (UAH)</TH>
-                <th><fmt:message key="Order_id" bundle="${rb}"/></th>
+                <TH class="js-sort-number"><fmt:message key="Count" bundle="${rb}"/></TH>
+                <TH class="js-sort-number"><fmt:message key="Price" bundle="${rb}"/> (UAH)</TH>
+                <th class="js-sort-number"><fmt:message key="Order_id" bundle="${rb}"/></th>
                 <th><fmt:message key="Status" bundle="${rb}"/></th>
                 <th><fmt:message key="Username" bundle="${rb}"/></th>
                 <th>Email:</th>

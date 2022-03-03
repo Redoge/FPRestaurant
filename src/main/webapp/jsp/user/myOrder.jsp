@@ -33,7 +33,9 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
             integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
             crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-
+    <script type="text/javascript">
+        <%@include file='/js/sort-table.js'%>
+    </script>
 </head>
 <body>
 
@@ -71,13 +73,13 @@
                 <%=request.getParameter("info")%>
             </div>
         </div><%}%>
-        <TABLE BORDER="1" width="90%" ALIGN="CENTER" class="table">
+        <TABLE cellspacing="0" width="100%" class="sort-table.js table js-sort-table" id="table_dish">
             <TR>
                 <TH><fmt:message key="Name_of_the_dish" bundle="${rb}"/></TH>
-                <TH><fmt:message key="Count" bundle="${rb}"/></TH>
-                <TH><fmt:message key="Price" bundle="${rb}"/> (UAH)</TH>
+                <TH class="js-sort-number"><fmt:message key="Count" bundle="${rb}"/></TH>
+                <TH class="js-sort-number"><fmt:message key="Price" bundle="${rb}"/> (UAH)</TH>
                 <th><fmt:message key="Status" bundle="${rb}"/></th>
-                <th><fmt:message key="Order_id" bundle="${rb}"/></th>
+                <th class="js-sort-number"><fmt:message key="Order_id" bundle="${rb}"/></th>
 
             </TR>
             <% for (Order order : orders) { %>

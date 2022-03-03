@@ -20,6 +20,9 @@
 
     <title>Manage menu</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script type="text/javascript">
+        <%@include file='/js/sort-table.js'%>
+    </script>
     <style>
         <%@include file='/css/css.css' %>
         <%@include file='/css/bootstrap.css' %>

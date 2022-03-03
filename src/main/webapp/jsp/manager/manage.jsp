@@ -18,6 +18,9 @@
 <head>
     <title>Manage</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script type="text/javascript">
+        <%@include file='/js/sort-table.js'%>
+    </script>
     <style>
         <%@include file='/css/css.css' %>
         <%@include file='/css/bootstrap.css' %>
@@ -91,9 +94,9 @@
         </form>
     </div>
     <div class="row">
-        <TABLE BORDER="1" width="90%" ALIGN="CENTER" class="table">
+        <TABLE cellspacing="0" width="100%" class="sort-table.js table js-sort-table" id="table_dish">
             <TR>
-                <TH>Id</TH>
+                <TH class="js-sort-number">Id</TH>
                 <TH><fmt:message key="Username" bundle="${rb}"/></TH>
                 <TH>Email</TH>
                 <th><fmt:message key="Role" bundle="${rb}"/></th>
