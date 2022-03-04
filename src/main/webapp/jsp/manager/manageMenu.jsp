@@ -103,7 +103,7 @@
         %>
         <div align="center"><h1><fmt:message key="Remove_dish" bundle="${rb}"/></h1></div>
         <form action="<%=request.getContextPath() + "/manager/manage/rm-dishes"%>" method="post">
-            <label for="AllMenu"><fmt:message key="Category" bundle="${rb}"/>:</label>
+            <label for="AllMenu"><fmt:message key="Name_of_the_dish" bundle="${rb}"/>:</label>
             <%--    <input type = "text" list = "AllMenu" name="id">--%>
             <select required id="AllMenu" name="id" class="form-select">
                 <%for (int id : dishes.keySet()) { %>
