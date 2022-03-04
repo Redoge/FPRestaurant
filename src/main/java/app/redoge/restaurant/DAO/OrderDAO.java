@@ -152,6 +152,31 @@ public class OrderDAO {
         return orders;
     }
 
+    public static ArrayList<Order> getNotDoneOrders(){
+        ArrayList<Order> orders = new ArrayList<>();
+        ResultSet rs = null;
+        Connection connection = getConnection();
+        Statement statement = null;
+        try {
+            statement = connection.createStatement();
+            rs = statement.executeQuery("SELECT * FROM `order` WHERE `status` != 'DONE'; ");
+            while(rs.next()) {
+                String name = rs.getString("dish");
+                int dishes_id = rs.getInt("dishes_id");
+                int count = rs.getInt("count");
+                int user_id = rs.getInt("user_id");
+                int order_id = rs.getInt("id");
+                double price = rs.getDouble("price");
+                Order.orderStatus status = Order.orderStatus.getStatus(rs.getString("status"));
+                orders.add(new Order(dishes_id, count, user_id,order_id, name, status, price));
+            }
+        } catch (SQLException e) {
+            log.error(e);
+        }
+        return orders;
+    }
+
+
     /**
      * Change order status by id boolean.
      * If the change is successful successfully return the true.

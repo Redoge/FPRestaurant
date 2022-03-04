@@ -73,6 +73,21 @@
                 <%=request.getParameter("info")%>
             </div>
         </div><%}%>
+
+        <div class="col position-relative" align="center">
+            <label for="input_group"><fmt:message key="Group_by" bundle="${rb}"/></label>
+            <select class="form-select" aria-label="Default select example" id="input_group">
+                <option value="">All</option>
+                <% Order.orderStatus[] dishesMenuArr = Order.orderStatus.values();
+                    for (Order.orderStatus dm : dishesMenuArr) {%>
+                <option value="<%=dm%>"><%=dm%>
+                </option>
+                <%}%>
+            </select>
+            <button class="btn btn-outline-secondary" id="" onclick="groupDishByCategory();"><fmt:message key="Grupped"
+                                                                                                          bundle="${rb}"/></button>
+        </div>
+
         <TABLE cellspacing="0" width="100%" class="sort-table.js table js-sort-table" id="table_dish">
             <TR>
                 <TH><fmt:message key="Name_of_the_dish" bundle="${rb}"/></TH>
@@ -99,5 +114,29 @@
         </TABLE>
     </div>
 </div>
+
+<script>
+    function groupDishByCategory() {
+        // Declare variables
+        var input, filter, table, tr, td, i, txtValue;
+        input = document.getElementById("input_group");
+        filter = input.value.toUpperCase();
+        table = document.getElementById("table_dish");
+        tr = table.getElementsByTagName("tr");
+
+        // Loop through all table rows, and hide those who don't match the search query
+        for (i = 0; i < tr.length; i++) {
+            td = tr[i].getElementsByTagName("td")[3];
+            if (td) {
+                txtValue = td.textContent || td.innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    tr[i].style.display = "";
+                } else {
+                    tr[i].style.display = "none";
+                }
+            }
+        }
+    }
+</script>
 </body>
 </html>

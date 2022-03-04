@@ -70,12 +70,12 @@
         </div><%}%>
         <form action="<%=request.getContextPath() + "/manager/changeOrderStatus"%>" method="post">
             <label for="AllMenu"><fmt:message key="Order_id" bundle="${rb}"/>:</label><br>
-            <%--    <input type = "text" list = "AllMenu" name="changed_id">--%>
-            <select  id="AllMenu" name="changed_id" class="form-select">
-                <%for (Order order : orders) {%>
-                <option value="<%=order.getOrder_id()%>"><%=order.getOrder_id()%>
-                        <% } %>
-            </select>
+                <input class="form-control" type = "number"  name="changed_id" id="AllMenu">
+<%--            <select  id="AllMenu" name="changed_id" class="form-select">--%>
+<%--                <%for (Order order : orders) {%>--%>
+<%--                <option value="<%=order.getOrder_id()%>"><%=order.getOrder_id()%>--%>
+<%--                        <% } %>--%>
+<%--            </select>--%>
             <label for="AllAtatus"><fmt:message key="New_status" bundle="${rb}"/>:</label>
             <%--    <input type = "text" list = "AllAtatus" name="changed_status">--%>
             <select id="AllAtatus" name="changed_status" class="form-select">
@@ -88,6 +88,22 @@
 
         </form>
     </div>
+
+    <div class="col position-relative" align="center">
+        <label for="input_group"><fmt:message key="Group_by" bundle="${rb}"/></label>
+        <select class="form-select" aria-label="Default select example" id="input_group">
+            <option value="">All</option>
+            <% Order.orderStatus[] dishesMenuArr = Order.orderStatus.values();
+                for (Order.orderStatus dm : dishesMenuArr) {%>
+            <option value="<%=dm%>"><%=dm%>
+            </option>
+            <%}%>
+        </select>
+        <button class="btn btn-outline-secondary" id="" onclick="groupDishByCategory();"><fmt:message key="Grupped"
+                                                                                                      bundle="${rb}"/></button>
+    </div>
+
+
     <div class="row">
         <TABLE cellspacing="0" width="100%" class="sort-table.js table js-sort-table" id="table_dish">
             <TR>
@@ -120,7 +136,29 @@
                 <% } %>
     </div>
 </div>
+<script>
+    function groupDishByCategory() {
+        // Declare variables
+        var input, filter, table, tr, td, i, txtValue;
+        input = document.getElementById("input_group");
+        filter = input.value.toUpperCase();
+        table = document.getElementById("table_dish");
+        tr = table.getElementsByTagName("tr");
 
+        // Loop through all table rows, and hide those who don't match the search query
+        for (i = 0; i < tr.length; i++) {
+            td = tr[i].getElementsByTagName("td")[4];
+            if (td) {
+                txtValue = td.textContent || td.innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    tr[i].style.display = "";
+                } else {
+                    tr[i].style.display = "none";
+                }
+            }
+        }
+    }
+</script>
 
 </body>
 </html>
