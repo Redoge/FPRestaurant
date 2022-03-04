@@ -105,7 +105,7 @@
         <form action="<%=request.getContextPath() + "/manager/manage/rm-dishes"%>" method="post">
             <label for="AllMenu"><fmt:message key="Category" bundle="${rb}"/>:</label>
             <%--    <input type = "text" list = "AllMenu" name="id">--%>
-            <select id="AllMenu" name="id" class="form-select">
+            <select required id="AllMenu" name="id" class="form-select">
                 <%for (int id : dishes.keySet()) { %>
                 <option value="<%= id%>"><%=dishes.get(id).getName()%>
                 </option>

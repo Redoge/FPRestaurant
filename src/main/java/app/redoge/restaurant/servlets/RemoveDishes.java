@@ -33,11 +33,9 @@ public class RemoveDishes extends HttpServlet {
         }
 
         final String id = request.getParameter("id");
-        if(id == null) {
+        if(id == null || id.length() == 0) {
             log.info("Paramater is null or empty");
             isGood = false;
-            response.sendRedirect(request.getContextPath() +"/manager/manage-menu?info=" +
-                    new String(rb.getString("Error").getBytes(StandardCharsets.UTF_8), "ISO-8859-1"));
         }
         if(isGood) {
             log.info("Try remove dishes: " + id);
