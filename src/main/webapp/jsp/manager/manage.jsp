@@ -81,7 +81,7 @@
                         <% } %>
             </select>
             <label for="userId"><fmt:message key="User_id" bundle="${rb}"/>:</label>
-            <input id="userId" type="number" list="userIdList" name="userId" class="form-select" list="userIdList" placeholder="ID">
+            <input required id="userId" type="number" list="userIdList" name="userId" class="form-select" list="userIdList" placeholder="ID">
             <datalist id="userIdList" >
                 <%for (User userForm : userList) {%>
                 <option value="<%=userForm.getId()%>"><%=userForm.getUsername()%>

@@ -71,7 +71,7 @@
         <form action="<%=request.getContextPath() + "/manager/changeOrderStatus"%>" method="post">
             <label for="AllMenu"><fmt:message key="Order_id" bundle="${rb}"/>:</label><br>
             <%--    <input type = "text" list = "AllMenu" name="changed_id">--%>
-            <select id="AllMenu" name="changed_id" class="form-select">
+            <select  id="AllMenu" name="changed_id" class="form-select">
                 <%for (Order order : orders) {%>
                 <option value="<%=order.getOrder_id()%>"><%=order.getOrder_id()%>
                         <% } %>

@@ -54,15 +54,15 @@
                 </div><%}%>
                 <div class="form-group">
                     <label for="email">E-mail:</label>
-                    <input class="form-control" type="email" id="email" name="email" placeholder="E-mail">
+                    <input required class="form-control" type="email" id="email" name="email" placeholder="E-mail">
                 </div>
                 <div class="form-group">
                     <label for="username"><fmt:message key="Username" bundle="${rb}"/>:</label>
-                    <input class="form-control" type="text" id="username" name="username" placeholder="<fmt:message key="Username" bundle="${rb}"/>">
+                    <input required class="form-control" type="text" id="username" name="username" placeholder="<fmt:message key="Username" bundle="${rb}"/>">
                 </div>
                 <div class="form-group">
                     <label for="password"><fmt:message key="Password" bundle="${rb}"/>:</label>
-                    <input class="form-control" type="password" id="password" name="password" placeholder="<fmt:message key="Password" bundle="${rb}"/>">
+                    <input required class="form-control" type="password" id="password" name="password" placeholder="<fmt:message key="Password" bundle="${rb}"/>">
                 </div>
                 <div class="form-group" align="center">
                     <br>

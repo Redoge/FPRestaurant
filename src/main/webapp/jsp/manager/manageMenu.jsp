@@ -76,10 +76,10 @@
         <div align="center"><h1><fmt:message key="Add_dish" bundle="${rb}"/></h1></div>
         <form action="<%=request.getContextPath() + "/manager/manage/add-dishes"%>" method="post">
             <label for="name"><fmt:message key="Name_of_the_dish" bundle="${rb}"/>:</label>
-            <input type="text" id="name" name="name" class="form-control" placeholder="<fmt:message key="Name_of_the_dish" bundle="${rb}"/>">
+            <input required type="text" id="name" name="name" class="form-control" placeholder="<fmt:message key="Name_of_the_dish" bundle="${rb}"/>">
 
             <label for="price"><fmt:message key="Price" bundle="${rb}"/>:</label>
-            <input type="number" id="price" name="price" class="form-control" placeholder="<fmt:message key="Price" bundle="${rb}"/>">
+            <input required type="number" id="price" name="price" class="form-control" placeholder="<fmt:message key="Price" bundle="${rb}"/>">
 
             <label for="category"><fmt:message key="Category" bundle="${rb}"/></label>
             <%--    <input type = "text" list = "category" name="category">--%>

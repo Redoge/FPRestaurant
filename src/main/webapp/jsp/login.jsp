@@ -1,5 +1,4 @@
 <%@ page import="app.redoge.restaurant.enums.UserRole" %>
-<%@ page import="java.util.Locale" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt"  prefix="fmt" %>
@@ -59,11 +58,12 @@
             </div><%}%>
             <div class="form-group">
                 <label for="email">E-mail:</label>
-                <input  type="email" class="form-control" id="email" name="email" placeholder="Email">
+                <input required  type="email" class="form-control" id="email" name="email" placeholder="Email">
             </div>
             <div class="form-group">
                 <label for="password"><fmt:message key="Password" bundle="${rb}"/>:</label>
-                <input type="password" class="form-control" id="password" name="password"  placeholder="Password">
+<%--                <input required pattern="^.{5,20}$" type="password" class="form-control" id="password" name="password"  placeholder="Password">--%>
+                <input required pattern="^.{5,20}$" type="password" class="form-control" id="password" name="password"  placeholder="Password">
             </div>
             <div class="form-group" align="center">
                 <br>

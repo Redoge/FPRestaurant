@@ -106,7 +106,7 @@
                         </select>
                         <div class="form-group">
                             <label for="count"><fmt:message key="Count" bundle="${rb}"/>:</label>
-                            <input type="number" class="form-control" id="count" name="count"
+                            <input required type="number" class="form-control" id="count" name="count"
                                    placeholder="<fmt:message key="Count" bundle="${rb}"/>">
                         </div><br>
                         <input type="submit" class="btn btn-outline-secondary"
