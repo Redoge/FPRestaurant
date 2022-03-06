@@ -19,6 +19,7 @@
         <%@include file='/css/css.css' %>
         <%@include file='/css/bootstrap.css' %>
     </style>
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
             crossorigin="anonymous"></script>
@@ -79,14 +80,60 @@
                 </div>
                 <div class="form-group" align="center">
                     <br>
-                    <input class="btn btn-outline-secondary" type="submit"
-                           value="<fmt:message key="Register" bundle="${rb}"/>">
+                    <div class="form-captcha">
+                        <div class="g-recaptcha" hidden="true" data-sitekey="6LcBDLweAAAAAEM78RQL_kwXWtadCiVI1BZQW5rx"></div>
+                    </div><br>
+                    <button class="btn btn-outline-secondary" type="submit"
+                            ><fmt:message key="Register" bundle="${rb}"/></button>
                 </div>
             </div>
         </div>
     </form>
 </div>
 
+<script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit"
+        async defer>
+</script>
+<script type="text/javascript">
+    var onloadCallback = function () {
+        reCaptcha('.form-captcha');
+    };
 
+    function reCaptcha(selector) {
+        var $wg = $(selector);
+        $wg.each(function () {
+            var id = randomString(10),
+                $form = $(this).closest('form');
+            console.log("dT");
+            console.log('id', id);
+            $form.find('button[type="submit"]').prop('disabled', true);
+            $(this).append($('<div class="g-recaptcha lololo" id="' + id + '"></div>'));
+            grecaptcha.render(id, {
+                sitekey: $(this).find('.g-recaptcha').data('sitekey') || '',
+                callback: function (response) {
+                    if (!!response) {
+                        console.log("dF");
+                        $form.find('button[type="submit"]').prop('disabled', false);
+                    }
+                }
+            });
+        });
+        console.log("End")
+    };
+
+    function randomString(length) {
+        var chars = '0123456789abcdefghijklmnopqrstuvwxyz'.split('');
+        // var result = ;
+        console.log(length);
+        var result =  Math.floor(Math.random() * 1000000000).toString();
+        console.log("result: " + result);
+        return result;
+    }
+
+    var reCaptchaOnLoadCallback = function () {
+        reCaptcha('.form-captcha');
+    }
+
+</script>
 </body>
 </html>

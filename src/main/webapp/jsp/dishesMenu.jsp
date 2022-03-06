@@ -11,7 +11,6 @@
 <%String language = (String) session.getAttribute("language");%>
 <fmt:setLocale value="<%=language%>"/>
 <fmt:setBundle basename="language" var="rb"/>
-
 <html translate="no">
 <head>
     <title>Dishes Menu</title>
@@ -26,7 +25,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
             integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
             crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-
     <script type="text/javascript">
         <%@include file='/js/sort-table.js'%>
     </script>
@@ -80,7 +78,6 @@
                                                                                                           bundle="${rb}"/></button>
         </div>
         <%if (role != null && role.equals(UserRole.User)) {%>
-
         <div id="newOrderDiv" class="col position-relative" align="center">
             <%if (request.getParameter("info") != null) {%>
             <div class="forAlert">
@@ -96,8 +93,6 @@
                         bundle="${rb}"/>:
                 </button>
                 <div id="popupWin" class="modalwin">
-
-
                     <form action="<%=request.getContextPath() + "/user/new-orderPost"%>" method="post">
                         <label for="AllMenu"><fmt:message key="Name_of_the_dish" bundle="${rb}"/>:</label>
                         <select id="AllMenu" class="form-select" name="id">
@@ -124,24 +119,20 @@
             if (role == null || role.equals(UserRole.Unknown)) {
         %>
         <div id="newOrderDiv" class="col position-relative " align="center"><br>
-
             <button class="btn spoiler-trigger btn-outline-secondary" onclick="showModalWin()"><fmt:message
                     key="New_order"
                     bundle="${rb}"/>:
             </button>
             <div id="popupWin" class="modalwin ">
-
                 <div class="position-absolute top-50 start-50 translate-middle">
-
                     <a href="<%=request.getContextPath() + "/login"%>">
                         <button class="btn  btn-dark"><fmt:message key="Login"
-                                                                                bundle="${rb}"/></button>
+                                                                   bundle="${rb}"/></button>
                     </a>
                 </div>
             </div>
         </div>
     </div>
-
     <%}%>
 </div>
 </div>
