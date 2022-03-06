@@ -91,10 +91,13 @@
             <%}%>
             <br>
             <div>
-                <button class="btn spoiler-trigger btn-outline-secondary" onclick="showModalWin()"><fmt:message key="New_order"
-                                                                                       bundle="${rb}"/>:
+                <button class="btn spoiler-trigger btn-outline-secondary" onclick="showModalWin()"><fmt:message
+                        key="New_order"
+                        bundle="${rb}"/>:
                 </button>
-                <div  id="popupWin" class="modalwin">
+                <div id="popupWin" class="modalwin">
+
+
                     <form action="<%=request.getContextPath() + "/user/new-orderPost"%>" method="post">
                         <label for="AllMenu"><fmt:message key="Name_of_the_dish" bundle="${rb}"/>:</label>
                         <select id="AllMenu" class="form-select" name="id">
@@ -108,15 +111,39 @@
                             <label for="count"><fmt:message key="Count" bundle="${rb}"/>:</label>
                             <input required type="number" class="form-control" id="count" name="count"
                                    placeholder="<fmt:message key="Count" bundle="${rb}"/>">
-                        </div><br>
-                        <input type="submit" class="btn btn-outline-secondary"
+                        </div>
+                        <br>
+                        <input type="submit" class="btn btn-dark"
                                value="<fmt:message key="New_order" bundle="${rb}"/>">
                     </form>
                 </div>
             </div>
         </div>
-        <%}%>
+        <%
+            }
+            if (role == null || role.equals(UserRole.Unknown)) {
+        %>
+        <div id="newOrderDiv" class="col position-relative " align="center"><br>
+
+            <button class="btn spoiler-trigger btn-outline-secondary" onclick="showModalWin()"><fmt:message
+                    key="New_order"
+                    bundle="${rb}"/>:
+            </button>
+            <div id="popupWin" class="modalwin ">
+
+                <div class="position-absolute top-50 start-50 translate-middle">
+
+                    <a href="<%=request.getContextPath() + "/login"%>">
+                        <button class="btn  btn-dark"><fmt:message key="Login"
+                                                                                bundle="${rb}"/></button>
+                    </a>
+                </div>
+            </div>
+        </div>
     </div>
+
+    <%}%>
+</div>
 </div>
 
 <div class="container">
@@ -142,6 +169,7 @@
         </TABLE>
     </div>
 </div>
+
 <script>
     function groupDishByCategory() {
         // Declare variables
