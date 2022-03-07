@@ -9,8 +9,8 @@ import static org.junit.jupiter.api.Assertions.*;
  */
 class OrderTest {
 
-    private final Order orderNotFull = new Order(1, 2, 3);
-    private final Order order = new Order(1,2,3,4, "Dish", Order.orderStatus.COOK, 50);
+    private final Order orderNotFull = new Order(1, 2, 3, "Address");
+    private final Order order = new Order(1,2,3,4, "Dish", Order.orderStatus.COOK, 50, "Address");
 
     /**
      * Gets price TEST.

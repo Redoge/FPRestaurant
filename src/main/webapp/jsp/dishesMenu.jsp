@@ -107,6 +107,8 @@
                             <input required type="number" class="form-control" id="count" name="count"
                                    placeholder="<fmt:message key="Count" bundle="${rb}"/>">
                         </div>
+                        <label for="address">Address</label>
+                        <input required type="text" id="address" name="address" class="form-control">
                         <br>
                         <input type="submit" class="btn btn-dark"
                                value="<fmt:message key="New_order" bundle="${rb}"/>">

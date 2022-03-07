@@ -14,6 +14,7 @@ public class Order implements OrderInterface {
     private String name = "";
     private orderStatus status;
     private double price;
+    private String address;
 
 
     /**
@@ -23,11 +24,12 @@ public class Order implements OrderInterface {
      * @param count     the count: int
      * @param user_id   the user id:int
      */
-    public Order(int dishes_id, int count, int user_id) {
+    public Order(int dishes_id, int count, int user_id, String address) {
         this.dishes_id = dishes_id;
         this.count = count;
         this.user_id = user_id;
         this.status = orderStatus.NEW;
+        this.address = address;
     }
 
 
@@ -43,7 +45,7 @@ public class Order implements OrderInterface {
      * @param price     the price: double
      */
     public Order(int dishes_id, int count, int user_id,
-                 int order_id, String name, orderStatus status, double price) {
+                 int order_id, String name, orderStatus status, double price, String address) {
         this.dishes_id = dishes_id;
         this.count = count;
         this.user_id = user_id;
@@ -51,6 +53,7 @@ public class Order implements OrderInterface {
         this.name = name;
         this.order_id = order_id;
         this.price = price*count;
+        this.address = address;
     }
 
 
@@ -84,6 +87,10 @@ public class Order implements OrderInterface {
 
     public orderStatus getStatus() {
         return status;
+    }
+
+    public String getAddress() {
+        return address;
     }
 
     @Override

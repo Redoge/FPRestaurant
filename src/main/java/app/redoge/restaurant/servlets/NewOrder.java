@@ -41,9 +41,11 @@ public class NewOrder extends HttpServlet {
 
         String dishIdString = req.getParameter("id");
         String countString = req.getParameter("count");
+        String address = req.getParameter("address");
         int dishId = 0;
         int count = 0;
-        if (dishIdString == null || countString == null || countString.length() < 1 || dishIdString.length() < 1) {
+        if (dishIdString == null || countString == null || address == null ||
+                countString.length() < 1 || dishIdString.length() < 1 || address.length() < 1 ) {
             log.info("Parameter is null or empty");
             err = rb.getString("Error");
             isGood = false;
@@ -73,7 +75,7 @@ public class NewOrder extends HttpServlet {
         }
 
         if (isGood) {
-            order = new Order(dishId, count, user.getId());
+            order = new Order(dishId, count, user.getId(), address);
         }
         if (isGood) {
             log.info("Try make new order and try added to db");

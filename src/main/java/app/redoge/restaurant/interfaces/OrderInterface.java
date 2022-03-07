@@ -57,6 +57,11 @@ public interface OrderInterface {
      * @return the status: Order.orderStatus
      */
     Order.orderStatus getStatus();
+    /**
+     * Gets address.
+     * @return the address: String
+     */
+    String getAddress();
 
     @Override
     String toString();

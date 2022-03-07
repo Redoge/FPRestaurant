@@ -113,6 +113,7 @@
                 <th class="js-sort-number"><fmt:message key="Order_id" bundle="${rb}"/></th>
                 <th><fmt:message key="Status" bundle="${rb}"/></th>
                 <th><fmt:message key="Username" bundle="${rb}"/></th>
+                <th>Address:</th>
                 <th>Email:</th>
             </TR>
                 <% for(Order order: orders){
@@ -129,6 +130,8 @@
                 <TD><%= order.getStatus() %>
                 </TD>
                 <TD><%= user.getUsername()%>
+                </TD>
+                <TD><%= order.getAddress() %>
                 </TD>
                 <TD><%= user.getEmail()%>
                 </TD>

@@ -35,9 +35,9 @@ public class OrderDAO {
         Connection connection = getConnection();
         String dish = getNameDishById(order.getDishes_id());
         double price = getPriceDishById(order.getDishes_id());
-        String sql = "INSERT `order`(`count`, `user_id`, `dishes_id`, `status`, `dish`, `price`) VALUE"+
+        String sql = "INSERT `order`(`count`, `user_id`, `dishes_id`, `status`, `dish`, `price`, `address`) VALUE"+
                 "("+order.getCount()+","+order.getUser_id()+", "+
-                order.getDishes_id()+", '"+ order.getStatus()+"','"+dish+"',"+price+")";
+                order.getDishes_id()+", '"+ order.getStatus()+"','"+dish+"',"+price+",'" + order.getAddress()+"')";
         try {
             statement = connection.createStatement();
             statement.executeUpdate(sql);
@@ -84,8 +84,9 @@ public class OrderDAO {
                 int user_id = rs.getInt("user_id");
                 int order_id = rs.getInt("id");
                 double price = rs.getDouble("price");
+                String address = rs.getString("address");
                 Order.orderStatus status = Order.orderStatus.getStatus(rs.getString("status"));
-                order = new Order(dishes_id, count, user_id,order_id, name, status, price);
+                order = new Order(dishes_id, count, user_id,order_id, name, status, price, address);
             }
         } catch (SQLException e) {
             log.error(e);
@@ -114,8 +115,9 @@ public class OrderDAO {
                 int user_id = rs.getInt("user_id");
                 int order_id = rs.getInt("id");
                 double price = rs.getDouble("price");
+                String address = rs.getString("address");
                 Order.orderStatus status = Order.orderStatus.getStatus(rs.getString("status"));
-                orders.add(new Order(dishes_id, count, user_id,order_id, name, status, price));
+                orders.add(new Order(dishes_id, count, user_id,order_id, name, status, price, address));
             }
         } catch (SQLException e) {
             log.error(e);
@@ -143,8 +145,9 @@ public class OrderDAO {
                 int user_id = rs.getInt("user_id");
                 int order_id = rs.getInt("id");
                 double price = rs.getDouble("price");
+                String address = rs.getString("address");
                 Order.orderStatus status = Order.orderStatus.getStatus(rs.getString("status"));
-                orders.add(new Order(dishes_id, count, user_id,order_id, name, status, price));
+                orders.add(new Order(dishes_id, count, user_id,order_id, name, status, price, address));
             }
         } catch (SQLException e) {
             log.error(e);
@@ -167,8 +170,9 @@ public class OrderDAO {
                 int user_id = rs.getInt("user_id");
                 int order_id = rs.getInt("id");
                 double price = rs.getDouble("price");
+                String address = rs.getString("address");
                 Order.orderStatus status = Order.orderStatus.getStatus(rs.getString("status"));
-                orders.add(new Order(dishes_id, count, user_id,order_id, name, status, price));
+                orders.add(new Order(dishes_id, count, user_id,order_id, name, status, price, address));
             }
         } catch (SQLException e) {
             log.error(e);

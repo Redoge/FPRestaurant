@@ -72,7 +72,11 @@
             </select>
 
             <label for="count"><fmt:message key="Count" bundle="${rb}"/>:</label>
-            <input required type="number" id="count" name="count" class="form-control" placeholder="<fmt:message key="Count" bundle="${rb}"/>"><br>
+            <input required type="number" id="count" name="count" class="form-control" placeholder="<fmt:message key="Count" bundle="${rb}"/>">
+
+            <label for="address">Address</label>
+            <input required type="text" id="address" name="address" class="form-control"><br>
+
             <div align="center"><input type="submit" value="<fmt:message key="New_order" bundle="${rb}"/>" class="btn btn-outline-secondary"></div>
         </form>
     </div>
