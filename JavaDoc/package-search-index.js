@@ -1,1 +1,0 @@
-packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"app.redoge.restaurant"},{"l":"app.redoge.restaurant.DAO"},{"l":"app.redoge.restaurant.enums"},{"l":"app.redoge.restaurant.filter"},{"l":"app.redoge.restaurant.interfaces"},{"l":"app.redoge.restaurant.listener"},{"l":"app.redoge.restaurant.servlets"}];updateSearchResults();
