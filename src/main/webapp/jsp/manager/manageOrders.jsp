@@ -113,8 +113,8 @@
                 <th class="js-sort-number"><fmt:message key="Order_id" bundle="${rb}"/></th>
                 <th><fmt:message key="Status" bundle="${rb}"/></th>
                 <th><fmt:message key="Username" bundle="${rb}"/></th>
-                <th>Address:</th>
                 <th>Email:</th>
+                <th>Info:</th>
             </TR>
                 <% for(Order order: orders){
         User user = getUserByUserId(order.getUser_id());%>
@@ -131,9 +131,11 @@
                 </TD>
                 <TD><%= user.getUsername()%>
                 </TD>
-                <TD><%= order.getAddress() %>
-                </TD>
                 <TD><%= user.getEmail()%>
+                </TD>
+                <TD><a href="<%=request.getContextPath() + "/manager/order-info?id="+order.getOrder_id()%>">
+                    <button class="btn btn-outline-secondary">Info</button>
+                </a>
                 </TD>
             </TR>
                 <% } %>
