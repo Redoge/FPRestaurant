@@ -18,6 +18,7 @@ import java.util.ResourceBundle;
 import org.apache.log4j.Logger;
 
 
+import static app.redoge.restaurant.DAO.UserDao.isTruePasswordByUsername;
 import static java.util.Objects.nonNull;
 
 public class Login implements Filter {
@@ -50,6 +51,18 @@ public class Login implements Filter {
                 User user = UserDao.getUser(email);
                 UserRole role = UserRole.getUserRole(user.getRole());
                 req.getSession().setAttribute("email", email);
+                req.getSession().setAttribute("role", role);
+                req.getSession().setAttribute("user_id", user.getId());
+
+                moveToMenu(req, resp, role);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }else if(isTruePasswordByUsername(password, email)){
+            try {
+                User user = UserDao.getUserByUsername(email);
+                UserRole role = UserRole.getUserRole(user.getRole());
+                req.getSession().setAttribute("email", user.getEmail());
                 req.getSession().setAttribute("role", role);
                 req.getSession().setAttribute("user_id", user.getId());
 

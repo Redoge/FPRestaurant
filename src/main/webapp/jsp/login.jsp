@@ -68,9 +68,9 @@
                 </div>
                 <%}%>
                 <div class="form-group">
-                    <label for="email">E-mail:</label>
-                    <input required pattern="^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$" type="email"
-                           class="form-control" id="email" name="email" placeholder="Email">
+                    <label for="email">E-mail / username:</label>
+                    <input required type="text"
+                           class="form-control" id="email" name="email" placeholder="E-mail / username">
                 </div>
                 <div class="form-group">
                     <label for="password"><fmt:message key="Password" bundle="${rb}"/>:</label>
@@ -81,8 +81,10 @@
                 <div class="form-group" align="center">
                     <br>
                     <div class="form-captcha">
-                        <div class="g-recaptcha" hidden="true" data-sitekey="6LcBDLweAAAAAEM78RQL_kwXWtadCiVI1BZQW5rx"></div>
-                    </div><br>
+                        <div class="g-recaptcha" hidden="true"
+                             data-sitekey="6LcBDLweAAAAAEM78RQL_kwXWtadCiVI1BZQW5rx"></div>
+                    </div>
+                    <br>
                     <button class="btn btn-outline-secondary" type="submit"><fmt:message key="Login"
                                                                                          bundle="${rb}"/></button>
 
@@ -92,6 +94,8 @@
         </form>
     </div>
 </div>
+
+
 <script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit"
         async defer>
 </script>
@@ -126,7 +130,7 @@
         var chars = '0123456789abcdefghijklmnopqrstuvwxyz'.split('');
         // var result = ;
         console.log(length);
-        var result =  Math.floor(Math.random() * 1000000000).toString();
+        var result = Math.floor(Math.random() * 1000000000).toString();
         console.log("result: " + result);
         return result;
     }

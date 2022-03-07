@@ -34,6 +34,17 @@ public class UserDao {
         return out;
     }
 
+    private static String getPasswordByUsername(String username) throws SQLException {
+        String  out = "";
+        ResultSet rs = null;
+        connection = getConnection();
+        Statement statement = connection.createStatement();
+        rs = statement.executeQuery("SELECT * FROM user  WHERE `username` = '"+username+"'");
+        while(rs.next()) {
+            out = (rs.getString("password"));
+        }
+        return out;
+    }
     /**
      * Gets user.
      *
@@ -61,6 +72,33 @@ public class UserDao {
         return user;
     }
 
+
+    /**
+     * Gets user.
+     *
+     * @param username the email
+     * @return the user
+     * @throws SQLException the sql exception
+     */
+    public static User getUserByUsername(String username) throws SQLException {
+        ResultSet rs = null;
+        connection = getConnection();
+        try {
+            Statement statement = connection.createStatement();
+            rs = statement.executeQuery("SELECT * FROM user  WHERE `username` = '"+username+"'");
+        } catch (SQLException e) {
+            log.error(e);
+        }
+        User user = null;
+        while(rs.next()) {
+            int id = rs.getInt("id");
+            int role = Integer.parseInt(rs.getString("role_id"));
+            String email = rs.getString("email");
+            user = new User(username, email, id, role);
+
+        }
+        return user;
+    }
     /**
      * Gets all user.
      *
@@ -136,6 +174,33 @@ public class UserDao {
 
         try {
             passwordTrue = getPassword(email);
+        } catch (SQLException e) {
+            log.error(e);
+        }
+        return password.equals(passwordTrue);
+    }
+
+
+    /**
+     * Is true password boolean.
+     * If the password is correct, it will return true.
+     * Otherwise false
+     * @param password the password
+     * @param username    the username
+     * @return the boolean
+     */
+    public static boolean isTruePasswordByUsername(String password, String username){
+        if(password == null || username == null) return false;
+
+        boolean out = false;
+        String passwordTrue = "";
+        username = username.trim();
+        if (password.length() < 3 || username.length() < 3){
+            return false;
+        }
+
+        try {
+            passwordTrue = getPasswordByUsername(username);
         } catch (SQLException e) {
             log.error(e);
         }
