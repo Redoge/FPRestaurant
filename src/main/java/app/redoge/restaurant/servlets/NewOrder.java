@@ -86,11 +86,11 @@ public class NewOrder extends HttpServlet {
                 err = rb.getString("Error");
             }
             log.info("Error added new order");
-            resp.sendRedirect(req.getContextPath() +"/user/new-order?info=" +
+            resp.sendRedirect(req.getContextPath() +"/user/orders?info=" +
                     new String(err.getBytes(StandardCharsets.UTF_8), "ISO-8859-1"));
         } else {
             log.info("Added new order");
-            resp.sendRedirect(req.getContextPath() +"/user/new-order?info=" +
+            resp.sendRedirect(req.getContextPath() +"/user/orders?info=" +
                     new String(rb.getString("OrderAccepted").getBytes(StandardCharsets.UTF_8), "ISO-8859-1"));
         }
 

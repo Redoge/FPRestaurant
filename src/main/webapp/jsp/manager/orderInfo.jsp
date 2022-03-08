@@ -91,6 +91,34 @@
             </div>
         </div>
         <%}%>
+
+
+<div class="container">
+    <div class="row ">
+        <%if(request.getParameter("info") != null){%>
+        <div class="forAlert">
+            <div class="alert alert-secondary form-group" role="alert">
+                <%=request.getParameter("info")%>
+            </div>
+        </div><%}%>
+        <form action="<%=request.getContextPath() + "/manager/changeOrderStatus"%>" method="post">
+            <input type="hidden" name="uri_pages" value="<%=request.getRequestURI()+"?id="+order.getOrder_id()%>">
+
+            <label for="AllMenu"><fmt:message key="Order_id" bundle="${rb}"/>:</label><br>
+            <input class="form-control" type = "number"  name="changed_id" id="AllMenu" value="<c:out value="${param.id}" />" readonly="">
+
+            <label for="AllAtatus"><fmt:message key="New_status" bundle="${rb}"/>:</label>
+            <select id="AllAtatus" name="changed_status" class="form-select">
+                <%for (Order.orderStatus orderSt : Order.orderStatus.values()) {%>
+                <option value="<%=orderSt%>"><%=orderSt%>
+                            <% } %>
+            </select>
+            <br>
+            <div align="center"><input type="submit" value="<fmt:message key="Change_order_status" bundle="${rb}"/>" class="btn btn-outline-secondary"></div>
+
+        </form>
+    </div>
+</div>
     </c:if>
 
 </body>

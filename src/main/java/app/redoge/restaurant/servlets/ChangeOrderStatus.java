@@ -29,37 +29,62 @@ public class ChangeOrderStatus extends HttpServlet {
             response.sendRedirect(request.getContextPath());
         }
         final String orderIdString = request.getParameter("changed_id");
+        String uri_page = request.getParameter("uri_pages");
         int orderId = -1;
         if (orderIdString == null || orderIdString.length() == 0) {
-            log.info("OrderId is null or empty");
+            log.info("OrderId is null or empty: " + orderIdString);
             isGood = false;
         }
         else{orderId = Integer.parseInt(orderIdString);}
         String newStatus =  request.getParameter("changed_status");
 
+        if(uri_page == null || uri_page.length() == 0) {
+            if (orderId == -1 || newStatus == null || newStatus.length() == 0) {
+                log.info("OrderId invalid(" + orderId + ") or newStatus is null or empty " + newStatus);
+                isGood = false;
+                response.sendRedirect(request.getContextPath() +"/manager/manage-orders" + "?info=" +
+                        new String(rb.getString("Error").getBytes(StandardCharsets.UTF_8), "ISO-8859-1"));
+            }
 
-        if(orderId == -1 || newStatus == null || newStatus.length() == 0){
-            log.info("OrderId invalid or newStatus is null or empty");
-            isGood = false;
-            response.sendRedirect(request.getContextPath() +"/manager/manage-orders?info=" +
-                    new String(rb.getString("Error").getBytes(StandardCharsets.UTF_8), "ISO-8859-1"));
-        }
+            if (isGood) {
+                log.info("Try change status in db");
+                isGood = changeOrderStatusById(orderId, Order.orderStatus.getStatus(newStatus));
+                if (!isGood) {
+                    log.info("Error added status in db");
+                    response.sendRedirect(request.getContextPath() +"/manager/manage-orders" + "?info=" +
+                            new String(rb.getString("Error").getBytes(StandardCharsets.UTF_8), "ISO-8859-1"));
+                }
+            }
 
-        if(isGood){
-            log.info("Try change status in db");
-            isGood = changeOrderStatusById(orderId, Order.orderStatus.getStatus(newStatus));
-        }
-
-        if(isGood){
-            log.info("Added status in db");
-            response.sendRedirect(request.getContextPath() +"/manager/manage-orders?info=" +
-                    new String(rb.getString("StatusChanged").getBytes(StandardCharsets.UTF_8), "ISO-8859-1"));
+            if (isGood) {
+                log.info("Added status in db");
+                response.sendRedirect(request.getContextPath() +"/manager/manage-orders" + "?info=" +
+                        new String(rb.getString("StatusChanged").getBytes(StandardCharsets.UTF_8), "ISO-8859-1"));
+            }
         }else{
-            log.info("Error added status in db");
-            response.sendRedirect(request.getContextPath() +"/manager/manage-orders?info=" +
-                    new String(rb.getString("Error").getBytes(StandardCharsets.UTF_8), "ISO-8859-1"));
-        }
+            if (orderId == -1 || newStatus == null || newStatus.length() == 0) {
+                log.info("OrderId invalid(" + orderId + ") or newStatus is null or empty " + newStatus);
+                isGood = false;
+                response.sendRedirect(uri_page + "&info=" +
+                        new String(rb.getString("Error").getBytes(StandardCharsets.UTF_8), "ISO-8859-1"));
+            }
 
+            if (isGood) {
+                log.info("Try change status in db");
+                isGood = changeOrderStatusById(orderId, Order.orderStatus.getStatus(newStatus));
+                if (!isGood) {
+                    log.info("Error added status in db");
+                    response.sendRedirect(uri_page + "&info=" +
+                            new String(rb.getString("Error").getBytes(StandardCharsets.UTF_8), "ISO-8859-1"));
+                }
+            }
+
+            if (isGood) {
+                log.info("Added status in db");
+                response.sendRedirect(uri_page + "&info=" +
+                        new String(rb.getString("StatusChanged").getBytes(StandardCharsets.UTF_8), "ISO-8859-1"));
+            }
+        }
 
     }
 }
