@@ -13,7 +13,7 @@
 <fmt:setBundle basename="language" var="rb"/>
 <html translate="no">
 <head>
-    <title>Dishes Menu</title>
+    <title><fmt:message key="Dishes_menu" bundle="${rb}"/></title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <style>
         <%@include file='/css/css.css' %>
@@ -107,8 +107,8 @@
                             <input required type="number" class="form-control" id="count" name="count"
                                    placeholder="<fmt:message key="Count" bundle="${rb}"/>">
                         </div>
-                        <label for="address">Address</label>
-                        <input required type="text" id="address" name="address" class="form-control">
+                        <label for="address"><fmt:message key="Count" bundle="${rb}"/>:</label>
+                        <input required type="text" id="address" name="address" class="form-control" placeholder="<fmt:message key="Count" bundle="${rb}"/>">
                         <br>
                         <input type="submit" class="btn btn-dark"
                                value="<fmt:message key="New_order" bundle="${rb}"/>">

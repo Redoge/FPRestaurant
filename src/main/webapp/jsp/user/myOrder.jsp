@@ -21,7 +21,7 @@
 %>
 <html translate="no">
 <head>
-    <title>Order</title>
+    <title><fmt:message key="My_orders" bundle="${rb}"/></title>
     <style>
         <%@include file='/css/css.css' %>
         <%@include file='/css/bootstrap.css' %>

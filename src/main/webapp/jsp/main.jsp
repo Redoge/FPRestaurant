@@ -8,7 +8,7 @@
 
 <html>
 <head>
-    <title>Restaurant</title>
+    <title><fmt:message key="Restaurant" bundle="${rb}"/></title>
     <style>
         <%@include file='/css/css.css' %>
         <%@include file='/css/bootstrap.css' %>

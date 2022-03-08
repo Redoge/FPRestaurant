@@ -16,7 +16,7 @@
             response.sendRedirect(request.getContextPath());
         }
     %>
-    <title>Login</title>
+    <title><fmt:message key="Login" bundle="${rb}"/></title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <style>
         <%@include file='/css/css.css' %>

@@ -15,7 +15,7 @@
 <html translate="no">
 <head>
 
-    <title>New order</title>
+    <title><fmt:message key="New_order" bundle="${rb}"/></title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <style>
         <%@include file='/css/css.css' %>
@@ -74,8 +74,8 @@
             <label for="count"><fmt:message key="Count" bundle="${rb}"/>:</label>
             <input required type="number" id="count" name="count" class="form-control" placeholder="<fmt:message key="Count" bundle="${rb}"/>">
 
-            <label for="address">Address</label>
-            <input required type="text" id="address" name="address" class="form-control"><br>
+            <label for="address"><fmt:message key="Address" bundle="${rb}"/>:</label>
+            <input required type="text" id="address" name="address" class="form-control" placeholder="<fmt:message key="Address" bundle="${rb}"/>"><br>
 
             <div align="center"><input type="submit" value="<fmt:message key="New_order" bundle="${rb}"/>" class="btn btn-outline-secondary"></div>
         </form>

@@ -34,7 +34,7 @@
             integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
             crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
-    <title>Manage orders</title>
+    <title><fmt:message key="Manage_orders" bundle="${rb}"/></title>
 
 </head>
 <body>
@@ -114,7 +114,7 @@
                 <th><fmt:message key="Status" bundle="${rb}"/></th>
                 <th><fmt:message key="Username" bundle="${rb}"/></th>
                 <th>Email:</th>
-                <th>Info:</th>
+                <th><fmt:message key="More" bundle="${rb}"/>:</th>
             </TR>
                 <% for(Order order: orders){
         User user = getUserByUserId(order.getUser_id());%>
@@ -134,7 +134,7 @@
                 <TD><%= user.getEmail()%>
                 </TD>
                 <TD><a href="<%=request.getContextPath() + "/manager/order-info?id="+order.getOrder_id()%>">
-                    <button class="btn btn-outline-secondary">Info</button>
+                    <button class="btn btn-outline-secondary"><fmt:message key="More" bundle="${rb}"/></button>
                 </a>
                 </TD>
             </TR>

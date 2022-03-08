@@ -15,7 +15,7 @@
 %>
 <html translate="no">
 <head>
-    <title>Cabinet</title>
+    <title><fmt:message key="Cabinet" bundle="${rb}"/></title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <style>
         <%@include file='/css/css.css' %>

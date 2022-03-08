@@ -18,7 +18,7 @@
          %>
 
 
-    <title>Manage menu</title>
+    <title><fmt:message key="Manage_menu" bundle="${rb}"/></title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script type="text/javascript">
         <%@include file='/js/sort-table.js'%>

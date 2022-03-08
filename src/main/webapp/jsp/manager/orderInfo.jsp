@@ -18,7 +18,7 @@
 %>
 <html>
 <head>
-    <title>Замовлення №<c:out value="${param.id}" /></title>
+    <title><fmt:message key="Order_number" bundle="${rb}"/><c:out value="${param.id}" /></title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <script type="text/javascript">
             <%@include file='/js/sort-table.js'%>
@@ -64,7 +64,7 @@
             Order order = getOrderById(Integer.parseInt(request.getParameter("id")));
             if(order == null){%>
         <div class="alert alert-secondary form-group" role="alert" align="center">
-            Order (<c:out value="${param.id}" />) not found
+            <fmt:message key="Not_found" bundle="${rb}"/> №<c:out value="${param.id}" />
         </div>
         <%}else{
             User user = getUserByUserId(order.getUser_id());
@@ -75,17 +75,18 @@
             <div class="card-body text-secondary">
                 <div class="card text-center">
                     <div class="card-header">
-                        Замовлення №<c:out value="${param.id}" />
+                        <fmt:message key="Order_number" bundle="${rb}"/><c:out value="${param.id}" />
                     </div>
                     <div class="card-body">
-                        <h3>User: <%=user.getUsername()%></h3>
-                        <h3>Email: <%=user.getEmail()%></h3>
-                        <h3>Order: <%=order.getName()%> (<%=order.getCount()%>)</h3>
-                        <h3>Price: <%=order.getPrice()%></h3>
-                        <h3>Address: <%=order.getAddress()%></h3>
+                        <h3><fmt:message key="Username" bundle="${rb}"/>:<strong> <%=user.getUsername()%></strong></h3>
+                        <h3>Email:  <strong><%=user.getEmail()%></strong></h3>
+                        <h3><fmt:message key="Name_of_the_dish" bundle="${rb}"/>: <strong> <%=order.getName()%> </strong></h3>
+                        <h3><fmt:message key="Count" bundle="${rb}"/>: <strong> <%=order.getCount()%></strong></h3>
+                        <h3><fmt:message key="Price" bundle="${rb}"/>: <strong> <%=order.getPrice()%></strong></h3>
+                        <h3><fmt:message key="Address" bundle="${rb}"/>: <strong> <%=order.getAddress()%></strong></h3>
                     </div>
                     <div class="card-footer text-muted">
-                        Status: <%=order.getStatus()%>
+                        <fmt:message key="Status" bundle="${rb}"/>: <strong> <%=order.getStatus()%></strong>
                     </div>
                 </div>
             </div>
@@ -104,8 +105,8 @@
         <form action="<%=request.getContextPath() + "/manager/changeOrderStatus"%>" method="post">
             <input type="hidden" name="uri_pages" value="<%=request.getRequestURI()+"?id="+order.getOrder_id()%>">
 
-            <label for="AllMenu"><fmt:message key="Order_id" bundle="${rb}"/>:</label><br>
-            <input class="form-control" type = "number"  name="changed_id" id="AllMenu" value="<c:out value="${param.id}" />" readonly="">
+<%--            <label    for="AllMenu"><fmt:message key="Order_id" bundle="${rb}"/>:</label><br>--%>
+            <input class="form-control" type="hidden"  name="changed_id" id="AllMenu" value="<c:out value="${param.id}" />" readonly="">
 
             <label for="AllAtatus"><fmt:message key="New_status" bundle="${rb}"/>:</label>
             <select id="AllAtatus" name="changed_status" class="form-select">
