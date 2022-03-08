@@ -63,7 +63,37 @@
         </div>
     </div>
 </nav>
-
+<%
+    User user = null;
+    try {
+        user = getUser((String) session.getAttribute("email"));
+    } catch (SQLException e) {
+        response.sendRedirect(request.getContextPath());
+    }
+    if (user == null) {
+%>
+<div class="alert alert-secondary form-group" role="alert" align="center">
+    <fmt:message key="Error" bundle="${rb}"/>
+        <%}else{%>
+    <div class="card border-secondary mb-2">
+        <div class="card-body text-secondary">
+            <div class="card text-center">
+                <div class="card-header">
+                    <fmt:message key="Username" bundle="${rb}"/>: <strong><%=user.getUsername()%></strong>
+                </div>
+                <div class="card-body">
+                    <h3>Email: <strong><%=user.getEmail()%></strong></h3>
+                    <h3><fmt:message key="Role" bundle="${rb}"/>: <strong><%=UserRole.getUserRole(user.getRole())%></strong></h3>
+                    <h3>Id: <strong><%=user.getId()%></strong></h3>
+                </div>
+<%--                <div class="card-footer text-muted">--%>
+<%--                    --%>
+<%--                </strong>--%>
+                </div>
+            </div>
+        </div>
+    </div>
+<%}%>
 <div class="container">
     <div class="row">
         <div class="col">
@@ -80,13 +110,5 @@
         </div>
     </div>
 </div>
-
-</br></br>
-${sessionScope.email}
-</br></br>
-${sessionScope.role}
-<br><br>
-
-
 </body>
 </html>
