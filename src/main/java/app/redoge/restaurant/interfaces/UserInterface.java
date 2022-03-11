@@ -32,4 +32,10 @@ public interface UserInterface {
      */
     int getRole();
 
+    /**
+     * Gets role.
+     * @return the role: int
+     */
+    String getLanguage();
+
 }

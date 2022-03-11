@@ -9,7 +9,7 @@ import static org.junit.jupiter.api.Assertions.*;
  */
 class UserTest {
 
-    private final User user = new User("Redoge", "mail.redoge@gmail.com", 1, 1);
+    private final User user = new User("Redoge", "mail.redoge@gmail.com", 1, 1, "en_US");
 
     /**
      * Gets username TEST.

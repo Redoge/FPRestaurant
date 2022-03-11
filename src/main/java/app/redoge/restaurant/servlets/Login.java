@@ -53,7 +53,7 @@ public class Login implements Filter {
                 req.getSession().setAttribute("email", email);
                 req.getSession().setAttribute("role", role);
                 req.getSession().setAttribute("user_id", user.getId());
-
+                req.getSession().setAttribute("language", user.getLanguage());
                 moveToMenu(req, resp, role);
             } catch (SQLException e) {
                 e.printStackTrace();
@@ -65,7 +65,7 @@ public class Login implements Filter {
                 req.getSession().setAttribute("email", user.getEmail());
                 req.getSession().setAttribute("role", role);
                 req.getSession().setAttribute("user_id", user.getId());
-
+                req.getSession().setAttribute("language", user.getLanguage());
                 moveToMenu(req, resp, role);
             } catch (SQLException e) {
                 e.printStackTrace();

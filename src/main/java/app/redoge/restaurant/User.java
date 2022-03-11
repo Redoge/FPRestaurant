@@ -11,6 +11,7 @@ public class User implements UserInterface {
     private String email;
     private int id;
     private int role;
+    private String language;
 
     /**
      * Instantiates a new User.
@@ -20,11 +21,12 @@ public class User implements UserInterface {
      * @param id       the id: int
      * @param role     the role: int
      */
-    public User(String username, String email, int id, int role) {
+    public User(String username, String email, int id, int role, String language) {
         this.username = username;
         this.email = email;
         this.id = id;
         this.role = role;
+        this.language = language;
     }
 
     public String getUsername() {
@@ -41,6 +43,10 @@ public class User implements UserInterface {
 
     public int getRole() {
         return role;
+    }
+
+    public String getLanguage() {
+        return language;
     }
 
 

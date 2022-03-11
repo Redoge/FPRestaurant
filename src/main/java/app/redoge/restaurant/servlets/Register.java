@@ -48,11 +48,12 @@ public class Register extends HttpServlet {
             response.sendRedirect(request.getContextPath() +"/register?info=" +
                     new String(rb.getString("LoginOrEmailAreBusy").getBytes(StandardCharsets.UTF_8), "ISO-8859-1"));
         }else{
-            validSetUser = setUser(username, email, password, 3);
+            validSetUser = setUser(username, email, password, 3, "en_US");
             if(validSetUser){
                 log.info("Register is done " + email);
                 request.getSession().setAttribute("email", email);
                 request.getSession().setAttribute("role", UserRole.User);
+                request.getSession().setAttribute("language", "en_US");
                 User user = null;
                 try {
                     user = UserDao.getUser(email);
