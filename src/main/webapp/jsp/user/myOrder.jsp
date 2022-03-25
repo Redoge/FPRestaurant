@@ -94,7 +94,7 @@
                 <TH class="js-sort-number"><fmt:message key="Count" bundle="${rb}"/></TH>
                 <TH class="js-sort-number"><fmt:message key="Price" bundle="${rb}"/> (UAH)</TH>
                 <th><fmt:message key="Status" bundle="${rb}"/></th>
-                <th>Address</th>
+                <th><fmt:message key="Address" bundle="${rb}"/></th>
                 <th class="js-sort-number"><fmt:message key="Order_id" bundle="${rb}"/></th>
 
             </TR>
@@ -106,7 +106,7 @@
                 </TD>
                 <TD><%= order.getPrice() %>
                 </TD>
-                <TD><%= order.getStatus() %>
+                <TD><fmt:message key="<%= order.getStatus().toString() %>" bundle="${rb}"/>
                 </TD>
                 <TD><%= order.getAddress() %>
                 </TD>

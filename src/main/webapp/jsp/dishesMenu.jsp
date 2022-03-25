@@ -64,13 +64,15 @@
         <div class="col position-relative" align="center">
             <label for="input_group"><fmt:message key="Group_by" bundle="${rb}"/></label>
             <select class="form-select" aria-label="Default select example" id="input_group">
-                <option value="">All</option>
+                <option value=""><fmt:message key="All"
+                                              bundle="${rb}"/></option>
                 <% Category[] dishesMenuArr = Category.values();
                     for (Category dm : dishesMenuArr) {
                         if (dm.equals(Category.Unknown)) {
                             continue;
                         }%>
-                <option value="<%=dm%>"><%=dm%>
+                <option value="<%=dm%>"><fmt:message key="<%=dm.toString()%>"
+                                                     bundle="${rb}"/>
                 </option>
                 <%}%>
             </select>
@@ -107,8 +109,8 @@
                             <input required type="number" class="form-control" id="count" name="count"
                                    placeholder="<fmt:message key="Count" bundle="${rb}"/>">
                         </div>
-                        <label for="address"><fmt:message key="Count" bundle="${rb}"/>:</label>
-                        <input required type="text" id="address" name="address" class="form-control" placeholder="<fmt:message key="Count" bundle="${rb}"/>">
+                        <label for="address"><fmt:message key="Address" bundle="${rb}"/>:</label>
+                        <input required type="text" id="address" name="address" class="form-control" placeholder="<fmt:message key="Address" bundle="${rb}"/>">
                         <br>
                         <input type="submit" class="btn btn-dark"
                                value="<fmt:message key="New_order" bundle="${rb}"/>">
@@ -150,10 +152,11 @@
             </TR>
             </thead>
             <% for (int id : dishes.keySet()) { %>
-            <TR>
+            <TR >
                 <TD><%= dishes.get(id).getName() %>
                 </td>
-                <TD><%= dishes.get(id).getCategory() %>
+                <TD><fmt:message key="<%= dishes.get(id).getCategory().toString() %>"
+                                 bundle="${rb}"/>
                 </TD>
                 <TD><%= dishes.get(id).getPrice() %>
                 </TD>

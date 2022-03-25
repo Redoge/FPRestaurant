@@ -97,7 +97,7 @@
                     </strong></h3>
                 </div>
                 <div class="card-footer text-muted">
-                    <fmt:message key="Status" bundle="${rb}"/>: <strong><%=order.getStatus()%>
+                    <fmt:message key="Status" bundle="${rb}"/>: <strong><fmt:message key="<%= order.getStatus().toString() %>" bundle="${rb}"/>
                 </strong>
                 </div>
             </div>
@@ -122,7 +122,7 @@
                 <label for="AllAtatus"><fmt:message key="New_status" bundle="${rb}"/>:</label>
                 <select id="AllAtatus" name="changed_status" class="form-select">
                     <%for (Order.orderStatus orderSt : Order.orderStatus.values()) {%>
-                    <option value="<%=orderSt%>"><%=orderSt%>
+                    <option value="<%=orderSt%>"><fmt:message key="<%= orderSt.toString() %>" bundle="${rb}"/>
                                 <% } %>
                 </select>
                 <br>

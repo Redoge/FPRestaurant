@@ -80,7 +80,7 @@
             <%--    <input type = "text" list = "AllAtatus" name="changed_status">--%>
             <select id="AllAtatus" name="changed_status" class="form-select">
                 <%for (Order.orderStatus order : Order.orderStatus.values()) {%>
-                <option value="<%=order%>"><%=order%>
+                <option value="<%=order%>"><fmt:message key="<%= order.toString() %>" bundle="${rb}"/>
                         <% } %>
             </select>
             <br>
@@ -127,7 +127,7 @@
                 </TD>
                 <TD><%= order.getOrder_id() %>
                 </TD>
-                <TD><%= order.getStatus() %>
+                <TD><fmt:message key="<%= order.getStatus().toString() %>" bundle="${rb}"/>
                 </TD>
                 <TD><%= user.getUsername()%>
                 </TD>
