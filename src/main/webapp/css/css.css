@@ -1,7 +1,11 @@
-
 /*#table_dish tr > *:nth-child(2) { !*Скриває категорію страви*!*/
 /*    display: none;*/
 /*}*/
+
+form{
+    margin:0;
+}
+
 .modalwin {
     height: 280px;
     width: 300px;

@@ -51,6 +51,21 @@
                 <a class="nav-link" href="<%=request.getContextPath() + "/cabinet"%>"><fmt:message key="Cabinet"
                                                                                                    bundle="${rb}"/></a> <%}%>
             </div>
+                        <%--Language--%>
+
+            <div class="navbar-nav ms-auto mb-2 mb-lg-0">
+                <form method="post" action="<%=request.getContextPath() + "/changeLanguage"%>">
+                    <input type="hidden" name="path" value="<%=request.getServletPath()%>">
+                    <%if (language.equalsIgnoreCase("en_US")){%>
+                    <input type="hidden" name="language" value="uk_UA"/>
+                    <button type="submit" class="nav-link btn" href="#">UKR</button>
+                    <%}else{%>
+                    <input type="hidden" name="language" value="en_US"/>
+                    <button type="submit" class="nav-link btn" href="#">ENG</button>
+                    <%}%>
+                </form>
+            </div>
+                     <%--Language--%>
         </div>
     </div>
 </nav>

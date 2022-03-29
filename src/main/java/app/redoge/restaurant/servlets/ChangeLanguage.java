@@ -18,14 +18,18 @@ public class ChangeLanguage extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         final HttpSession session = req.getSession();
         final String languageSession = (String) session.getAttribute("language");
-
+        String path = req.getParameter("path");
+        if(path == null || path.length() == 0){path = "/cabinet";}
         final String language = req.getParameter("language");
-        if (!(req.getSession().getAttribute("language") == null) && !(req.getSession().getAttribute("user_id")==null)) {
+        if (!(req.getSession().getAttribute("language") == null)) {
+            if (!(req.getSession().getAttribute("user_id") == null)) {
                 changeLanguageById((Integer) req.getSession().getAttribute("user_id"), language);
                 session.setAttribute("language", language);
-        }
-        log.info("Change language -> " + language);
-        resp.sendRedirect(req.getContextPath() + "/cabinet");
-
+                log.info("Change language and added to db-> " + language);
+            } else {
+                session.setAttribute("language", language);
+                log.info("Change language and not added to db-> " + language);
+            }
+        }resp.sendRedirect(req.getContextPath() + path);
     }
 }
