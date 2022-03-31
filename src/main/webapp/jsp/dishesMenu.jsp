@@ -16,6 +16,7 @@
     <title><fmt:message key="Dishes_menu" bundle="${rb}"/></title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <style>
+        <%@include file='/css/jquery.dataTables.min.css' %>
         <%@include file='/css/css.css' %>
         <%@include file='/css/bootstrap.css' %>
     </style>
@@ -27,6 +28,7 @@
             crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script type="text/javascript">
         <%@include file='/js/sort-table.js'%>
+        <%@include file='/js/jquery.dataTables.min.js'%>
     </script>
 </head>
 <body>
@@ -224,7 +226,9 @@
             return false;
         };
     }
-
+    $(document).ready(function() {
+        $("#table_dish").DataTable();
+    });
 </script>
 </body>
 </html>

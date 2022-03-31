@@ -99,7 +99,8 @@
             <%--    <input type = "text" list = "category" name="category">--%>
             <select id="category" name="category" class="form-select">
                 <% for (Category name : Category.values()) { if(name.equals(Category.Unknown)){continue;}%>
-                <option value="<%= name.getId()%>"><%=name%>
+                <option value="<%= name.getId()%>"><fmt:message key="<%=name.toString()%>"
+                                                                bundle="${rb}"/>
                 </option>
                 <% } %>
             </select>

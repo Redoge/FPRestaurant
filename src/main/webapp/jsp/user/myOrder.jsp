@@ -23,6 +23,7 @@
 <head>
     <title><fmt:message key="My_orders" bundle="${rb}"/></title>
     <style>
+        <%@include file='/css/jquery.dataTables.min.css' %>
         <%@include file='/css/css.css' %>
         <%@include file='/css/bootstrap.css' %>
     </style>
@@ -35,6 +36,7 @@
             crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script type="text/javascript">
         <%@include file='/js/sort-table.js'%>
+        <%@include file='/js/jquery.dataTables.min.js'%>
     </script>
 </head>
 <body>
@@ -103,6 +105,7 @@
         </div>
 
         <TABLE cellspacing="0" width="100%" class="sort-table.js table js-sort-table" id="table_dish">
+            <thead>
             <TR>
                 <TH><fmt:message key="Name_of_the_dish" bundle="${rb}"/></TH>
                 <TH class="js-sort-number"><fmt:message key="Count" bundle="${rb}"/></TH>
@@ -112,6 +115,8 @@
                 <th class="js-sort-number"><fmt:message key="Order_id" bundle="${rb}"/></th>
 
             </TR>
+            </thead>
+            <tbody>
             <% for (Order order : orders) { %>
             <TR>
                 <TD><%= order.getName() %>
@@ -128,6 +133,7 @@
                 </TD>
             </TR>
             <% } %>
+            </tbody>
         </TABLE>
     </div>
 </div>
@@ -154,6 +160,9 @@
             }
         }
     }
+    $(document).ready(function() {
+        $("#table_dish").DataTable();
+    });
 </script>
 </body>
 </html>
