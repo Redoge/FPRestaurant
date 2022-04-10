@@ -12,6 +12,7 @@ import java.util.Locale;
 import java.util.Map;
 
 import static app.redoge.restaurant.DAO.ConnectDB.getConnection;
+import static app.redoge.restaurant.enums.Category.getDishesCategoryIdByNames;
 import static java.util.Objects.isNull;
 
 /**
@@ -183,6 +184,34 @@ public class DishesDAO{
                 int id = rs.getInt("id");
                 String name = rs.getString("name");
                 int category_id = rs.getInt("category_id");
+                double price = rs.getDouble("price");
+                Dish tmp = new Dish(id, name, category_id, price);
+                out.put(id, tmp);
+            }
+        } catch (SQLException e) {
+            log.error(e);
+        }
+        return out;
+    }
+
+    public static Map<Integer, Dish> getDishIdByGrouped(String grouped){
+        System.out.println(grouped);
+        int category = getDishesCategoryIdByNames(grouped);
+        System.out.println(category);
+        if (category == 0){
+            return getDishIdBySorted("name");
+        }
+        Map<Integer, Dish> out = new HashMap<>();
+        ResultSet rs = null;
+        Connection connection = getConnection();
+        Statement statement = null;
+        try {
+            statement = connection.createStatement();
+            rs = statement.executeQuery("select * from dishes where `deleted` is  null and `category_id` = " + category + ";");
+            while(rs.next()) {
+                int id = rs.getInt("id");
+                String name = rs.getString("name");
+                int category_id = category;
                 double price = rs.getDouble("price");
                 Dish tmp = new Dish(id, name, category_id, price);
                 out.put(id, tmp);

@@ -46,6 +46,15 @@ public enum Category {
         else return Unknown;
     }
 
+    public static int getDishesCategoryIdByNames(String role){
+        if(role == null) return 0;
+        if (role.equalsIgnoreCase("salad")) return 1;
+        if (role.equalsIgnoreCase("maindishes")) return 2;
+        if (role.equalsIgnoreCase("desserts")) return 3;
+        if(role.equalsIgnoreCase("drinks")) return 4;
+        else return 0;
+    }
+
     /**
      * Get dishes category to String.
      *

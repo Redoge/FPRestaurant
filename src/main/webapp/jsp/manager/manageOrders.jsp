@@ -114,19 +114,19 @@
         </form>
     </div>
 
-    <div class="col position-relative" align="center">
-        <label for="input_group"><fmt:message key="Group_by" bundle="${rb}"/></label>
-        <select class="form-select" aria-label="Default select example" id="input_group">
-            <option value="">All</option>
-            <% Order.orderStatus[] dishesMenuArr = Order.orderStatus.values();
-                for (Order.orderStatus dm : dishesMenuArr) {%>
-            <option value="<%=dm%>"><%=dm%>
-            </option>
-            <%}%>
-        </select>
-        <button class="btn btn-outline-secondary" id="" onclick="groupDishByCategory();"><fmt:message key="Grupped"
-                                                                                                      bundle="${rb}"/></button>
-    </div>
+<%--    <div class="col position-relative" align="center">--%>
+<%--        <label for="input_group"><fmt:message key="Group_by" bundle="${rb}"/></label>--%>
+<%--        <select class="form-select" aria-label="Default select example" id="input_group">--%>
+<%--            <option value="">All</option>--%>
+<%--            <% Order.orderStatus[] dishesMenuArr = Order.orderStatus.values();--%>
+<%--                for (Order.orderStatus dm : dishesMenuArr) {%>--%>
+<%--            <option value="<%=dm%>"><%=dm%>--%>
+<%--            </option>--%>
+<%--            <%}%>--%>
+<%--        </select>--%>
+<%--        <button class="btn btn-outline-secondary" id="" onclick="groupDishByCategory();"><fmt:message key="Grupped"--%>
+<%--                                                                                                      bundle="${rb}"/></button>--%>
+<%--    </div>--%>
 
 
     <div class="row">

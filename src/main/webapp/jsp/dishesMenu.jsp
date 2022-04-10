@@ -5,6 +5,8 @@
 <%@ page import="app.redoge.restaurant.Dish" %>
 <%@ page import="static app.redoge.restaurant.DAO.DishesDAO.getAllMenuMap" %>
 <%@ page import="app.redoge.restaurant.enums.Category" %>
+<%@ page import="static app.redoge.restaurant.enums.Category.getDishesCategoryIdByNames" %>
+<%@ page import="static app.redoge.restaurant.DAO.DishesDAO.*" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
@@ -53,48 +55,50 @@
                 <a class="nav-link" href="<%=request.getContextPath() + "/cabinet"%>"><fmt:message key="Cabinet"
                                                                                                    bundle="${rb}"/></a> <%}%>
             </div>
-                        <%--Language--%>
+            <%--Language--%>
 
             <div class="navbar-nav ms-auto mb-2 mb-lg-0">
                 <form method="post" action="<%=request.getContextPath() + "/changeLanguage"%>">
                     <input type="hidden" name="path" value="<%=request.getServletPath()%>">
-                    <%if (language.equalsIgnoreCase("en_US")){%>
+                    <%if (language.equalsIgnoreCase("en_US")) {%>
                     <input type="hidden" name="language" value="uk_UA"/>
                     <button type="submit" class="nav-link btn" href="#">UKR</button>
-                    <%}else{%>
+                    <%} else {%>
                     <input type="hidden" name="language" value="en_US"/>
                     <button type="submit" class="nav-link btn" href="#">ENG</button>
                     <%}%>
                 </form>
             </div>
-                     <%--Language--%>
+            <%--Language--%>
         </div>
     </div>
 </nav>
 <%
-    String category = "category_id";
-    Map<Integer, Dish> dishes = getDishIdBySorted(category);
+    String category = request.getParameter("group_by");
+    Map<Integer, Dish> dishes = getDishIdByGrouped(category);
 %>
 <hr>
 <div class="container">
     <div class="row">
         <div class="col position-relative" align="center">
-            <label for="input_group"><fmt:message key="Group_by" bundle="${rb}"/></label>
-            <select class="form-select" aria-label="Default select example" id="input_group">
-                <option value=""><fmt:message key="All"
-                                              bundle="${rb}"/></option>
-                <% Category[] dishesMenuArr = Category.values();
-                    for (Category dm : dishesMenuArr) {
-                        if (dm.equals(Category.Unknown)) {
-                            continue;
-                        }%>
-                <option value="<%=dm%>"><fmt:message key="<%=dm.toString()%>"
-                                                     bundle="${rb}"/>
-                </option>
-                <%}%>
-            </select>
-            <button class="btn btn-outline-secondary" id="" onclick="groupDishByCategory();"><fmt:message key="Grupped"
-                                                                                                          bundle="${rb}"/></button>
+            <form action="<%=request.getContextPath() + "/dishesMenu"%>"  method="get">
+                <label for="input_group"><fmt:message key="Group_by" bundle="${rb}"/></label>
+                <select class="form-select" aria-label="Default select example" id="input_group" name="group_by">
+                    <option value=""><fmt:message key="All"
+                                                  bundle="${rb}"/></option>
+                    <% Category[] dishesMenuArr = Category.values();
+                        for (Category dm : dishesMenuArr) {
+                            if (dm.equals(Category.Unknown)) {
+                                continue;
+                            }%>
+                    <option value="<%=dm%>"><fmt:message key="<%=dm.toString()%>"
+                                                         bundle="${rb}"/>
+                    </option>
+                    <%}%>
+                </select>
+                <button class="btn btn-outline-secondary" id=""><fmt:message key="Grupped"
+                                                                             bundle="${rb}"/></button>
+            </form>
         </div>
         <%if (role != null && role.equals(UserRole.User)) {%>
         <div id="newOrderDiv" class="col position-relative" align="center">
@@ -127,7 +131,8 @@
                                    placeholder="<fmt:message key="Count" bundle="${rb}"/>">
                         </div>
                         <label for="address"><fmt:message key="Address" bundle="${rb}"/>:</label>
-                        <input required type="text" id="address" name="address" class="form-control" placeholder="<fmt:message key="Address" bundle="${rb}"/>">
+                        <input required type="text" id="address" name="address" class="form-control"
+                               placeholder="<fmt:message key="Address" bundle="${rb}"/>">
                         <br>
                         <input type="submit" class="btn btn-dark"
                                value="<fmt:message key="New_order" bundle="${rb}"/>">
@@ -169,7 +174,7 @@
             </TR>
             </thead>
             <% for (int id : dishes.keySet()) { %>
-            <TR >
+            <TR>
                 <TD><%= dishes.get(id).getName() %>
                 </td>
                 <TD><fmt:message key="<%= dishes.get(id).getCategory().toString() %>"
@@ -184,33 +189,33 @@
 </div>
 
 <script>
-    function groupDishByCategory() {
-        // Declare variables
-        var input, filter, table, tr, td, i, txtValue;
-        input = document.getElementById("input_group");
-        filter = input.value.toUpperCase();
-        table = document.getElementById("table_dish");
-        tr = table.getElementsByTagName("tr");
-
-        // Loop through all table rows, and hide those who don't match the search query
-        for (i = 0; i < tr.length; i++) {
-            td = tr[i].getElementsByTagName("td")[1];
-            if (td) {
-                txtValue = td.textContent || td.innerText;
-                if (txtValue.toUpperCase().indexOf(filter) > -1) {
-                    tr[i].style.display = "";
-                } else {
-                    tr[i].style.display = "none";
-                }
-            }
-        }
-    }
-
-    $(document).on('click', '.spoiler-trigger', function (e) {
-        e.preventDefault();
-        $(this).toggleClass('active');
-        $(this).parent().find('.spoiler-block').first().slideToggle(300);
-    })
+    // function groupDishByCategory() {
+    //     // Declare variables
+    //     var input, filter, table, tr, td, i, txtValue;
+    //     input = document.getElementById("input_group");
+    //     filter = input.value.toUpperCase();
+    //     table = document.getElementById("table_dish");
+    //     tr = table.getElementsByTagName("tr");
+    //
+    //     // Loop through all table rows, and hide those who don't match the search query
+    //     for (i = 0; i < tr.length; i++) {
+    //         td = tr[i].getElementsByTagName("td")[1];
+    //         if (td) {
+    //             txtValue = td.textContent || td.innerText;
+    //             if (txtValue.toUpperCase().indexOf(filter) > -1) {
+    //                 tr[i].style.display = "";
+    //             } else {
+    //                 tr[i].style.display = "none";
+    //             }
+    //         }
+    //     }
+    // }
+    //
+    // $(document).on('click', '.spoiler-trigger', function (e) {
+    //     e.preventDefault();
+    //     $(this).toggleClass('active');
+    //     $(this).parent().find('.spoiler-block').first().slideToggle(300);
+    // })
 
     function showModalWin() {
         var darkLayer = document.createElement('div'); // слой затемнения
@@ -226,7 +231,8 @@
             return false;
         };
     }
-    $(document).ready(function() {
+
+    $(document).ready(function () {
         $("#table_dish").DataTable();
     });
 </script>
