@@ -7,7 +7,7 @@
 <%String language = (String) session.getAttribute("language");%>
 <fmt:setLocale value="<%=language%>"/>
 <fmt:setBundle basename="language" var="rb"/>
-
+<%@ taglib uri="http://redoge.app" prefix="rt" %>
 <html translate="no">
 <head>
     <% UserRole role = (UserRole) request.getSession().getAttribute("role");

@@ -195,9 +195,7 @@ public class DishesDAO{
     }
 
     public static Map<Integer, Dish> getDishIdByGrouped(String grouped){
-        System.out.println(grouped);
         int category = getDishesCategoryIdByNames(grouped);
-        System.out.println(category);
         if (category == 0){
             return getDishIdBySorted("name");
         }

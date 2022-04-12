@@ -1,4 +1,5 @@
 <%@ page import="java.util.Map" %>
+<%@ taglib uri="http://redoge.app" prefix="rt" %>
 <%@ page import="app.redoge.restaurant.enums.Category" %>
 <%@ page import="app.redoge.restaurant.enums.UserRole" %>
 <%@ page import="static app.redoge.restaurant.DAO.DishesDAO.getDishIdBySorted" %>
@@ -36,7 +37,7 @@
 <body>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
-        <a class="navbar-brand" href="<%=request.getContextPath()%>">Restaurant</a>
+        <a class="navbar-brand" href="<%=request.getContextPath()%>"><rt:projectName/></a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
                 aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>

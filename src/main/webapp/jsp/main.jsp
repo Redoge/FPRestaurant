@@ -5,7 +5,7 @@
 <%String language = (String) session.getAttribute("language");%>
 <fmt:setLocale value="<%=language%>"/>
 <fmt:setBundle basename="language"  var="rb"/>
-
+<%@ taglib uri="http://redoge.app" prefix="rt" %>
 <html>
 <head>
     <title><fmt:message key="Restaurant" bundle="${rb}"/></title>

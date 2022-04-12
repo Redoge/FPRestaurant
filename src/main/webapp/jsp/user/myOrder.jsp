@@ -7,6 +7,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%String language = (String) session.getAttribute("language");%>
+<%@ taglib uri="http://redoge.app" prefix="rt" %>
 <fmt:setLocale value="<%=language%>"/>
 <fmt:setBundle basename="language" var="rb"/>
 <% UserRole role = (UserRole) request.getSession().getAttribute("role");
@@ -43,7 +44,7 @@
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
-        <a class="navbar-brand" href="<%=request.getContextPath()%>">Restaurant</a>
+        <a class="navbar-brand" href="<%=request.getContextPath()%>"><rt:projectName/></a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
                 aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
